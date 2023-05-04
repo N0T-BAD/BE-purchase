@@ -1,9 +1,7 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure;
+package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,23 +10,23 @@ import lombok.Getter;
 
 @Getter
 @Entity
-@Table(name = "webtoon_bm")
-public class WebtoonBMEntity {
+@Table(name = "profile_skin")
+public class ProfileSkinEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private Long webtoonId;
+    private String profileSkinName;
 
     @Column
-    private Long episodeId;
+    private String profileSkinDescription;
 
     @Column
-    private Integer webtoonBMBlockPrice;
+    private String profileSkinBlockPrice;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private WebtoonBMStatus webtoonBMStatus;
+    private String profileSkinImage;
+
 }

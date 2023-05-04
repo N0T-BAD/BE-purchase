@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.WebtoonBMEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.WebtoonBMStatus;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.WebtoonBMEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.WebtoonBMStatus;
 
 import lombok.Builder;
 import lombok.Getter;

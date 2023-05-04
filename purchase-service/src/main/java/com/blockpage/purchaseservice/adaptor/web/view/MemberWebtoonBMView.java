@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasWebtoonBMEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasWebtoonBMEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;

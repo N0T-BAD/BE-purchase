@@ -1,5 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure;
+package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

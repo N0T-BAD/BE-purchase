@@ -1,11 +1,11 @@
 package com.blockpage.purchaseservice.adaptor.web;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.NftEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.NftRepository;
-import com.blockpage.purchaseservice.adaptor.infrastructure.ProfileSkinEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.ProfileSkinRepository;
-import com.blockpage.purchaseservice.adaptor.infrastructure.WebtoonBMEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.WebtoonBMRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.NftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.repository.NftRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.ProfileSkinEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.repository.ProfileSkinRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.WebtoonBMEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.repository.WebtoonBMRepository;
 import com.blockpage.purchaseservice.adaptor.web.view.NftDetailView;
 import com.blockpage.purchaseservice.adaptor.web.view.ProfileSkinDetailView;
 import com.blockpage.purchaseservice.adaptor.web.view.WebtoonBMDetailView;

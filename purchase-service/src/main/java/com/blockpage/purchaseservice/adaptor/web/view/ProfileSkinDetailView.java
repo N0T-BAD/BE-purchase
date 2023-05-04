@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.ProfileSkinEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.ProfileSkinEntity;
 import lombok.Builder;
 import lombok.Getter;
 

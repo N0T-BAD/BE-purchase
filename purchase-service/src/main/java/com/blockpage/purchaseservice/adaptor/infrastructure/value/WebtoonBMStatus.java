@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure;
+package com.blockpage.purchaseservice.adaptor.infrastructure.value;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

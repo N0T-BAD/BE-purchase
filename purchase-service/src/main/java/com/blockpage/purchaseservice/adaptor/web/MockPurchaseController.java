@@ -1,13 +1,13 @@
 package com.blockpage.purchaseservice.adaptor.web;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasNftEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasNftRepository;
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasProfileSkinEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasProfileSkinRepository;
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasWebtoonBMEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasWebtoonBMRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasNftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.repository.MemberHasNftRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasProfileSkinEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.repository.MemberHasProfileSkinRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasWebtoonBMEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.repository.MemberHasWebtoonBMRepository;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberNftView;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberProfileSkinView;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberWebtoonBMView;
