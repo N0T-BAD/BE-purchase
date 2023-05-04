@@ -1,5 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure;
+package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.WebtoonBMStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,37 +11,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
-@Entity
 @Getter
-@Table(name = "nft")
-public class NftEntity {
+@Entity
+@Table(name = "webtoon_bm")
+public class WebtoonBMEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private Long userId;
+    private Long webtoonId;
 
     @Column
-    private Long creatorId;
+    private Long episodeId;
 
     @Column
-    private String nftName;
+    private Integer webtoonBMBlockPrice;
 
     @Column
-    private String nftDescription;
-
-    @Column
-    private Integer nftBlockPrice;
-
-    @Column
-    private Integer nftStock;
-
-    @Column
-    private String nftImage;
-
     @Enumerated(EnumType.STRING)
-    private NftType nftType;
-
+    private WebtoonBMStatus webtoonBMStatus;
 }

@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.MemberHasNftEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.NftType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasNftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
 import lombok.Builder;
 import lombok.Getter;
 

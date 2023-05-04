@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure;
+package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,20 +13,17 @@ import lombok.Getter;
 
 @Getter
 @Entity
-@Table(name = "member_has_profile_skin")
-public class MemberHasProfileSkinEntity {
+@Table(name = "member_has_nft")
+public class MemberHasNftEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_skin_id")
-    private ProfileSkinEntity profileSkinEntity;
+    @JoinColumn(name = "nft_id")
+    private NftEntity nftEntity;
 
     @Column(name = "member_id")
     private Long memberId;
-
-    @Column(name = "default_skin")
-    private Boolean defaultSkin;
 }

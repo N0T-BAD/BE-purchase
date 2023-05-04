@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure;
+package com.blockpage.purchaseservice.adaptor.infrastructure.value;
 
 import java.util.Arrays;
 import lombok.AllArgsConstructor;
