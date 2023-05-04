@@ -9,7 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "member_has_profile_skin")
 public class MemberHasProfileSkinEntity {
@@ -22,6 +24,9 @@ public class MemberHasProfileSkinEntity {
     @JoinColumn(name = "profile_skin_id")
     private ProfileSkinEntity profileSkinEntity;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "member_id")
+    private Long memberId;
+
+    @Column(name = "default_skin")
+    private Boolean defaultSkin;
 }

@@ -9,7 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "member_has_nft")
 public class MemberHasNftEntity {
@@ -20,7 +22,7 @@ public class MemberHasNftEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nft_id")
-    private NftEntity nftId;
+    private NftEntity nftEntity;
 
     @Column(name = "member_id")
     private Long memberId;

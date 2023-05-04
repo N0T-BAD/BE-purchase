@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "member_has_webtoon_bm")
 public class MemberHasWebtoonBMEntity {
@@ -18,8 +20,11 @@ public class MemberHasWebtoonBMEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "episode_id")
-    private Long episode_id;
+    @Column
+    private Long memberId;
+
+    @Column
+    private Long episodeId;
 
     @Enumerated(EnumType.STRING)
     private PersistType persistType;
