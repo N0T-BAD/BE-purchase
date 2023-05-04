@@ -13,14 +13,11 @@ import com.blockpage.purchaseservice.adaptor.web.view.MemberProfileSkinView;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberWebtoonBMView;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,14 +80,5 @@ public class MockPurchaseController {
                     .body("잘못된 요청 입니다.");
             }
         }
-    }
-
-    @GetMapping("/test")
-    public void test(
-        @RequestParam(value = "weekday", required = false) String weekday,
-        @RequestParam(value = "genre", required = false) String genre
-    ) {
-        System.out.println("data = " + weekday);
-        System.out.println("data.getGenre() = " + genre);
     }
 }
