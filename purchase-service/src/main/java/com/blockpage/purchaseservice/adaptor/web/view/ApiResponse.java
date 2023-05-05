@@ -16,7 +16,7 @@ public class ApiResponse<T> {
         this.data = data;
         this.meta = meta;
     }
-K
+
     public ApiResponse(T data) {
         this.data = data;
         this.meta = null;
