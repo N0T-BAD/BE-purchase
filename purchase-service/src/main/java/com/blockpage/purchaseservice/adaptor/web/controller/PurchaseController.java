@@ -5,6 +5,8 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
 import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
 
+import com.blockpage.purchaseservice.adaptor.web.apispec.ProfileSkinRequest;
+import com.blockpage.purchaseservice.adaptor.web.apispec.MemberPurchaseRequest;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberPurchaseView;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,5 +67,44 @@ public class PurchaseController {
         }
         return ResponseEntity.status(HttpStatus.OK)
             .body(new ApiWrapperResponse(memberPurchaseViews));
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiWrapperResponse> postPurchases(
+        @RequestParam("type") String type,
+        @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
+        System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());
+        switch (type) {
+            case "nft": {
+                //nft 생성 포트 + DTO 매핑 함수
+                System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());
+            }
+            break;
+            case "profile-skin": {
+                //profile-skin 생성 포트 + DTO 매핑 함수
+                System.out.println("purchaseRequest : profile-skin = " + memberPurchaseRequest);
+            }
+            break;
+            case "episode-bm": {
+                //episode-bm 생성 포트 + DTO 매핑 함수
+                System.out.println("purchaseRequest : episode-bm = " + memberPurchaseRequest);
+            }
+            break;
+            default: {
+                return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ApiWrapperResponse("잘못된 요청 입니다."));
+            }
+
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(new ApiWrapperResponse("리소스가 정상적으로 생성되었습니다."));
+    }
+
+    @PatchMapping
+    public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(@RequestBody ProfileSkinRequest profileSkinRequest) {
+        //profile skin default 값 설정 변경 + DTO 매핑 함수
+        System.out.println("profileSkinRequest = " + profileSkinRequest.getProfileSkinId());
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(new ApiWrapperResponse("리소스가 정상적으로 변경되었습니다."));
     }
 }
