@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure;
+package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
