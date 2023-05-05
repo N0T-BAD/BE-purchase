@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.web;
+package com.blockpage.purchaseservice.adaptor.web.controller;
 
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
