@@ -23,11 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/purchases")
 public class PurchaseController {
 
-    /***
-     *  해당 유저 NFT 구매 목록 조회 API                    |   /v1/purchases?type=nft
-     *  해당 유저 프로필 스킨 구매 목록 조회 API              |   /v1/purchases?type=profile-skin
-     *  해당 유저 에피소드 BM 구매 목록(히스토리) 조회 API     |   /v1/purchases?type=history
-     *  해당 유저 에피소드 BM 구매 목록(유료) 조회 API        |   /v1/purchases?type=episode-bm-paid
+    /**
+     * Mock Data 작업중 (서비스 로직 없음)
      */
     @GetMapping
     public ResponseEntity<ApiWrapperResponse> getMemberPurchaseHistory(@RequestParam("type") String type) {
