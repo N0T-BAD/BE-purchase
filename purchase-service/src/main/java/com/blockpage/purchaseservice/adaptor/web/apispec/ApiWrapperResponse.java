@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.web.view;
+package com.blockpage.purchaseservice.adaptor.web.apispec;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -7,17 +7,17 @@ import lombok.ToString;
 @Getter
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiResponse<T> {
+public class ApiWrapperResponse<T> {
 
     private final T data;
     private final Meta meta;
 
-    public ApiResponse(T data, Meta meta) {
+    public ApiWrapperResponse(T data, Meta meta) {
         this.data = data;
         this.meta = meta;
     }
 
-    public ApiResponse(T data) {
+    public ApiWrapperResponse(T data) {
         this.data = data;
         this.meta = null;
     }
