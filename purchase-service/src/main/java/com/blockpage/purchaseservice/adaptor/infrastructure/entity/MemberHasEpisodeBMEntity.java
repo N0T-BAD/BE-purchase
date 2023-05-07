@@ -14,8 +14,8 @@ import lombok.Getter;
 
 @Getter
 @Entity
-@Table(name = "member_has_webtoon_bm")
-public class MemberHasWebtoonBMEntity {
+@Table(name = "member_has_episode_bm")
+public class MemberHasEpisodeBMEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,9 @@ public class MemberHasWebtoonBMEntity {
 
     @Column
     private Long episodeId;
+
+    @Column
+    private Long webtoonId;
 
     @Enumerated(EnumType.STRING)
     private PersistType persistType;
