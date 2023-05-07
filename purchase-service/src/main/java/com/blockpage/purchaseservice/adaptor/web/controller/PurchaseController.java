@@ -8,7 +8,7 @@ import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
 import com.blockpage.purchaseservice.adaptor.web.apispec.ProfileSkinRequest;
 import com.blockpage.purchaseservice.adaptor.web.apispec.MemberPurchaseRequest;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberPurchaseView;
-import com.blockpage.purchaseservice.application.port.in.PurchaseProductDto;
+import com.blockpage.purchaseservice.application.port.in.PurchaseInPortDto;
 import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -79,7 +79,7 @@ public class PurchaseController {
         @RequestParam("type") String type,
         @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
         Long memberId = 1L;
-        purchaseProductUseCase.purchaseProduct(PurchaseProductDto.toDto(type, memberId, memberPurchaseRequest));
+        purchaseProductUseCase.purchaseProduct(PurchaseInPortDto.toDto(type, memberId, memberPurchaseRequest));
 
 
         System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());

@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
 
-import com.blockpage.purchaseservice.application.port.out.PurchaseDto;
+import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,10 +38,10 @@ public class MemberHasProfileSkinEntity {
     @Column(name = "default_skin")
     private Boolean defaultSkin;
 
-    public static MemberHasProfileSkinEntity toEntity(PurchaseDto purchaseDto) {
+    public static MemberHasProfileSkinEntity toEntity(PurchaseOutPortDto purchaseOutPortDto) {
         return MemberHasProfileSkinEntity.builder()
             .profileSkinEntity(new ProfileSkinEntity()) //상품 Entity 넣어줘야함..!
-            .memberId(purchaseDto.getMemberId())
+            .memberId(purchaseOutPortDto.getMemberId())
             .defaultSkin(Boolean.FALSE)
             .build();
     }

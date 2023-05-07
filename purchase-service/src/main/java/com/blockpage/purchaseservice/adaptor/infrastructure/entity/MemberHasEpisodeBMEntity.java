@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
-import com.blockpage.purchaseservice.application.port.out.PurchaseDto;
+import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -43,13 +43,13 @@ public class MemberHasEpisodeBMEntity {
     @Column
     private LocalDateTime expiredDate;
 
-    public static MemberHasEpisodeBMEntity toEntity(PurchaseDto purchaseDto) {
+    public static MemberHasEpisodeBMEntity toEntity(PurchaseOutPortDto purchaseOutPortDto) {
         return MemberHasEpisodeBMEntity.builder()
-            .memberId(purchaseDto.getMemberId())
-            .episodeId(purchaseDto.getEpisodeId())
-            .webtoonId(purchaseDto.getWebtoonId())
-            .persistType(purchaseDto.getPersistType())
-            .expiredDate(purchaseDto.getExpiredDate())
+            .memberId(purchaseOutPortDto.getMemberId())
+            .episodeId(purchaseOutPortDto.getEpisodeId())
+            .webtoonId(purchaseOutPortDto.getWebtoonId())
+            .persistType(purchaseOutPortDto.getPersistType())
+            .expiredDate(purchaseOutPortDto.getExpiredDate())
             .build();
     }
 }
