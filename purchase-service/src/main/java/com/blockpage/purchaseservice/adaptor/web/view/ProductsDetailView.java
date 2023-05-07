@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.WebtoonBMStatus;
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.episodeBMStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.ToString;
@@ -29,7 +29,7 @@ public class ProductsDetailView {
     private Long webtoonId;
     private Long episodeId;
     private Integer webtoonBMBlockPrice;
-    private WebtoonBMStatus webtoonBMStatus;
+    private episodeBMStatus episodeBMStatus;
 
     public ProductsDetailView(Long nftId, Long creatorId, String nftName, String nftDescription, Integer nftBlockPrice, String nftImage,
         NftType nftType) {
@@ -52,11 +52,11 @@ public class ProductsDetailView {
     }
 
     public ProductsDetailView(Long webtoonBMId, Long webtoonId, Long episodeId, Integer webtoonBMBlockPrice,
-        WebtoonBMStatus webtoonBMStatus) {
+        episodeBMStatus episodeBMStatus) {
         WebtoonBMId = webtoonBMId;
         this.webtoonId = webtoonId;
         this.episodeId = episodeId;
         this.webtoonBMBlockPrice = webtoonBMBlockPrice;
-        this.webtoonBMStatus = webtoonBMStatus;
+        this.episodeBMStatus = episodeBMStatus;
     }
 }

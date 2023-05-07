@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.controller;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.WebtoonBMStatus;
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.episodeBMStatus;
 import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
 import com.blockpage.purchaseservice.adaptor.web.view.ProductsDetailView;
 import java.util.ArrayList;
@@ -54,9 +54,9 @@ public class ProductController {
             }
             break;
             case "episode-bm": {
-                productsDetailViews.add(new ProductsDetailView(1L, 1L, 1L, 2, WebtoonBMStatus.ON_SALE));
-                productsDetailViews.add(new ProductsDetailView(2L, 1L, 2L, 2, WebtoonBMStatus.ON_SALE));
-                productsDetailViews.add(new ProductsDetailView(3L, 1L, 3L, 2, WebtoonBMStatus.ON_SALE));
+                productsDetailViews.add(new ProductsDetailView(1L, 1L, 1L, 2, episodeBMStatus.ON_SALE));
+                productsDetailViews.add(new ProductsDetailView(2L, 1L, 2L, 2, episodeBMStatus.ON_SALE));
+                productsDetailViews.add(new ProductsDetailView(3L, 1L, 3L, 2, episodeBMStatus.ON_SALE));
             }
         }
         return ResponseEntity.status(HttpStatus.OK)
