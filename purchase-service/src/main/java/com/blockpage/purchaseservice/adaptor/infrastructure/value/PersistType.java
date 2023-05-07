@@ -8,15 +8,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PersistType {
     FREE(0, "무료"),
-    PERMANENT(1, "영구 소장"),
+    PERMANENT(1, "영구소장"),
     RENTAL(2, "대여"),
     ;
     private int key;
     private String value;
 
-    public static PersistType findPersistTypeByKey(int num) {
+    public static PersistType findPersistTypeByValue(String value) {
         return Arrays.stream(PersistType.values())
-            .filter(t -> t.getKey() == num)
+            .filter(t -> t.getValue().equals(value))
             .findFirst()
             .get();
     }
