@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @Table(name = "member_has_episode_bm")
-public class MemberHasEpisodeBMEntity {
+public class MemberHasEpisodeBMEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

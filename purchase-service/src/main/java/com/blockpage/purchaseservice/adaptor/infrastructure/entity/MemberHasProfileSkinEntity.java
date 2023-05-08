@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "member_has_profile_skin")
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberHasProfileSkinEntity {
+public class MemberHasProfileSkinEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

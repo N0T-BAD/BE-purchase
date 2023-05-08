@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @Entity
 @Table(name = "profile_skin")
-public class ProfileSkinEntity {
+public class ProfileSkinEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
