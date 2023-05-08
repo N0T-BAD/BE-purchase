@@ -66,7 +66,7 @@ public class PurchaseController {
                 memberPurchaseViews.add(new MemberPurchaseView(1L, 50L, PersistType.PERMANENT, LocalDateTime.now()));
                 memberPurchaseViews.add(new MemberPurchaseView(2L, 220L, PersistType.RENTAL, LocalDateTime.now()));
                 memberPurchaseViews.add(new MemberPurchaseView(3L, 133L, PersistType.RENTAL, LocalDateTime.now()));
-                memberPurchaseViews.add(new MemberPurchaseView(4L, 11L, PersistType.FREE, LocalDateTime.now()));
+                memberPurchaseViews.add(new MemberPurchaseView(4L, 11L, PersistType.RENTAL, LocalDateTime.now()));
             }
             break;
         }
@@ -79,8 +79,8 @@ public class PurchaseController {
         @RequestParam("type") String type,
         @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
         Long memberId = 1L;
-        purchaseProductUseCase.purchaseProduct(PurchaseInPortDto.toDto(type, memberId, memberPurchaseRequest));
-
+        purchaseProductUseCase.purchaseProduct(
+            PurchaseInPortDto.toInPortDto(type, memberId, memberPurchaseRequest));
 
         System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());
         switch (type) {

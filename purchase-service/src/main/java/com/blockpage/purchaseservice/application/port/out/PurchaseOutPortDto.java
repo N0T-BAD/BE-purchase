@@ -8,17 +8,21 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PurchaseOutPortDto {
+
     //common
     private Long memberId;
+    private PersistType persistType;
+    private LocalDateTime expiredDate;
 
     //episodeBM
     private Long episodeId;
     private Long webtoonId;
-    private PersistType persistType;
-    private LocalDateTime expiredDate;
 
-    public PurchaseOutPortDto(Long memberId) {
+
+    public PurchaseOutPortDto(Long memberId, PersistType persistType, LocalDateTime expiredDate) {
         this.memberId = memberId;
+        this.persistType = persistType;
+        this.expiredDate = expiredDate;
     }
 
     public PurchaseOutPortDto(Long memberId, Long episodeId, Long webtoonId, PersistType persistType, LocalDateTime expiredDate) {
