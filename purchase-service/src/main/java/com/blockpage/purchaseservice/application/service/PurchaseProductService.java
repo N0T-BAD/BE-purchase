@@ -1,11 +1,12 @@
 package com.blockpage.purchaseservice.application.service;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.value.ProductType;
 import com.blockpage.purchaseservice.application.port.in.PurchaseInPortDto;
 import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
 import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
 import com.blockpage.purchaseservice.application.port.out.SavePurchasePort;
-import java.time.LocalDateTime;
+import com.blockpage.purchaseservice.domain.Purchase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,24 +19,28 @@ public class PurchaseProductService implements PurchaseProductUseCase {
     private final SavePurchasePort savePurchasePort;
 
     @Override
-
     public Long purchaseProduct(PurchaseInPortDto purchaseInPortDto) {
-        ;
-        /*
-        도메인 로직 작성 ! 지금은 살짞 패스!
-         */
+        PersistType persistType = PersistType.findPersistTypeByValue(purchaseInPortDto.getPersistType());
+        ProductType productType = ProductType.findPersistTypeByValue(purchaseInPortDto.getProductType());
+        Purchase purchase = new Purchase(productType, persistType);
+        purchase.makeExpiredDate(persistType);
 
-        switch (purchaseInPortDto.getType()) {
-            case "nft":
-                return savePurchasePort.saveNft(new PurchaseOutPortDto(purchaseInPortDto.getMemberId()));
-            case "episode-bm":
-                return savePurchasePort.saveEpisodeBM(new PurchaseOutPortDto(
-                    purchaseInPortDto.getMemberId(), purchaseInPortDto.getEpisodeId(), purchaseInPortDto.getWebtoonId(),
-                    PersistType.findPersistTypeByValue(purchaseInPortDto.getPersistType()), LocalDateTime.now()));
-            case "profile-skin":
-                return savePurchasePort.saveProfileSkin(new PurchaseOutPortDto(purchaseInPortDto.getMemberId()));
-            default:
-                return 999L;
+        switch (purchase.getProductType()) {
+            case NFT -> {
+                return savePurchasePort.saveNft(
+                    new PurchaseOutPortDto(purchaseInPortDto.getMemberId(), purchase.getPersistType(), purchase.getExpiredDate()));
+            }
+            case EPISODE_BM -> {
+                return savePurchasePort.saveEpisodeBM(
+                    new PurchaseOutPortDto(purchaseInPortDto.getMemberId(), purchaseInPortDto.getEpisodeId(),
+                        purchaseInPortDto.getWebtoonId(),
+                        purchase.getPersistType(), purchase.getExpiredDate()));
+            }
+            case PROFILE_SKIN -> {
+                return savePurchasePort.saveProfileSkin(
+                    new PurchaseOutPortDto(purchaseInPortDto.getMemberId(), purchase.getPersistType(), purchase.getExpiredDate()));
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + persistType);
         }
     }
 }
