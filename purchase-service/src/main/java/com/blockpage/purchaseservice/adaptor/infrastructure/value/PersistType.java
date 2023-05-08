@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PersistType {
-    PERMANENT(0, "영구소장"),
-    RENTAL(1, "대여"),
+    PERMANENT(0, "permanent"),
+    RENTAL(1, "rental"),
     ;
     private int key;
     private String value;
