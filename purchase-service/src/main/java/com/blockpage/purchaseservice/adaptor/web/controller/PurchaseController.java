@@ -36,7 +36,6 @@ public class PurchaseController {
      * Mock Data 작업중 (서비스 로직 없음)
      */
     @GetMapping
-
     public ResponseEntity<ApiWrapperResponse> getMemberPurchaseHistory(@RequestParam("type") String type) {
 
         List<MemberPurchaseView> memberPurchaseViews = new ArrayList<>();
@@ -75,17 +74,18 @@ public class PurchaseController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiWrapperResponse> postPurchases(
-        @RequestParam("type") String type,
-        @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
+    public ResponseEntity<ApiWrapperResponse> postPurchases(@RequestParam("type") String type, @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
         Long memberId = 1L;
         purchaseProductUseCase.purchaseProduct(PurchaseInPortDto.toInPortDto(type, memberId, memberPurchaseRequest));
 
-        System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());
+        /**
+         * Mockup DATA
+         */
+        System.out.println("purchaseRequest = " + memberPurchaseRequest);
         switch (type) {
             case "nft": {
                 //nft 생성 포트 + DTO 매핑 함수
-                System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());
+                System.out.println("purchaseRequest = " + memberPurchaseRequest);
             }
             break;
             case "profile-skin": {
@@ -114,5 +114,10 @@ public class PurchaseController {
         System.out.println("profileSkinRequest = " + profileSkinRequest.getProfileSkinId());
         return ResponseEntity.status(HttpStatus.OK)
             .body(new ApiWrapperResponse("리소스가 정상적으로 변경되었습니다."));
+    }
+
+    @PostMapping("/kakaopay")
+    public void please() {
+        System.out.println("==========================================");
     }
 }
