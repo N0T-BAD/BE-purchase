@@ -79,8 +79,7 @@ public class PurchaseController {
         @RequestParam("type") String type,
         @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
         Long memberId = 1L;
-        purchaseProductUseCase.purchaseProduct(
-            PurchaseInPortDto.toInPortDto(type, memberId, memberPurchaseRequest));
+        purchaseProductUseCase.purchaseProduct(PurchaseInPortDto.toInPortDto(type, memberId, memberPurchaseRequest));
 
         System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());
         switch (type) {

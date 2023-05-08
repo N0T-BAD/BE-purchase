@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 @Entity
 @Table(name = "episode_bm")
-public class EpisodeBMEntity {
+public class EpisodeBMEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
