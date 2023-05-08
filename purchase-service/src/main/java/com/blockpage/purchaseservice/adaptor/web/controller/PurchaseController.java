@@ -8,6 +8,8 @@ import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
 import com.blockpage.purchaseservice.adaptor.web.apispec.ProfileSkinRequest;
 import com.blockpage.purchaseservice.adaptor.web.apispec.MemberPurchaseRequest;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberPurchaseView;
+import com.blockpage.purchaseservice.application.port.in.PurchaseInPortDto;
+import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/purchases")
 public class PurchaseController {
 
+    private final PurchaseProductUseCase purchaseProductUseCase;
+
     /**
      * Mock Data 작업중 (서비스 로직 없음)
      */
     @GetMapping
+
     public ResponseEntity<ApiWrapperResponse> getMemberPurchaseHistory(@RequestParam("type") String type) {
 
         List<MemberPurchaseView> memberPurchaseViews = new ArrayList<>();
@@ -61,7 +66,7 @@ public class PurchaseController {
                 memberPurchaseViews.add(new MemberPurchaseView(1L, 50L, PersistType.PERMANENT, LocalDateTime.now()));
                 memberPurchaseViews.add(new MemberPurchaseView(2L, 220L, PersistType.RENTAL, LocalDateTime.now()));
                 memberPurchaseViews.add(new MemberPurchaseView(3L, 133L, PersistType.RENTAL, LocalDateTime.now()));
-                memberPurchaseViews.add(new MemberPurchaseView(4L, 11L, PersistType.FREE, LocalDateTime.now()));
+                memberPurchaseViews.add(new MemberPurchaseView(4L, 11L, PersistType.RENTAL, LocalDateTime.now()));
             }
             break;
         }
@@ -73,6 +78,10 @@ public class PurchaseController {
     public ResponseEntity<ApiWrapperResponse> postPurchases(
         @RequestParam("type") String type,
         @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
+        Long memberId = 1L;
+        purchaseProductUseCase.purchaseProduct(
+            PurchaseInPortDto.toInPortDto(type, memberId, memberPurchaseRequest));
+
         System.out.println("purchaseRequest = " + memberPurchaseRequest.toString());
         switch (type) {
             case "nft": {
