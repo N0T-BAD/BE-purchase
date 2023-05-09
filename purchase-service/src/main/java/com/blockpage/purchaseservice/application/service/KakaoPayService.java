@@ -52,11 +52,11 @@ public class KakaoPayService implements KakaoPayUseCase {
         Random random = new Random();
         random.setSeed(System.currentTimeMillis());
 
-        String yyyyMmDd = LocalDate.now().toString();
+        String yyyyMmDd = LocalDate.now().toString().replace("-", "");
         String randomNumbers = Stream.generate(() -> random.nextInt(1, 10))
             .limit(6)
             .map(String::valueOf)
             .collect(Collectors.joining());
-        return yyyyMmDd + memberId.toString() + randomNumbers;
+        return yyyyMmDd + memberId + randomNumbers;
     }
 }
