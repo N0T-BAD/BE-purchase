@@ -20,9 +20,9 @@ public class KakaoPayInPortDto {
     public static KakaoPayInPortDto toInPortDto(Long memberId, KakaoPayReadyRequest kakaoPayReadyRequest) {
         return KakaoPayInPortDto.builder()
             .memberId(memberId)
-            .itemName(kakaoPayReadyRequest.getItem_name())
+            .itemName(kakaoPayReadyRequest.getItemName())
             .quantity(kakaoPayReadyRequest.getQuantity())
-            .totalAmount(kakaoPayReadyRequest.getTotal_amount())
+            .totalAmount(kakaoPayReadyRequest.getTotalAmount())
             .build();
     }
 }

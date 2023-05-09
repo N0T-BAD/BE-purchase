@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class KakaoPayReadyRequest {
 
-    private String item_name;
+    private String itemName;
     private Integer quantity;
-    private Integer total_amount;
+    private Integer totalAmount;
 }
