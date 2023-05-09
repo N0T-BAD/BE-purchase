@@ -20,6 +20,7 @@ public class PurchaseProductService implements PurchaseProductUseCase {
 
     @Override
     public Long purchaseProduct(PurchaseInPortDto purchaseInPortDto) {
+
         PersistType persistType = PersistType.findPersistTypeByValue(purchaseInPortDto.getPersistType());
         ProductType productType = ProductType.findPersistTypeByValue(purchaseInPortDto.getProductType());
         Purchase purchase = new Purchase(productType, persistType);

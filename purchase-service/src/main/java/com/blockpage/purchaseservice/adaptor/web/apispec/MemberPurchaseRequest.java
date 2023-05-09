@@ -1,6 +1,5 @@
 package com.blockpage.purchaseservice.adaptor.web.apispec;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
