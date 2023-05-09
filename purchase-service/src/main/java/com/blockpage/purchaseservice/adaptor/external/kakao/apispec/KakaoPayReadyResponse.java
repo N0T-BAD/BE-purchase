@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.externalsystem.apispec;
+package com.blockpage.purchaseservice.adaptor.external.kakao.apispec;
 
 import lombok.Getter;
 
