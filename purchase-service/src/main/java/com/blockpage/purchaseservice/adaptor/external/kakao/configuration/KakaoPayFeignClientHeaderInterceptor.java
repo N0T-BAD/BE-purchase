@@ -2,10 +2,7 @@ package com.blockpage.purchaseservice.adaptor.external.kakao.configuration;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import lombok.RequiredArgsConstructor;
 
-
-@RequiredArgsConstructor
 public class KakaoPayFeignClientHeaderInterceptor implements RequestInterceptor {
 
     private final String KAKAO_PAY_AUTHORIZATION = "Authorization";
