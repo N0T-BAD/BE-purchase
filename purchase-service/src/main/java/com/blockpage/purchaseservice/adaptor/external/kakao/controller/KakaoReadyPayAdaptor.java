@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class KakaoReadyPayFeignClientAdaptor implements KakaoReadyPort {
+public class KakaoReadyPayAdaptor implements KakaoReadyPort {
 
     private final KakaoPayFeignClient kakaoPayFeignClient;
 
