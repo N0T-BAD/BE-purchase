@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PurchaseOutPortDto {
+public class PurchaseOutDto {
 
     //common
     private Long memberId;
@@ -19,13 +19,13 @@ public class PurchaseOutPortDto {
     private Long webtoonId;
 
 
-    public PurchaseOutPortDto(Long memberId, PersistType persistType, LocalDateTime expiredDate) {
+    public PurchaseOutDto(Long memberId, PersistType persistType, LocalDateTime expiredDate) {
         this.memberId = memberId;
         this.persistType = persistType;
         this.expiredDate = expiredDate;
     }
 
-    public PurchaseOutPortDto(Long memberId, Long episodeId, Long webtoonId, PersistType persistType, LocalDateTime expiredDate) {
+    public PurchaseOutDto(Long memberId, Long episodeId, Long webtoonId, PersistType persistType, LocalDateTime expiredDate) {
         this.memberId = memberId;
         this.episodeId = episodeId;
         this.webtoonId = webtoonId;
