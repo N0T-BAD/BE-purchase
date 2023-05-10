@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
-import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
+import com.blockpage.purchaseservice.application.port.out.PurchaseOutDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -43,13 +43,13 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
     @Column
     private LocalDateTime expiredDate;
 
-    public static MemberHasEpisodeBMEntity toEntity(PurchaseOutPortDto purchaseOutPortDto) {
+    public static MemberHasEpisodeBMEntity toEntity(PurchaseOutDto purchaseOutDto) {
         return MemberHasEpisodeBMEntity.builder()
-            .memberId(purchaseOutPortDto.getMemberId())
-            .episodeId(purchaseOutPortDto.getEpisodeId())
-            .webtoonId(purchaseOutPortDto.getWebtoonId())
-            .persistType(purchaseOutPortDto.getPersistType())
-            .expiredDate(purchaseOutPortDto.getExpiredDate())
+            .memberId(purchaseOutDto.getMemberId())
+            .episodeId(purchaseOutDto.getEpisodeId())
+            .webtoonId(purchaseOutDto.getWebtoonId())
+            .persistType(purchaseOutDto.getPersistType())
+            .expiredDate(purchaseOutDto.getExpiredDate())
             .build();
     }
 }
