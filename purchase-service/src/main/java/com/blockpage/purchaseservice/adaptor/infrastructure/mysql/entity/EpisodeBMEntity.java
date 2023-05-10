@@ -1,6 +1,5 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.episodeBMStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,5 +30,5 @@ public class EpisodeBMEntity extends BaseEntity{
 
     @Column
     @Enumerated(EnumType.STRING)
-    private episodeBMStatus episodeBMStatus;
+    private com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.episodeBMStatus episodeBMStatus;
 }

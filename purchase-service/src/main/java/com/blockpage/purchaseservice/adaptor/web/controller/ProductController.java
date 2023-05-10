@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.controller;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.episodeBMStatus;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.episodeBMStatus;
 import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
 import com.blockpage.purchaseservice.adaptor.web.view.ProductsDetailView;
 import java.util.ArrayList;

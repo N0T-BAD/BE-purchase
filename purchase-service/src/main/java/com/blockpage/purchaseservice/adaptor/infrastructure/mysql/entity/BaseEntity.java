@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

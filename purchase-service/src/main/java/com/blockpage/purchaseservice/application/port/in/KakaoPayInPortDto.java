@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.application.port.in;
 
-import com.blockpage.purchaseservice.adaptor.external.kakao.apispec.KakaoPayReadyRequest;
+import com.blockpage.purchaseservice.adaptor.web.apispec.KakaoPayReadyRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

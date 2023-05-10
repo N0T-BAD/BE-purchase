@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.application.port.out;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;

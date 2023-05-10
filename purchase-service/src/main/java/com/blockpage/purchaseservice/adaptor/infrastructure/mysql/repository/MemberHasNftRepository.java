@@ -1,6 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.repository;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasNftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasNftEntity;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

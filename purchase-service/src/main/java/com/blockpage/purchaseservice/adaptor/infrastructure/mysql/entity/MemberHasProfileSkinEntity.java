@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
 import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
 import jakarta.persistence.CascadeType;

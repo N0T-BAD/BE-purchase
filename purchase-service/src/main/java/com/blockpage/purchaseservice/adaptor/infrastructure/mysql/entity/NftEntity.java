@@ -1,6 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.entity;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
