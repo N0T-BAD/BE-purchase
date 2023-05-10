@@ -1,8 +1,8 @@
 package com.blockpage.purchaseservice.adaptor.web.controller;
 
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
 import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
 
 import com.blockpage.purchaseservice.adaptor.web.apispec.ProfileSkinRequest;

@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.NftType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 import lombok.Getter;

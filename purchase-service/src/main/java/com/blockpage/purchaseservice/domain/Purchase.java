@@ -2,8 +2,8 @@ package com.blockpage.purchaseservice.domain;
 
 import static java.lang.Boolean.*;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.ProductType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

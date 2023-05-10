@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.application.service;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.PersistType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.value.ProductType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import com.blockpage.purchaseservice.application.port.in.PurchaseInPortDto;
 import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
 import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
