@@ -1,6 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.repository;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.entity.EpisodeBMEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.EpisodeBMEntity;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

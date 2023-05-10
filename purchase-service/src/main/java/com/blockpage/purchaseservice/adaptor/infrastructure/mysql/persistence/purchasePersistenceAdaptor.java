@@ -1,11 +1,11 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.persistence;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.persistence;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasEpisodeBMEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasNftEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.entity.MemberHasProfileSkinEntity;
-import com.blockpage.purchaseservice.adaptor.infrastructure.repository.MemberHasEpisodeBMRepository;
-import com.blockpage.purchaseservice.adaptor.infrastructure.repository.MemberHasNftRepository;
-import com.blockpage.purchaseservice.adaptor.infrastructure.repository.MemberHasProfileSkinRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasEpisodeBMEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasNftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasProfileSkinEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasEpisodeBMRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasNftRepository;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasProfileSkinRepository;
 import com.blockpage.purchaseservice.application.port.out.SavePurchasePort;
 import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
 import lombok.RequiredArgsConstructor;

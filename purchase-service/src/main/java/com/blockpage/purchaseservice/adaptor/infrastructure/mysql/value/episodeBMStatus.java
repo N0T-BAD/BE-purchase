@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.value;
+package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

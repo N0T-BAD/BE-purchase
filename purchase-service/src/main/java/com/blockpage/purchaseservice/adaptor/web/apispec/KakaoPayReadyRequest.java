@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.external.kakao.apispec;
+package com.blockpage.purchaseservice.adaptor.web.apispec;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
