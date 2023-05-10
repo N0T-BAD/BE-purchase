@@ -8,7 +8,7 @@ import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
 import com.blockpage.purchaseservice.adaptor.web.apispec.ProfileSkinRequest;
 import com.blockpage.purchaseservice.adaptor.web.apispec.MemberPurchaseRequest;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberPurchaseView;
-import com.blockpage.purchaseservice.application.port.in.PurchaseInPortDto;
+import com.blockpage.purchaseservice.application.port.in.PurchaseInDto;
 import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ public class PurchaseController {
     @PostMapping
     public ResponseEntity<ApiWrapperResponse> postPurchases(@RequestParam("type") String type, @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
         Long memberId = 1L;
-        purchaseProductUseCase.purchaseProduct(PurchaseInPortDto.toInPortDto(type, memberId, memberPurchaseRequest));
+        purchaseProductUseCase.purchaseProduct(PurchaseInDto.toDto(type, memberId, memberPurchaseRequest));
 
         /**
          * Mockup DATA
