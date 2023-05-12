@@ -2,9 +2,9 @@ package com.blockpage.purchaseservice.application.port.out;
 
 public interface SavePurchasePort {
 
-    Long saveProfileSkin(PurchaseOutPortDto purchaseOutPortDto);
+    Long saveProfileSkin(PurchaseOutDto purchaseOutDto);
 
-    Long saveEpisodeBM(PurchaseOutPortDto purchaseOutPortDto);
+    Long saveEpisodeBM(PurchaseOutDto purchaseOutDto);
 
-    Long saveNft(PurchaseOutPortDto purchaseOutPortDto);
+    Long saveNft(PurchaseOutDto purchaseOutDto);
 }

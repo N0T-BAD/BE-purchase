@@ -7,7 +7,7 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.Mem
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasNftRepository;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasProfileSkinRepository;
 import com.blockpage.purchaseservice.application.port.out.SavePurchasePort;
-import com.blockpage.purchaseservice.application.port.out.PurchaseOutPortDto;
+import com.blockpage.purchaseservice.application.port.out.PurchaseOutDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,24 +20,24 @@ public class purchasePersistenceAdaptor implements SavePurchasePort {
     private final MemberHasEpisodeBMRepository memberHasEpisodeBMRepository;
 
     @Override
-    public Long saveProfileSkin(PurchaseOutPortDto purchaseOutPortDto) {
+    public Long saveProfileSkin(PurchaseOutDto purchaseOutDto) {
 
         MemberHasProfileSkinEntity memberHasProfileSkinEntity = memberHasProfileSkinRepository.save(
-            MemberHasProfileSkinEntity.toEntity(purchaseOutPortDto));
+            MemberHasProfileSkinEntity.toEntity(purchaseOutDto));
         return memberHasProfileSkinEntity.getId();
     }
 
     @Override
-    public Long saveEpisodeBM(PurchaseOutPortDto purchaseOutPortDto) {
+    public Long saveEpisodeBM(PurchaseOutDto purchaseOutDto) {
         MemberHasEpisodeBMEntity memberHasEpisodeBMEntity = memberHasEpisodeBMRepository.save(
-            MemberHasEpisodeBMEntity.toEntity(purchaseOutPortDto));
+            MemberHasEpisodeBMEntity.toEntity(purchaseOutDto));
         return memberHasEpisodeBMEntity.getId();
 
     }
 
     @Override
-    public Long saveNft(PurchaseOutPortDto purchaseOutPortDto) {
-        MemberHasNftEntity memberHasNftEntity = memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchaseOutPortDto));
+    public Long saveNft(PurchaseOutDto purchaseOutDto) {
+        MemberHasNftEntity memberHasNftEntity = memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchaseOutDto));
         return memberHasNftEntity.getId();
     }
 }

@@ -10,15 +10,15 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class KakaoPayInPortDto {
+public class KakaoPayReadyInDto {
 
     private Long memberId;
     private String itemName;
     private Integer quantity;
     private Integer totalAmount;
 
-    public static KakaoPayInPortDto toInPortDto(Long memberId, KakaoPayReadyRequest kakaoPayReadyRequest) {
-        return KakaoPayInPortDto.builder()
+    public static KakaoPayReadyInDto toDto(Long memberId, KakaoPayReadyRequest kakaoPayReadyRequest) {
+        return KakaoPayReadyInDto.builder()
             .memberId(memberId)
             .itemName(kakaoPayReadyRequest.getItemName())
             .quantity(kakaoPayReadyRequest.getQuantity())

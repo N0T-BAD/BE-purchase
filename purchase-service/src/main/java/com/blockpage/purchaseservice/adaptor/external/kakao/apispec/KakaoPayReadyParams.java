@@ -2,7 +2,7 @@ package com.blockpage.purchaseservice.adaptor.external.kakao.apispec;
 
 import static com.blockpage.purchaseservice.adaptor.external.kakao.configuration.KakaoPayRedirectUrl.*;
 
-import com.blockpage.purchaseservice.application.port.in.KakaoPayInPortDto;
+import com.blockpage.purchaseservice.application.port.in.KakaoPayReadyInDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +23,7 @@ public class KakaoPayReadyParams {
     private String cancel_url;
     private String fail_url;
 
-    public static KakaoPayReadyParams addEssentialParams(Long memberId, String orderNumber, KakaoPayInPortDto kakaoPayInPortDto) {
+    public static KakaoPayReadyParams addEssentialParams(Long memberId, String orderNumber, KakaoPayReadyInDto kakaoPayReadyInDto) {
         return KakaoPayReadyParams.builder()
             .cid("TC0ONETIME")
             .approval_url(KAKAO_APPROVAL_URL.getUrl())
@@ -31,10 +31,10 @@ public class KakaoPayReadyParams {
             .fail_url(KAKAO_FAIL_URL.getUrl())
             .tax_free_amount(0)
             .partner_order_id(orderNumber)
-            .item_name(kakaoPayInPortDto.getItemName())
-            .quantity(kakaoPayInPortDto.getQuantity())
+            .item_name(kakaoPayReadyInDto.getItemName())
+            .quantity(kakaoPayReadyInDto.getQuantity())
             .partner_user_id(memberId.toString())
-            .total_amount(kakaoPayInPortDto.getTotalAmount())
+            .total_amount(kakaoPayReadyInDto.getTotalAmount())
             .build();
     }
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class PurchaseInPortDto {
+public class PurchaseInDto {
 
     private String productType;
 
@@ -28,8 +28,8 @@ public class PurchaseInPortDto {
     private Long episodeId;
     private String persistType;
 
-    public static PurchaseInPortDto toInPortDto(String productType, Long memberId, MemberPurchaseRequest memberPurchaseRequest) {
-        return PurchaseInPortDto.builder()
+    public static PurchaseInDto toDto(String productType, Long memberId, MemberPurchaseRequest memberPurchaseRequest) {
+        return PurchaseInDto.builder()
             .productType(productType)
             .memberId(memberId)
             .nftId(memberPurchaseRequest.getNftId())
