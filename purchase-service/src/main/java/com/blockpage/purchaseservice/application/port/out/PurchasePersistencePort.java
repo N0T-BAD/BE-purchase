@@ -1,10 +1,12 @@
 package com.blockpage.purchaseservice.application.port.out;
 
+import com.blockpage.purchaseservice.application.service.PurchaseService.PurchaseDto;
+
 public interface PurchasePersistencePort {
 
-    Long saveProfileSkin(PurchaseOutDto purchaseOutDto);
+    Long saveProfileSkin(PurchaseDto purchaseOutDto);
 
-    Long saveEpisodeBM(PurchaseOutDto purchaseOutDto);
+    Long saveEpisodeBM(PurchaseDto purchaseOutDto);
 
-    Long saveNft(PurchaseOutDto purchaseOutDto);
+    Long saveNft(PurchaseDto purchaseOutDto);
 }

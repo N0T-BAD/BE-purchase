@@ -7,7 +7,7 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.Mem
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasNftRepository;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasProfileSkinRepository;
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
-import com.blockpage.purchaseservice.application.port.out.PurchaseOutDto;
+import com.blockpage.purchaseservice.application.service.PurchaseService.PurchaseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class purchasePersistenceAdaptorPersistence implements PurchasePersistenc
     private final MemberHasEpisodeBMRepository memberHasEpisodeBMRepository;
 
     @Override
-    public Long saveProfileSkin(PurchaseOutDto purchaseOutDto) {
+    public Long saveProfileSkin(PurchaseDto purchaseOutDto) {
 
         MemberHasProfileSkinEntity memberHasProfileSkinEntity = memberHasProfileSkinRepository.save(
             MemberHasProfileSkinEntity.toEntity(purchaseOutDto));
@@ -28,7 +28,7 @@ public class purchasePersistenceAdaptorPersistence implements PurchasePersistenc
     }
 
     @Override
-    public Long saveEpisodeBM(PurchaseOutDto purchaseOutDto) {
+    public Long saveEpisodeBM(PurchaseDto purchaseOutDto) {
         MemberHasEpisodeBMEntity memberHasEpisodeBMEntity = memberHasEpisodeBMRepository.save(
             MemberHasEpisodeBMEntity.toEntity(purchaseOutDto));
         return memberHasEpisodeBMEntity.getId();
@@ -36,7 +36,7 @@ public class purchasePersistenceAdaptorPersistence implements PurchasePersistenc
     }
 
     @Override
-    public Long saveNft(PurchaseOutDto purchaseOutDto) {
+    public Long saveNft(PurchaseDto purchaseOutDto) {
         MemberHasNftEntity memberHasNftEntity = memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchaseOutDto));
         return memberHasNftEntity.getId();
     }
