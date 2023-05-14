@@ -3,10 +3,10 @@ package com.blockpage.purchaseservice.adaptor.web.controller;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
-import com.blockpage.purchaseservice.adaptor.web.apispec.ApiWrapperResponse;
+import com.blockpage.purchaseservice.adaptor.web.view.ApiWrapperResponse;
 
-import com.blockpage.purchaseservice.adaptor.web.apispec.ProfileSkinRequest;
-import com.blockpage.purchaseservice.adaptor.web.apispec.MemberPurchaseRequest;
+import com.blockpage.purchaseservice.adaptor.web.requestbody.ProfileSkinRequest;
+import com.blockpage.purchaseservice.adaptor.web.requestbody.MemberPurchaseRequest;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberPurchaseView;
 import com.blockpage.purchaseservice.application.port.in.PurchaseInDto;
 import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
