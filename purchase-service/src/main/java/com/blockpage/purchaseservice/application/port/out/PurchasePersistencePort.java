@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.application.port.out;
 
-public interface SavePurchasePort {
+public interface PurchasePersistencePort {
 
     Long saveProfileSkin(PurchaseOutDto purchaseOutDto);
 

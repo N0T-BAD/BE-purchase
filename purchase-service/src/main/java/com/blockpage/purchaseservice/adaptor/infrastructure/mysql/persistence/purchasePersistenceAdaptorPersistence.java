@@ -6,14 +6,14 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberH
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasEpisodeBMRepository;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasNftRepository;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.MemberHasProfileSkinRepository;
-import com.blockpage.purchaseservice.application.port.out.SavePurchasePort;
+import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.application.port.out.PurchaseOutDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class purchasePersistenceAdaptor implements SavePurchasePort {
+public class purchasePersistenceAdaptorPersistence implements PurchasePersistencePort {
 
     private final MemberHasProfileSkinRepository memberHasProfileSkinRepository;
     private final MemberHasNftRepository memberHasNftRepository;

@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MemberPurchaseRequest {
+public class PurchaseRequest {
 
+    private Integer blockQuantity;
     //NFT purchase spec
     private Long nftId;
 
