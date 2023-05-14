@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.web.apispec;
+package com.blockpage.purchaseservice.adaptor.web.view;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
