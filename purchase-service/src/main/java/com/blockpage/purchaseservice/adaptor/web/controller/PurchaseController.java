@@ -6,13 +6,16 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistT
 import com.blockpage.purchaseservice.adaptor.web.view.ApiWrapperResponse;
 
 import com.blockpage.purchaseservice.adaptor.web.requestbody.ProfileSkinRequest;
-import com.blockpage.purchaseservice.adaptor.web.requestbody.MemberPurchaseRequest;
+import com.blockpage.purchaseservice.adaptor.web.requestbody.PurchaseRequest;
 import com.blockpage.purchaseservice.adaptor.web.view.MemberPurchaseView;
-import com.blockpage.purchaseservice.application.port.in.PurchaseInDto;
-import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
+import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
+import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.PurchaseQuery;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -30,7 +33,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/purchases")
 public class PurchaseController {
 
-    private final PurchaseProductUseCase purchaseProductUseCase;
+    private final PurchaseUseCase purchaseUseCase;
+
+    private long TEST_MEMBER_ID = 1l;
 
     /**
      * Mock Data 작업중 (서비스 로직 없음)
@@ -73,37 +78,15 @@ public class PurchaseController {
             .body(new ApiWrapperResponse(memberPurchaseViews));
     }
 
+    /**
+     * @param type = nft, profile-skin, episode-bm
+     */
     @PostMapping
-    public ResponseEntity<ApiWrapperResponse> postPurchases(@RequestParam("type") String type, @RequestBody MemberPurchaseRequest memberPurchaseRequest) {
-        Long memberId = 1L;
-        purchaseProductUseCase.purchaseProduct(PurchaseInDto.toDto(type, memberId, memberPurchaseRequest));
+    public ResponseEntity<ApiWrapperResponse> postPurchases(@RequestParam("type") String type,
+        @RequestBody PurchaseRequest purchaseRequest) {
 
-        /**
-         * Mockup DATA
-         */
-        System.out.println("purchaseRequest = " + memberPurchaseRequest);
-        switch (type) {
-            case "nft": {
-                //nft 생성 포트 + DTO 매핑 함수
-                System.out.println("purchaseRequest = " + memberPurchaseRequest);
-            }
-            break;
-            case "profile-skin": {
-                //profile-skin 생성 포트 + DTO 매핑 함수
-                System.out.println("purchaseRequest : profile-skin = " + memberPurchaseRequest);
-            }
-            break;
-            case "episode-bm": {
-                //episode-bm 생성 포트 + DTO 매핑 함수
-                System.out.println("purchaseRequest : episode-bm = " + memberPurchaseRequest);
-            }
-            break;
-            default: {
-                return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ApiWrapperResponse("잘못된 요청 입니다."));
-            }
+        purchaseUseCase.purchaseProduct(PurchaseQuery.toQuery(TEST_MEMBER_ID, type, purchaseRequest));
 
-        }
         return ResponseEntity.status(HttpStatus.OK)
             .body(new ApiWrapperResponse("리소스가 정상적으로 생성되었습니다."));
     }
