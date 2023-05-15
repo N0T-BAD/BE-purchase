@@ -7,8 +7,12 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductT
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
 import com.blockpage.purchaseservice.application.port.out.BlockServicePort;
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
+import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort.MemberHasEpisodeBMEntityDto;
+import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort.MemberHasNftEntityDto;
+import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort.MemberHasProfileSkinEntityDto;
 import com.blockpage.purchaseservice.domain.Purchase;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -44,16 +48,18 @@ public class PurchaseService implements PurchaseUseCase {
     public PurchaseDto purchaseQuery(FindPurchaseQuery findPurchaseQuery) {
         switch (ProductType.findByValue(findPurchaseQuery.getProductType())) {
             case NFT -> {
-                return purchasePersistencePort.findNft(findPurchaseQuery.getMemberId());
+                List<MemberHasNftEntityDto> nft = purchasePersistencePort.findNft(findPurchaseQuery.getMemberId());
             }
             case EPISODE_BM -> {
-                return purchasePersistencePort.findEpisodeBM(findPurchaseQuery.getMemberId(), findPurchaseQuery.getWebtoonId());
+                List<MemberHasEpisodeBMEntityDto> episodeBM = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+                    findPurchaseQuery.getWebtoonId());
             }
             case PROFILE_SKIN -> {
-                return purchasePersistencePort.findProfileSkin(findPurchaseQuery.getMemberId());
+                List<MemberHasProfileSkinEntityDto> profileSkin = purchasePersistencePort.findProfileSkin(findPurchaseQuery.getMemberId());
             }
             default -> throw new IllegalStateException("Unexpected value: " + ProductType.findByValue(findPurchaseQuery.getProductType()));
         }
+        return null;
     }
 
     @Getter
