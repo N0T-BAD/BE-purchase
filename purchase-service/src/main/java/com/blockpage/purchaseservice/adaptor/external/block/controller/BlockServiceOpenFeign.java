@@ -5,7 +5,6 @@ import com.blockpage.purchaseservice.adaptor.external.block.configuration.BlockS
 import com.blockpage.purchaseservice.adaptor.external.block.request.BlockPayRequestParams;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
