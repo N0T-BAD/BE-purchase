@@ -1,9 +1,13 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
 import com.blockpage.purchaseservice.domain.Purchase;
+import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,11 +39,19 @@ public class MemberHasNftEntity extends BaseEntity {
     @Column(name = "member_id")
     private Long memberId;
 
+    @Enumerated(EnumType.STRING)
+    private PersistType persistType;
+
+    @Column
+    private LocalDateTime expiredDate;
+
     public static MemberHasNftEntity toEntity(Purchase purchase, NftEntity nftEntity) {
         return MemberHasNftEntity.builder()
             .id(purchase.getMemberHasNftId())
             .memberId(purchase.getMemberId())
             .nftEntity(nftEntity)
+            .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
+            .expiredDate(purchase.getExpiredDate())
             .build();
     }
 }
