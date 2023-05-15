@@ -12,6 +12,8 @@ public class PurchaseRequest {
 
     //common spec
     private Integer blockQuantity;
+    private String persistType;
+
     //NFT purchase spec
     private Long nftId;
 
@@ -20,6 +22,4 @@ public class PurchaseRequest {
 
     //episodeBM purchase spec
     private Long episodeId;
-    private Long webtoonId;
-    private String persistType;
 }

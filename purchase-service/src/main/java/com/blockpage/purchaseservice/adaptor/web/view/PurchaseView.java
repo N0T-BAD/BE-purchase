@@ -10,38 +10,41 @@ import lombok.ToString;
 @Getter
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MemberPurchaseView {
+public class PurchaseView {
+
+    private Long memberId;
+    private PersistType persistType;
+    private LocalDateTime expiredDate;
+
+    private Long memberHasEpisodeBMId;
+    private Long webtoonId;
+    private Long episodeId;
 
     private Long memberHasNftId;
     private String nftNames;
     private NftType nftType;
     private String nftImage;
 
-    private Long memberHasWebtoonBMId;
-    private Long episodeId;
-    private PersistType persistType;
-    private LocalDateTime expiredDate;
-
     private Long profileSkinId;
     private String profileSkinName;
     private String profileSkinImage;
     private boolean defaultSkin;
 
-    public MemberPurchaseView(Long memberHasNftId, String nftNames, NftType nftType, String nftImage) {
+    public PurchaseView(Long memberHasNftId, String nftNames, NftType nftType, String nftImage) {
         this.memberHasNftId = memberHasNftId;
         this.nftNames = nftNames;
         this.nftType = nftType;
         this.nftImage = nftImage;
     }
 
-    public MemberPurchaseView(Long memberHasWebtoonBMId, Long episodeId, PersistType persistType, LocalDateTime expiredDate) {
-        this.memberHasWebtoonBMId = memberHasWebtoonBMId;
+    public PurchaseView(Long memberHasEpisodeBMId, Long episodeId, PersistType persistType, LocalDateTime expiredDate) {
+        this.memberHasEpisodeBMId = memberHasEpisodeBMId;
         this.episodeId = episodeId;
         this.persistType = persistType;
         this.expiredDate = expiredDate;
     }
 
-    public MemberPurchaseView(Long profileSkinId, String profileSkinName, String profileSkinImage, boolean defaultSkin) {
+    public PurchaseView(Long profileSkinId, String profileSkinName, String profileSkinImage, boolean defaultSkin) {
         this.profileSkinId = profileSkinId;
         this.profileSkinName = profileSkinName;
         this.profileSkinImage = profileSkinImage;
