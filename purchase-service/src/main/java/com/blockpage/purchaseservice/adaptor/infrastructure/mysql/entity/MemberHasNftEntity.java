@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
-import com.blockpage.purchaseservice.application.service.PurchaseService.PurchaseDto;
+import com.blockpage.purchaseservice.domain.Purchase;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,10 +35,11 @@ public class MemberHasNftEntity extends BaseEntity {
     @Column(name = "member_id")
     private Long memberId;
 
-    public static MemberHasNftEntity toEntity(PurchaseDto purchaseOutDto) {
+    public static MemberHasNftEntity toEntity(Purchase purchase, NftEntity nftEntity) {
         return MemberHasNftEntity.builder()
-            .memberId(purchaseOutDto.getMemberId())
-            .nftEntity(new NftEntity()) //상품 Entity 넣어줘야함..!
+            .id(purchase.getMemberHasNftId())
+            .memberId(purchase.getMemberId())
+            .nftEntity(nftEntity)
             .build();
     }
 }
