@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.application.service;
 
-import com.blockpage.purchaseservice.adaptor.external.block.request.BlockPayRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.external.block.request.BlockPayRequestParams;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;

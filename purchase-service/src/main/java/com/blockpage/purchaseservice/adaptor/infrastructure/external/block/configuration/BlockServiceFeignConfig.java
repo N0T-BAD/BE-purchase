@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.external.block.configuration;
+package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.configuration;
 
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
