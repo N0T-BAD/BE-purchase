@@ -6,6 +6,7 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberH
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.NftEntity;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.ProfileSkinEntity;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
+import com.blockpage.purchaseservice.application.service.PurchaseService.PurchaseDto;
 import com.blockpage.purchaseservice.domain.Purchase;
 import java.time.LocalDateTime;
 import lombok.Builder;
@@ -18,6 +19,12 @@ public interface PurchasePersistencePort {
     MemberHasEpisodeBMEntityDto saveEpisodeBM(Purchase purchase);
 
     MemberHasNftEntityDto saveNft(Purchase purchase);
+
+    PurchaseDto findNft(Long memberId);
+
+    PurchaseDto findEpisodeBM(Long memberId, Long webtoonId);
+
+    PurchaseDto findProfileSkin(Long memberId);
 
     @Builder
     @Getter
