@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class purchasePersistenceAdaptorPersistence implements PurchasePersistencePort {
+public class purchasePersistenceAdaptor implements PurchasePersistencePort {
 
     private final MemberHasProfileSkinRepository memberHasProfileSkinRepository;
     private final MemberHasNftRepository memberHasNftRepository;
@@ -28,49 +28,44 @@ public class purchasePersistenceAdaptorPersistence implements PurchasePersistenc
     private final NftRepository nftRepository;
 
     @Override
-    public MemberHasProfileSkinEntityDto saveProfileSkin(Purchase purchase) {
-        ProfileSkinEntity profileSkinEntity = profileSkinRepository.findById(purchase.getProfileSkinFk().getId()).get();
-        MemberHasProfileSkinEntity memberHasProfileSkinEntity = memberHasProfileSkinRepository.save(
-            MemberHasProfileSkinEntity.toEntity(purchase, profileSkinEntity));
-        return MemberHasProfileSkinEntityDto.toDto(memberHasProfileSkinEntity);
+    public void saveProfileSkin(Purchase purchase) {
+        ProfileSkinEntity profileSkinEntity = profileSkinRepository.findById(purchase.getProfileSkinWrapper().getId()).get();
+        memberHasProfileSkinRepository.save(MemberHasProfileSkinEntity.toEntity(purchase, profileSkinEntity));
     }
 
     @Override
-    public MemberHasEpisodeBMEntityDto saveEpisodeBM(Purchase purchase) {
-        MemberHasEpisodeBMEntity memberHasEpisodeBMEntity = memberHasEpisodeBMRepository.save(MemberHasEpisodeBMEntity.toEntity(purchase));
-        return MemberHasEpisodeBMEntityDto.toDto(memberHasEpisodeBMEntity);
+    public void saveEpisodeBM(Purchase purchase) {
+        memberHasEpisodeBMRepository.save(MemberHasEpisodeBMEntity.toEntity(purchase));
 
     }
 
     @Override
-    public MemberHasNftEntityDto saveNft(Purchase purchase) {
-        NftEntity nftEntity = nftRepository.findById(purchase.getNftFk().getId()).get();
-        MemberHasNftEntity memberHasNftEntity = memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchase, nftEntity));
-        return MemberHasNftEntityDto.toDto(memberHasNftEntity);
+    public void saveNft(Purchase purchase) {
+        NftEntity nftEntity = nftRepository.findById(purchase.getNftWrapper().getId()).get();
+        memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchase, nftEntity));
     }
 
     @Override
-    public List<MemberHasNftEntityDto> findNft(Long memberId) {
+    public List<Purchase> findNft(Long memberId) {
         List<MemberHasNftEntity> memberNftEntityList = memberHasNftRepository.findByMemberId(memberId);
         return memberNftEntityList.stream()
-            .map(MemberHasNftEntityDto::toDto)
+            .map(Purchase::toDomainFromMemberNftEntity)
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<MemberHasEpisodeBMEntityDto> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId) {
-        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAnd(memberId,
-            webtoonId);
+    public List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId) {
+        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonId(memberId, webtoonId);
         return memberEpisodeBMEntityList.stream()
-            .map(MemberHasEpisodeBMEntityDto::toDto)
+            .map(Purchase::toDomainFromMemberEpisodeBMEntity)
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<MemberHasProfileSkinEntityDto> findProfileSkin(Long memberId) {
+    public List<Purchase> findProfileSkin(Long memberId) {
         List<MemberHasProfileSkinEntity> memberProfileSkinEntityList = memberHasProfileSkinRepository.findByMemberId(memberId);
         return memberProfileSkinEntityList.stream()
-            .map(MemberHasProfileSkinEntityDto::toDto)
+            .map(Purchase::toDomainFromMemberProfileSkinEntity)
             .collect(Collectors.toList());
     }
 }
