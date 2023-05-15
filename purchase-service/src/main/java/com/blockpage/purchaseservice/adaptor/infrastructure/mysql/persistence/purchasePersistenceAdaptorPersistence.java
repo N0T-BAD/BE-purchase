@@ -12,6 +12,8 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.Nft
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.ProfileSkinRepository;
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.domain.Purchase;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +30,8 @@ public class purchasePersistenceAdaptorPersistence implements PurchasePersistenc
     @Override
     public MemberHasProfileSkinEntityDto saveProfileSkin(Purchase purchase) {
         ProfileSkinEntity profileSkinEntity = profileSkinRepository.findById(purchase.getProfileSkinFk().getId()).get();
-        MemberHasProfileSkinEntity memberHasProfileSkinEntity = memberHasProfileSkinRepository.save(MemberHasProfileSkinEntity.toEntity(purchase, profileSkinEntity));
+        MemberHasProfileSkinEntity memberHasProfileSkinEntity = memberHasProfileSkinRepository.save(
+            MemberHasProfileSkinEntity.toEntity(purchase, profileSkinEntity));
         return MemberHasProfileSkinEntityDto.toDto(memberHasProfileSkinEntity);
     }
 
@@ -44,5 +47,30 @@ public class purchasePersistenceAdaptorPersistence implements PurchasePersistenc
         NftEntity nftEntity = nftRepository.findById(purchase.getNftFk().getId()).get();
         MemberHasNftEntity memberHasNftEntity = memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchase, nftEntity));
         return MemberHasNftEntityDto.toDto(memberHasNftEntity);
+    }
+
+    @Override
+    public List<MemberHasNftEntityDto> findNft(Long memberId) {
+        List<MemberHasNftEntity> memberNftEntityList = memberHasNftRepository.findByMemberId(memberId);
+        return memberNftEntityList.stream()
+            .map(MemberHasNftEntityDto::toDto)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MemberHasEpisodeBMEntityDto> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId) {
+        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAnd(memberId,
+            webtoonId);
+        return memberEpisodeBMEntityList.stream()
+            .map(MemberHasEpisodeBMEntityDto::toDto)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MemberHasProfileSkinEntityDto> findProfileSkin(Long memberId) {
+        List<MemberHasProfileSkinEntity> memberProfileSkinEntityList = memberHasProfileSkinRepository.findByMemberId(memberId);
+        return memberProfileSkinEntityList.stream()
+            .map(MemberHasProfileSkinEntityDto::toDto)
+            .collect(Collectors.toList());
     }
 }
