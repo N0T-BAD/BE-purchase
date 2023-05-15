@@ -2,7 +2,14 @@ package com.blockpage.purchaseservice.domain;
 
 import static java.lang.Boolean.*;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasEpisodeBMEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasNftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasProfileSkinEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.NftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.ProfileSkinEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.PurchaseQuery;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import lombok.AllArgsConstructor;
@@ -30,11 +37,31 @@ public class Purchase {
     private Long webtoonId;
 
     private Long memberHasNftId;
-    private NftFkWrapper nftFk;
+    private NftWrapper nftWrapper;
 
     private Long memberHasProfileSkinId;
-    private ProfileSkinFkWrapper profileSkinFk;
+    private ProfileSkinWrapper profileSkinWrapper;
     private Boolean profileSkinDefault;
+
+    public static LocalDateTime makeExpiredDate(PersistType persistType) {
+        switch (persistType) {
+            case RENTAL -> {
+                return LocalDateTime.now().plusDays(RENTAL_POLICY_FOR_DAYS);
+            }
+            case PERMANENT -> {
+                return LocalDateTime.now().plusYears(FREE_POLICY_FOR_YEARS);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + persistType);
+        }
+    }
+
+    public void changeProfileSkinDefault(Purchase purchase) {
+        if (purchase.profileSkinDefault == TRUE) {
+            purchase.profileSkinDefault = FALSE;
+        } else {
+            purchase.profileSkinDefault = TRUE;
+        }
+    }
 
     public static Purchase initPurchaseForSave(PurchaseQuery query) {
         ProductType productType = ProductType.findByValue(query.getProductType());
@@ -57,7 +84,7 @@ public class Purchase {
                     .productType(productType)
                     .persistType(persistType)
                     .expiredDate(makeExpiredDate(persistType))
-                    .nftFk(new NftFkWrapper(query.getNftId()))
+                    .nftWrapper(NftWrapper.initForSave(query.getNftId()))
                     .memberHasNftId(null)
                     .build();
             }
@@ -68,7 +95,7 @@ public class Purchase {
                     .persistType(persistType)
                     .expiredDate(makeExpiredDate(persistType))
                     .memberHasProfileSkinId(null)
-                    .profileSkinFk(new ProfileSkinFkWrapper(query.getProfileSkinId()))
+                    .profileSkinWrapper(ProfileSkinWrapper.initForSave(query.getProfileSkinId()))
                     .profileSkinDefault(FALSE)
                     .build();
             }
@@ -76,49 +103,98 @@ public class Purchase {
         }
     }
 
-    public static LocalDateTime makeExpiredDate(PersistType persistType) {
-        switch (persistType) {
-            case RENTAL -> {
-                return LocalDateTime.now().plusDays(RENTAL_POLICY_FOR_DAYS);
-            }
-            case PERMANENT -> {
-                return LocalDateTime.now().plusYears(FREE_POLICY_FOR_YEARS);
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + persistType);
-        }
+    public static Purchase toDomainFromMemberNftEntity(MemberHasNftEntity entity) {
+        return Purchase.builder()
+            .productType(ProductType.NFT)
+            .memberId(entity.getMemberId())
+            .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
+            .expiredDate(entity.getExpiredDate())
+            .memberHasNftId(entity.getId())
+            .nftWrapper(NftWrapper.initForGet(entity.getNftEntity()))
+            .build();
     }
 
-    public void changeProfileSkinDefault(Purchase purchase) {
-        if (purchase.profileSkinDefault == TRUE) {
-            purchase.profileSkinDefault = FALSE;
-        } else {
-            purchase.profileSkinDefault = TRUE;
-        }
+    public static Purchase toDomainFromMemberProfileSkinEntity(MemberHasProfileSkinEntity entity) {
+        return Purchase.builder()
+            .productType(ProductType.PROFILE_SKIN)
+            .memberId(entity.getMemberId())
+            .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
+            .expiredDate(entity.getExpiredDate())
+            .memberHasProfileSkinId(entity.getId())
+            .profileSkinWrapper(ProfileSkinWrapper.initForGet(entity.getProfileSkinEntity()))
+            .profileSkinDefault(entity.getDefaultSkin())
+            .build();
     }
 
-    public static class NftFkWrapper {
+
+    public static Purchase toDomainFromMemberEpisodeBMEntity(MemberHasEpisodeBMEntity entity) {
+        return Purchase.builder()
+            .productType(ProductType.EPISODE_BM)
+            .memberId(entity.getMemberId())
+            .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
+            .expiredDate(entity.getExpiredDate())
+            .memberHasEpisodeBMId(entity.getId())
+            .episodeId(entity.getEpisodeId())
+            .webtoonId(entity.getWebtoonId())
+            .build();
+    }
+
+    @Builder
+    @Getter
+    public static class NftWrapper {
 
         private Long id;
+        private Long memberId;
+        private Long creatorId;
+        private String nftName;
+        private String nftDescription;
+        private Integer nftBlockPrice;
+        private String nftImage;
+        private NftType nftType;
 
-        public Long getId() {
-            return id;
+        public static NftWrapper initForGet(NftEntity entity) {
+            return NftWrapper.builder()
+                .id(entity.getId())
+                .memberId(entity.getMemberId())
+                .creatorId(entity.getCreatorId())
+                .nftName(entity.getNftName())
+                .nftBlockPrice(entity.getNftBlockPrice())
+                .nftImage(entity.getNftImage())
+                .nftType(entity.getNftType())
+                .build();
         }
 
-        public NftFkWrapper(Long id) {
-            this.id = id;
+        public static NftWrapper initForSave(Long nftId) {
+            return NftWrapper.builder()
+                .id(nftId)
+                .build();
         }
     }
 
-    public static class ProfileSkinFkWrapper {
+    @Getter
+    @Builder
+    public static class ProfileSkinWrapper {
 
         private Long id;
+        private String profileSkinName;
+        private String profileSkinDescription;
+        private String profileSkinBlockPrice;
+        private String profileSkinImage;
 
-        public Long getId() {
-            return id;
+        public static ProfileSkinWrapper initForGet(ProfileSkinEntity entity) {
+            return ProfileSkinWrapper.builder()
+                .id(entity.getId())
+                .profileSkinName(entity.getProfileSkinName())
+                .profileSkinDescription(entity.getProfileSkinDescription())
+                .profileSkinBlockPrice(entity.getProfileSkinBlockPrice())
+                .profileSkinImage(entity.getProfileSkinImage())
+                .build();
         }
 
-        public ProfileSkinFkWrapper(Long id) {
-            this.id = id;
+        public static ProfileSkinWrapper initForSave(Long profileSkinId) {
+            return ProfileSkinWrapper.builder()
+                .id(profileSkinId)
+                .build();
         }
     }
 
