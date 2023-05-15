@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Purchase {
 
-    private final long FREE_POLICY_FOR_YEARS = 100l; //100년
-    private final long RENTAL_POLICY_FOR_DAYS = 2l;  //2일
+    private final static long FREE_POLICY_FOR_YEARS = 100l; //100년
+    private final static long RENTAL_POLICY_FOR_DAYS = 2l;  //2일
 
     private ProductType productType;                //도메인만 가지고 있음
 
@@ -30,19 +30,62 @@ public class Purchase {
     private Long webtoonId;
 
     private Long memberHasNftId;
-    private NftEntity nftEntity;
+    private NftFkWrapper nftFk;
 
     private Long memberHasProfileSkinId;
-    private ProfileSkinEntity profileSkinEntity;
+    private ProfileSkinFkWrapper profileSkinFk;
     private Boolean profileSkinDefault;
 
-    public LocalDateTime makeExpiredDate(PersistType persistType) {
+    public static Purchase initPurchaseForSave(PurchaseQuery query) {
+        ProductType productType = ProductType.findByValue(query.getProductType());
+        PersistType persistType = PersistType.findByValue(query.getPersistType());
+        switch (productType) {
+            case EPISODE_BM -> {
+                return Purchase.builder()
+                    .memberId(query.getMemberId())
+                    .productType(productType)
+                    .persistType(persistType)
+                    .expiredDate(makeExpiredDate(persistType))
+                    .episodeId(query.getEpisodeId())
+                    .webtoonId(query.getWebtoonId())
+                    .memberHasEpisodeBMId(null)
+                    .build();
+            }
+            case NFT -> {
+                return Purchase.builder()
+                    .memberId(query.getMemberId())
+                    .productType(productType)
+                    .persistType(persistType)
+                    .expiredDate(makeExpiredDate(persistType))
+                    .nftFk(new NftFkWrapper(query.getNftId()))
+                    .memberHasNftId(null)
+                    .build();
+            }
+            case PROFILE_SKIN -> {
+                return Purchase.builder()
+                    .memberId(query.getMemberId())
+                    .productType(productType)
+                    .persistType(persistType)
+                    .expiredDate(makeExpiredDate(persistType))
+                    .memberHasProfileSkinId(null)
+                    .profileSkinFk(new ProfileSkinFkWrapper(query.getProfileSkinId()))
+                    .profileSkinDefault(FALSE)
+                    .build();
+            }
+            default -> throw new RuntimeException("Bad Request");
+        }
+    }
+
+    public static LocalDateTime makeExpiredDate(PersistType persistType) {
         switch (persistType) {
-            case RENTAL -> this.expiredDate = LocalDateTime.now().plusDays(RENTAL_POLICY_FOR_DAYS);
-            case PERMANENT -> this.expiredDate = LocalDateTime.now().plusYears(FREE_POLICY_FOR_YEARS);
+            case RENTAL -> {
+                return LocalDateTime.now().plusDays(RENTAL_POLICY_FOR_DAYS);
+            }
+            case PERMANENT -> {
+                return LocalDateTime.now().plusYears(FREE_POLICY_FOR_YEARS);
+            }
             default -> throw new IllegalStateException("Unexpected value: " + persistType);
         }
-        return this.expiredDate;
     }
 
     public void changeProfileSkinDefault(Purchase purchase) {
@@ -53,38 +96,33 @@ public class Purchase {
         }
     }
 
-    public static Purchase initPurchaseForSave(PurchaseQuery query) {
-        ProductType productType = ProductType.findByValue(query.getProductType());
-        switch (productType) {
-            case NFT -> {
-                return Purchase.builder()
-                    .expiredDate(null)
-                    .productType(productType)
-                    .persistType(PersistType.findByValue(query.getPersistType()))
-                    .profileSkinDefault(TRUE)
-                    .build();
-            }
-            case EPISODE_BM -> {
-                return Purchase.builder()
-                    .expiredDate(null)
-                    .productType(productType)
-                    .persistType(PersistType.findByValue(query.getPersistType()))
-                    .profileSkinDefault(TRUE)
-                    .build();
-            }
-            case PROFILE_SKIN -> {
-                return Purchase.builder()
-                    .expiredDate(null)
-                    .productType(productType)
-                    .persistType(PersistType.findByValue(query.getPersistType()))
-                    .profileSkinDefault(TRUE)
-                    .build();
-            }
+    public static class NftFkWrapper {
+
+        private Long id;
+
+        public Long getId() {
+            return id;
+        }
+
+        public NftFkWrapper(Long id) {
+            this.id = id;
         }
     }
 
+    public static class ProfileSkinFkWrapper {
 
-    enum PersistType {
+        private Long id;
+
+        public Long getId() {
+            return id;
+        }
+
+        public ProfileSkinFkWrapper(Long id) {
+            this.id = id;
+        }
+    }
+
+    public enum PersistType {
         PERMANENT(0, "permanent"),
         RENTAL(1, "rental"),
         ;
@@ -112,7 +150,7 @@ public class Purchase {
         }
     }
 
-    enum ProductType {
+    public enum ProductType {
         EPISODE_BM(0, "episode-bm"),
         PROFILE_SKIN(1, "profile-skin"),
         NFT(2, "nft"),
