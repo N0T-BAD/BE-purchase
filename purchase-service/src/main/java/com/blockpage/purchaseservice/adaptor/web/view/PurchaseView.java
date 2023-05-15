@@ -1,9 +1,13 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
+import com.blockpage.purchaseservice.application.service.PurchaseService.NftDto;
+import com.blockpage.purchaseservice.application.service.PurchaseService.ProfileSkinDto;
+import com.blockpage.purchaseservice.application.service.PurchaseService.PurchaseDto;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -13,41 +17,71 @@ import lombok.ToString;
 public class PurchaseView {
 
     private Long memberId;
-    private PersistType persistType;
     private LocalDateTime expiredDate;
 
     private Long memberHasEpisodeBMId;
-    private Long webtoonId;
     private Long episodeId;
+    private Long webtoonId;
 
     private Long memberHasNftId;
-    private String nftNames;
-    private NftType nftType;
-    private String nftImage;
+    private NftDetail nftDetail;
 
-    private Long profileSkinId;
-    private String profileSkinName;
-    private String profileSkinImage;
-    private boolean defaultSkin;
+    private Long memberHasProfileSkinId;
+    private ProfileSkinDetail profileSkinDetail;
+    private Boolean profileSkinDefault;
 
-    public PurchaseView(Long memberHasNftId, String nftNames, NftType nftType, String nftImage) {
-        this.memberHasNftId = memberHasNftId;
-        this.nftNames = nftNames;
-        this.nftType = nftType;
-        this.nftImage = nftImage;
+    public PurchaseView(PurchaseDto purchaseDto) {
+        this.memberId = purchaseDto.getMemberId();
+        this.expiredDate = purchaseDto.getExpiredDate();
+        this.memberHasEpisodeBMId = purchaseDto.getMemberHasEpisodeBMId();
+        this.episodeId = purchaseDto.getEpisodeId();
+        this.webtoonId = purchaseDto.getWebtoonId();
+        this.memberHasNftId = purchaseDto.getMemberHasNftId();
+        this.nftDetail = purchaseDto.getNftDto() != null ? new NftDetail(purchaseDto.getNftDto()) : null;
+        this.memberHasProfileSkinId = purchaseDto.getMemberHasProfileSkinId();
+        this.profileSkinDefault = purchaseDto.getProfileSkinDefault();
+        this.profileSkinDetail = purchaseDto.getProfileSkinDto() != null ? new ProfileSkinDetail(purchaseDto.getProfileSkinDto()) : null;
     }
 
-    public PurchaseView(Long memberHasEpisodeBMId, Long episodeId, PersistType persistType, LocalDateTime expiredDate) {
-        this.memberHasEpisodeBMId = memberHasEpisodeBMId;
-        this.episodeId = episodeId;
-        this.persistType = persistType;
-        this.expiredDate = expiredDate;
+    @Getter
+    public class NftDetail {
+
+        private Long id;
+        private Long memberId;
+        private Long creatorId;
+        private String nftName;
+        private String nftDescription;
+        private Integer nftBlockPrice;
+        private String nftImage;
+        private NftType nftType;
+
+        public NftDetail(NftDto dto) {
+            this.id = dto.getId();
+            this.memberId = dto.getMemberId();
+            this.creatorId = dto.getCreatorId();
+            this.nftName = dto.getNftName();
+            this.nftDescription = dto.getNftDescription();
+            this.nftBlockPrice = dto.getNftBlockPrice();
+            this.nftImage = dto.getNftImage();
+            this.nftType = dto.getNftType();
+        }
     }
 
-    public PurchaseView(Long profileSkinId, String profileSkinName, String profileSkinImage, boolean defaultSkin) {
-        this.profileSkinId = profileSkinId;
-        this.profileSkinName = profileSkinName;
-        this.profileSkinImage = profileSkinImage;
-        this.defaultSkin = defaultSkin;
+    @Getter
+    public class ProfileSkinDetail {
+
+        private Long id;
+        private String profileSkinName;
+        private String profileSkinDescription;
+        private String profileSkinBlockPrice;
+        private String profileSkinImage;
+
+        public ProfileSkinDetail(ProfileSkinDto dto) {
+            this.id = dto.getId();
+            this.profileSkinName = dto.getProfileSkinName();
+            this.profileSkinDescription = dto.getProfileSkinDescription();
+            this.profileSkinBlockPrice = dto.getProfileSkinBlockPrice();
+            this.profileSkinImage = dto.getProfileSkinImage();
+        }
     }
 }

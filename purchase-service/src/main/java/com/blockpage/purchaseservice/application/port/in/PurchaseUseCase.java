@@ -2,6 +2,7 @@ package com.blockpage.purchaseservice.application.port.in;
 
 import com.blockpage.purchaseservice.adaptor.web.requestbody.PurchaseRequest;
 import com.blockpage.purchaseservice.application.service.PurchaseService.PurchaseDto;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,7 +10,7 @@ public interface PurchaseUseCase {
 
     void purchaseProduct(PurchaseQuery purchaseQuery);
 
-    PurchaseDto purchaseQuery(FindPurchaseQuery findPurchaseQuery);
+    List<PurchaseDto> purchaseQuery(FindPurchaseQuery findPurchaseQuery);
 
 
     @Getter

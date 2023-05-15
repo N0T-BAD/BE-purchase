@@ -11,6 +11,8 @@ import com.blockpage.purchaseservice.adaptor.web.view.PurchaseView;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.PurchaseQuery;
 import com.blockpage.purchaseservice.application.service.PurchaseService.PurchaseDto;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -32,13 +34,16 @@ public class PurchaseController {
     private Long TEST_MEMBER_ID = 1l;
 
     @GetMapping
-    public ResponseEntity<ApiWrapperResponse<?>> getPurchases(
+    public ResponseEntity<ApiWrapperResponse<List<PurchaseView>>> getPurchases(
         @RequestParam String type,
         @RequestParam(required = false) Long webtoonId) {
 
-        PurchaseDto purchaseDto = purchaseUseCase.purchaseQuery(FindPurchaseQuery.toQuery(TEST_MEMBER_ID, type, webtoonId));
+        List<PurchaseDto> purchaseDtoList = purchaseUseCase.purchaseQuery(FindPurchaseQuery.toQuery(TEST_MEMBER_ID, type, webtoonId));
+        List<PurchaseView> purchaseViews = purchaseDtoList.stream()
+            .map(PurchaseView::new)
+            .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK)
-            .body(new ApiWrapperResponse<>("g"));
+            .body(new ApiWrapperResponse<>(purchaseViews));
     }
 
     @PostMapping
