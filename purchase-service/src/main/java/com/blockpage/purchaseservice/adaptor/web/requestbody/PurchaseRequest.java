@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PurchaseRequest {
 
+    //common spec
     private Integer blockQuantity;
     //NFT purchase spec
     private Long nftId;
