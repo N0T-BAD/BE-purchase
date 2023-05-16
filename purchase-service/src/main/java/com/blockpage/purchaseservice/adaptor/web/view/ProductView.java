@@ -1,0 +1,49 @@
+package com.blockpage.purchaseservice.adaptor.web.view;
+
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
+import com.blockpage.purchaseservice.application.service.ProductService.ProductDto;
+import com.blockpage.purchaseservice.domain.Product.NftType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductView {
+
+    private Long nftId;
+    private Long nftMemberId;
+    private Long nftCreatorId;
+    private String nftName;
+    private String nftDescription;
+    private Integer nftBlockPrice;
+    private String nftImage;
+    private NftType nftType;
+
+    private Long profileSkinId;
+    private String profileSkinName;
+    private String profileSkinDescription;
+    private String profileSkinBlockPrice;
+    private String profileSkinImage;
+
+
+    public ProductView(ProductDto dto) {
+        if (dto.getProductType() == ProductType.NFT) {
+            this.nftId = dto.getNftDto().getNftId();
+            this.nftMemberId = dto.getNftDto().getNftMemberId();
+            this.nftCreatorId = dto.getNftDto().getNftCreatorId();
+            this.nftName = dto.getNftDto().getNftName();
+            this.nftDescription = dto.getNftDto().getNftDescription();
+            this.nftBlockPrice = dto.getNftDto().getNftBlockPrice();
+            this.nftImage = dto.getNftDto().getNftImage();
+            this.nftType = dto.getNftDto().getNftType();
+        } else {
+            this.profileSkinId = dto.getProfileSkinDto().getProfileSkinId();
+            this.profileSkinName = dto.getProfileSkinDto().getProfileSkinName();
+            this.profileSkinDescription = dto.getProfileSkinDto().getProfileSkinDescription();
+            this.profileSkinBlockPrice = dto.getProfileSkinDto().getProfileSkinBlockPrice();
+            this.profileSkinImage = dto.getProfileSkinDto().getProfileSkinImage();
+        }
+    }
+}
