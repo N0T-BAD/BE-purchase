@@ -1,8 +1,8 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import com.blockpage.purchaseservice.application.service.ProductService.ProductEntityDto;
-import com.blockpage.purchaseservice.domain.Product.NftType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.ToString;

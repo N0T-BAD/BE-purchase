@@ -2,13 +2,10 @@ package com.blockpage.purchaseservice.application.service;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.NftEntity;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.ProfileSkinEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import com.blockpage.purchaseservice.application.port.in.ProductUseCase;
 import com.blockpage.purchaseservice.application.port.out.ProductPersistencePort;
-import com.blockpage.purchaseservice.domain.Product;
-import com.blockpage.purchaseservice.domain.Product.Nft;
-import com.blockpage.purchaseservice.domain.Product.NftType;
-import com.blockpage.purchaseservice.domain.Product.ProfileSkin;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;

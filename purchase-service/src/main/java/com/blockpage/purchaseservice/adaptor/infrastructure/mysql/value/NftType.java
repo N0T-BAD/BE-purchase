@@ -15,9 +15,9 @@ public enum NftType {
     private int key;
     private String value;
 
-    public static NftType findNftTypeByKey(int num) {
+    public static NftType findByValue(String value) {
         return Arrays.stream(NftType.values())
-            .filter(t -> t.getKey() == num)
+            .filter(t -> t.getValue().equals(value))
             .findFirst()
             .get();
     }
