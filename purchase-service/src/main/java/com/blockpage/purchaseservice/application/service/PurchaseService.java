@@ -48,6 +48,7 @@ public class PurchaseService implements PurchaseUseCase {
     }
 
     @Override
+    @Transactional
     public void changeProfileSkinPurchases(ChangePurchaseQuery query) {
         Purchase purchase = purchasePersistencePort.changeProfileSkin(query.getMemberId(), query.getMemberProfileSkinId());
 
