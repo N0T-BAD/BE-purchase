@@ -1,5 +1,7 @@
 package com.blockpage.purchaseservice.application.service;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.NftEntity;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.ProfileSkinEntity;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import com.blockpage.purchaseservice.application.port.in.ProductUseCase;
 import com.blockpage.purchaseservice.application.port.out.ProductPersistencePort;
@@ -8,7 +10,6 @@ import com.blockpage.purchaseservice.domain.Product.Nft;
 import com.blockpage.purchaseservice.domain.Product.NftType;
 import com.blockpage.purchaseservice.domain.Product.ProfileSkin;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,32 +24,36 @@ public class ProductService implements ProductUseCase {
     private final ProductPersistencePort productPersistencePort;
 
     @Override
-    public List<ProductDto> productQuery(ProductQuery query) {
-        List<Product> productList;
+    public List<ProductEntityDto> productQuery(ProductQuery query) {
+        List<ProductEntityDto> productEntityDtoList;
         switch (ProductType.findByValue(query.getType())) {
-            case NFT -> productList = productPersistencePort.findAllNft();
-            case PROFILE_SKIN -> productList = productPersistencePort.findAllProfileSkin();
+            case NFT -> productEntityDtoList = productPersistencePort.findAllNft();
+            case PROFILE_SKIN -> productEntityDtoList = productPersistencePort.findAllProfileSkin();
             default -> throw new IllegalStateException("Unexpected value");
         }
 
-        return productList.stream()
-            .map(ProductDto::toDto)
-            .collect(Collectors.toList());
+        return productEntityDtoList;
     }
 
     @Getter
     @Builder
-    public static class ProductDto {
+    public static class ProductEntityDto {
 
         private ProductType productType;
         private NftDto nftDto;
         private ProfileSkinDto profileSkinDto;
 
-        public static ProductDto toDto(Product product) {
-            return ProductDto.builder()
-                .productType(ProductType.findByValue(product.getProductType().getValue()))
-                .nftDto(product.getNft() != null ? NftDto.toDto(product.getNft()) : null)
-                .profileSkinDto(product.getProfileSkin() != null ? ProfileSkinDto.toDto(product.getProfileSkin()) : null)
+        public static ProductEntityDto toDtoFromNftEntity(NftEntity entity) {
+            return ProductEntityDto.builder()
+                .productType(ProductType.NFT)
+                .nftDto(NftDto.toDto(entity))
+                .build();
+        }
+
+        public static ProductEntityDto toDtoFromProfileSkinEntity(ProfileSkinEntity entity) {
+            return ProductEntityDto.builder()
+                .productType(ProductType.PROFILE_SKIN)
+                .profileSkinDto(ProfileSkinDto.toDto(entity))
                 .build();
         }
     }
@@ -66,11 +71,11 @@ public class ProductService implements ProductUseCase {
         private String nftImage;
         private NftType nftType;
 
-        public static NftDto toDto(Nft nft) {
+        public static NftDto toDto(NftEntity nft) {
             return NftDto.builder()
-                .nftId(nft.getNftId())
-                .nftMemberId(nft.getNftMemberId())
-                .nftCreatorId(nft.getNftCreatorId())
+                .nftId(nft.getId())
+                .nftMemberId(nft.getMemberId())
+                .nftCreatorId(nft.getCreatorId())
                 .nftName(nft.getNftName())
                 .nftDescription(nft.getNftDescription())
                 .nftBlockPrice(nft.getNftBlockPrice())
@@ -90,9 +95,9 @@ public class ProductService implements ProductUseCase {
         private String profileSkinBlockPrice;
         private String profileSkinImage;
 
-        public static ProfileSkinDto toDto(ProfileSkin profileSkin) {
+        public static ProfileSkinDto toDto(ProfileSkinEntity profileSkin) {
             return ProfileSkinDto.builder()
-                .profileSkinId(profileSkin.getProfileSkinId())
+                .profileSkinId(profileSkin.getId())
                 .profileSkinName(profileSkin.getProfileSkinName())
                 .profileSkinDescription(profileSkin.getProfileSkinDescription())
                 .profileSkinBlockPrice(profileSkin.getProfileSkinBlockPrice())

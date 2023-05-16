@@ -5,7 +5,7 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.Profile
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.NftRepository;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.ProfileSkinRepository;
 import com.blockpage.purchaseservice.application.port.out.ProductPersistencePort;
-import com.blockpage.purchaseservice.domain.Product;
+import com.blockpage.purchaseservice.application.service.ProductService.ProductEntityDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,18 +18,18 @@ public class ProductPersistenceAdaptor implements ProductPersistencePort {
     private final NftRepository nftRepository;
 
     @Override
-    public List<Product> findAllNft() {
+    public List<ProductEntityDto> findAllNft() {
         List<NftEntity> nftEntities = nftRepository.findAll();
         return nftEntities.stream()
-            .map(Product::toDomainFromNftEntity)
+            .map(ProductEntityDto::toDtoFromNftEntity)
             .toList();
     }
 
     @Override
-    public List<Product> findAllProfileSkin() {
+    public List<ProductEntityDto> findAllProfileSkin() {
         List<ProfileSkinEntity> profileSkinEntities = profileSkinRepository.findAll();
         return profileSkinEntities.stream()
-            .map(Product::toDomainFromProfileSkinEntity)
+            .map(ProductEntityDto::toDtoFromProfileSkinEntity)
             .toList();
     }
 }

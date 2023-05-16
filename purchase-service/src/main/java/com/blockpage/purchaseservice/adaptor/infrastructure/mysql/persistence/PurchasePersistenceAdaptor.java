@@ -42,6 +42,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     @Override
     public void saveNft(Purchase purchase) {
         NftEntity nftEntity = nftRepository.findById(purchase.getNftWrapper().getId()).get();
+        nftEntity.setMemberId(purchase.getMemberId());
         memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchase, nftEntity));
     }
 

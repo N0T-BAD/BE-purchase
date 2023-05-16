@@ -4,7 +4,7 @@ import com.blockpage.purchaseservice.adaptor.web.view.ApiWrapperResponse;
 import com.blockpage.purchaseservice.adaptor.web.view.ProductView;
 import com.blockpage.purchaseservice.application.port.in.ProductUseCase;
 import com.blockpage.purchaseservice.application.port.in.ProductUseCase.ProductQuery;
-import com.blockpage.purchaseservice.application.service.ProductService.ProductDto;
+import com.blockpage.purchaseservice.application.service.ProductService.ProductEntityDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,8 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<ApiWrapperResponse<List<ProductView>>> getAllProducts(@RequestParam String type) {
 
-        List<ProductDto> productDtoList = productUseCase.productQuery(ProductQuery.toQuery(type));
-        List<ProductView> productViews = productDtoList.stream()
+        List<ProductEntityDto> productEntityDtoList = productUseCase.productQuery(ProductQuery.toQuery(type));
+        List<ProductView> productViews = productEntityDtoList.stream()
             .map(ProductView::new)
             .toList();
 

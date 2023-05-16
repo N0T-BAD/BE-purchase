@@ -1,10 +1,10 @@
 package com.blockpage.purchaseservice.application.port.out;
 
-import com.blockpage.purchaseservice.domain.Product;
+import com.blockpage.purchaseservice.application.service.ProductService.ProductEntityDto;
 import java.util.List;
 
 public interface ProductPersistencePort {
 
-    List<Product> findAllNft();
-    List<Product> findAllProfileSkin();
+    List<ProductEntityDto> findAllNft();
+    List<ProductEntityDto> findAllProfileSkin();
 }
