@@ -1,47 +1,141 @@
 package com.blockpage.purchaseservice.application.service;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
+import com.blockpage.purchaseservice.adaptor.infrastructure.external.block.request.BlockPayRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
-import com.blockpage.purchaseservice.application.port.in.PurchaseInDto;
-import com.blockpage.purchaseservice.application.port.in.PurchaseProductUseCase;
-import com.blockpage.purchaseservice.application.port.out.PurchaseOutDto;
-import com.blockpage.purchaseservice.application.port.out.SavePurchasePort;
+import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
+import com.blockpage.purchaseservice.application.port.out.BlockServicePort;
+import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.domain.Purchase;
+import com.blockpage.purchaseservice.domain.Purchase.NftWrapper;
+import com.blockpage.purchaseservice.domain.Purchase.ProfileSkinWrapper;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-public class PurchaseService implements PurchaseProductUseCase {
+@Transactional(readOnly = true)
+public class PurchaseService implements PurchaseUseCase {
 
-    private final SavePurchasePort savePurchasePort;
+    private final PurchasePersistencePort purchasePersistencePort;
+    private final BlockServicePort blockServicePort;
 
     @Override
-    public Long purchaseProduct(PurchaseInDto purchaseInDto) {
+    @Transactional
+    public void purchaseProduct(PurchaseQuery query) {
 
-        PersistType persistType = PersistType.findPersistTypeByValue(purchaseInDto.getPersistType());
-        ProductType productType = ProductType.findPersistTypeByValue(purchaseInDto.getProductType());
-        Purchase purchase = new Purchase(productType, persistType);
-        purchase.makeExpiredDate(persistType);
+        BlockPayRequestParams blockPayRequestParams = BlockPayRequestParams.addEssentialParams(query.getBlockQuantity());
+        blockServicePort.blockPay(blockPayRequestParams);
+
+        Purchase purchase = Purchase.initPurchaseForSave(query);
 
         switch (purchase.getProductType()) {
-            case NFT -> {
-                return savePurchasePort.saveNft(
-                    new PurchaseOutDto(purchaseInDto.getMemberId(), purchase.getPersistType(), purchase.getExpiredDate()));
-            }
-            case EPISODE_BM -> {
-                return savePurchasePort.saveEpisodeBM(
-                    new PurchaseOutDto(purchaseInDto.getMemberId(), purchaseInDto.getEpisodeId(),
-                        purchaseInDto.getWebtoonId(),
-                        purchase.getPersistType(), purchase.getExpiredDate()));
-            }
-            case PROFILE_SKIN -> {
-                return savePurchasePort.saveProfileSkin(
-                    new PurchaseOutDto(purchaseInDto.getMemberId(), purchase.getPersistType(), purchase.getExpiredDate()));
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + persistType);
+            case NFT -> purchasePersistencePort.saveNft(purchase);
+            case EPISODE_BM -> purchasePersistencePort.saveEpisodeBM(purchase);
+            case PROFILE_SKIN -> purchasePersistencePort.saveProfileSkin(purchase);
+            default -> throw new IllegalStateException("Unexpected value: " + purchase.getProductType());
+        }
+    }
+
+    @Override
+    public List<PurchaseDto> purchaseQuery(FindPurchaseQuery findPurchaseQuery) {
+        List<Purchase> purchaseList;
+        switch (ProductType.findByValue(findPurchaseQuery.getProductType())) {
+            case NFT -> purchaseList = purchasePersistencePort.findNft(findPurchaseQuery.getMemberId());
+            case EPISODE_BM -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+                findPurchaseQuery.getWebtoonId());
+            case PROFILE_SKIN -> purchaseList = purchasePersistencePort.findProfileSkin(findPurchaseQuery.getMemberId());
+            default -> throw new IllegalStateException("Unexpected value: " + ProductType.findByValue(findPurchaseQuery.getProductType()));
+        }
+        return purchaseList.stream()
+            .map(PurchaseDto::toDto)
+            .collect(Collectors.toList());
+    }
+
+    @Getter
+    @Builder
+    public static class PurchaseDto {
+
+        private Long memberId;
+        private LocalDateTime expiredDate;
+
+        private Long memberHasEpisodeBMId;
+        private Long episodeId;
+        private Long webtoonId;
+
+        private Long memberHasNftId;
+        private NftDto nftDto;
+
+        private Long memberHasProfileSkinId;
+        private ProfileSkinDto profileSkinDto;
+        private Boolean profileSkinDefault;
+
+        public static PurchaseDto toDto(Purchase purchase) {
+            return PurchaseDto.builder()
+                .memberId(purchase.getMemberId())
+                .expiredDate(purchase.getExpiredDate())
+                .memberHasEpisodeBMId(purchase.getMemberHasEpisodeBMId())
+                .episodeId(purchase.getEpisodeId())
+                .webtoonId(purchase.getWebtoonId())
+                .memberHasNftId(purchase.getMemberHasNftId())
+                .nftDto(purchase.getNftWrapper() != null ? NftDto.initForGet(purchase.getNftWrapper()) : null)
+                .memberHasProfileSkinId(purchase.getMemberHasProfileSkinId())
+                .profileSkinDto(purchase.getProfileSkinWrapper() != null ? ProfileSkinDto.initForGet(purchase.getProfileSkinWrapper()):null)
+                .profileSkinDefault(purchase.getProfileSkinDefault())
+                .build();
+        }
+    }
+
+    @Builder
+    @Getter
+    public static class NftDto {
+
+        private Long id;
+        private Long memberId;
+        private Long creatorId;
+        private String nftName;
+        private String nftDescription;
+        private Integer nftBlockPrice;
+        private String nftImage;
+        private NftType nftType;
+
+        public static NftDto initForGet(NftWrapper nftWrapper) {
+            return NftDto.builder()
+                .id(nftWrapper.getId())
+                .memberId(nftWrapper.getMemberId())
+                .creatorId(nftWrapper.getCreatorId())
+                .nftName(nftWrapper.getNftName())
+                .nftBlockPrice(nftWrapper.getNftBlockPrice())
+                .nftImage(nftWrapper.getNftImage())
+                .nftType(nftWrapper.getNftType())
+                .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    public static class ProfileSkinDto {
+
+        private Long id;
+        private String profileSkinName;
+        private String profileSkinDescription;
+        private String profileSkinBlockPrice;
+        private String profileSkinImage;
+
+        public static ProfileSkinDto initForGet(ProfileSkinWrapper wrapper) {
+            return ProfileSkinDto.builder()
+                .id(wrapper.getId())
+                .profileSkinName(wrapper.getProfileSkinName())
+                .profileSkinDescription(wrapper.getProfileSkinDescription())
+                .profileSkinBlockPrice(wrapper.getProfileSkinBlockPrice())
+                .profileSkinImage(wrapper.getProfileSkinImage())
+                .build();
         }
     }
 }

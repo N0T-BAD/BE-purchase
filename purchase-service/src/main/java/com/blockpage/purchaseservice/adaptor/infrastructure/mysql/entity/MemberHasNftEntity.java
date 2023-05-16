@@ -1,9 +1,13 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
-import com.blockpage.purchaseservice.application.port.out.PurchaseOutDto;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
+import com.blockpage.purchaseservice.domain.Purchase;
+import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,10 +39,19 @@ public class MemberHasNftEntity extends BaseEntity {
     @Column(name = "member_id")
     private Long memberId;
 
-    public static MemberHasNftEntity toEntity(PurchaseOutDto purchaseOutDto) {
+    @Enumerated(EnumType.STRING)
+    private PersistType persistType;
+
+    @Column
+    private LocalDateTime expiredDate;
+
+    public static MemberHasNftEntity toEntity(Purchase purchase, NftEntity nftEntity) {
         return MemberHasNftEntity.builder()
-            .memberId(purchaseOutDto.getMemberId())
-            .nftEntity(new NftEntity()) //상품 Entity 넣어줘야함..!
+            .id(purchase.getMemberHasNftId())
+            .memberId(purchase.getMemberId())
+            .nftEntity(nftEntity)
+            .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
+            .expiredDate(purchase.getExpiredDate())
             .build();
     }
 }

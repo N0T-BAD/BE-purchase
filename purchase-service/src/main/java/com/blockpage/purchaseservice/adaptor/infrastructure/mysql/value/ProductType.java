@@ -14,7 +14,7 @@ public enum ProductType {
     private int key;
     private String value;
 
-    public static ProductType findPersistTypeByValue(String value) {
+    public static ProductType findByValue(String value) {
         return Arrays.stream(ProductType.values())
             .filter(t -> t.getValue().equals(value))
             .findFirst()

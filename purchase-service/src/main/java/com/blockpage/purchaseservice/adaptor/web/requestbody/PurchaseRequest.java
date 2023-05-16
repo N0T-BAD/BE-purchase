@@ -8,7 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MemberPurchaseRequest {
+public class PurchaseRequest {
+
+    //common spec
+    private Integer blockQuantity;
+    private String persistType;
 
     //NFT purchase spec
     private Long nftId;
@@ -18,6 +22,4 @@ public class MemberPurchaseRequest {
 
     //episodeBM purchase spec
     private Long episodeId;
-    private Long webtoonId;
-    private String persistType;
 }

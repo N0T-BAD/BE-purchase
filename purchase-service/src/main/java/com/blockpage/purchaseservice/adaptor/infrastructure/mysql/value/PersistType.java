@@ -13,7 +13,7 @@ public enum PersistType {
     private int key;
     private String value;
 
-    public static PersistType findPersistTypeByValue(String value) {
+    public static PersistType findByValue(String value) {
         return Arrays.stream(PersistType.values())
             .filter(t -> t.getValue().equals(value))
             .findFirst()

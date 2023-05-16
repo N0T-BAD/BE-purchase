@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.web.view;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
-import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.episodeBMStatus;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.EpisodeBMStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.ToString;
@@ -29,7 +29,7 @@ public class ProductsDetailView {
     private Long webtoonId;
     private Long episodeId;
     private Integer webtoonBMBlockPrice;
-    private episodeBMStatus episodeBMStatus;
+    private EpisodeBMStatus episodeBMStatus;
 
     public ProductsDetailView(Long nftId, Long creatorId, String nftName, String nftDescription, Integer nftBlockPrice, String nftImage,
         NftType nftType) {
@@ -52,7 +52,7 @@ public class ProductsDetailView {
     }
 
     public ProductsDetailView(Long webtoonBMId, Long webtoonId, Long episodeId, Integer webtoonBMBlockPrice,
-        episodeBMStatus episodeBMStatus) {
+        EpisodeBMStatus episodeBMStatus) {
         WebtoonBMId = webtoonBMId;
         this.webtoonId = webtoonId;
         this.episodeId = episodeId;

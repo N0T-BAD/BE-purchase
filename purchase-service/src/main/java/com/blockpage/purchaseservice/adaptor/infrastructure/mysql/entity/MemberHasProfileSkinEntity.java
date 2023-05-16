@@ -1,9 +1,13 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 
-import com.blockpage.purchaseservice.application.port.out.PurchaseOutDto;
+import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
+import com.blockpage.purchaseservice.domain.Purchase;
+import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,11 +42,20 @@ public class MemberHasProfileSkinEntity extends BaseEntity {
     @Column(name = "default_skin")
     private Boolean defaultSkin;
 
-    public static MemberHasProfileSkinEntity toEntity(PurchaseOutDto purchaseOutDto) {
+    @Enumerated(EnumType.STRING)
+    private PersistType persistType;
+
+    @Column
+    private LocalDateTime expiredDate;
+
+    public static MemberHasProfileSkinEntity toEntity(Purchase purchase, ProfileSkinEntity profileSkinEntity) {
         return MemberHasProfileSkinEntity.builder()
-            .profileSkinEntity(new ProfileSkinEntity()) //상품 Entity 넣어줘야함..!
-            .memberId(purchaseOutDto.getMemberId())
-            .defaultSkin(Boolean.FALSE)
+            .id(purchase.getMemberHasProfileSkinId())
+            .profileSkinEntity(profileSkinEntity) //상품 Entity 넣어줘야함..!
+            .memberId(purchase.getMemberId())
+            .defaultSkin(purchase.getProfileSkinDefault())
+            .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
+            .expiredDate(purchase.getExpiredDate())
             .build();
     }
 }

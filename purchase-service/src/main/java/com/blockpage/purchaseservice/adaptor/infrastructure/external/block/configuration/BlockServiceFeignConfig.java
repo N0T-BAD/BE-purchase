@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.external.block.configuration;
+package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.configuration;
 
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 public class BlockServiceFeignConfig {
 
     @Value("${block.service.api.content-type}")
-    private String kakaoPayApiContentType;
+    private String BlockServiceContentType;
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return new BlockServiceFeignClientInterceptor(kakaoPayApiContentType);
+        return new BlockServiceFeignClientInterceptor(BlockServiceContentType);
     }
 }

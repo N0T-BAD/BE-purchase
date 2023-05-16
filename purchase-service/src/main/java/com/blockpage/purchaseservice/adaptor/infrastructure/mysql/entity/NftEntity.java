@@ -21,7 +21,7 @@ public class NftEntity extends BaseEntity {
     private Long id;
 
     @Column
-    private Long userId;
+    private Long memberId;
 
     @Column
     private Long creatorId;
@@ -34,9 +34,6 @@ public class NftEntity extends BaseEntity {
 
     @Column
     private Integer nftBlockPrice;
-
-    @Column
-    private Integer nftStock;
 
     @Column
     private String nftImage;
