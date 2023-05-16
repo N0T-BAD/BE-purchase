@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.request;
+package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.requestbody;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

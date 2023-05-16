@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BlockServiceFeignConfig {
+public class BlockServiceOpenFeignConfig {
 
     @Value("${block.service.api.content-type}")
-    private String BlockServiceContentType;
+    private String blockServiceContentType;
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return new BlockServiceFeignClientInterceptor(BlockServiceContentType);
+        return new BlockServiceOpenFeignInterceptor(blockServiceContentType);
     }
 }
