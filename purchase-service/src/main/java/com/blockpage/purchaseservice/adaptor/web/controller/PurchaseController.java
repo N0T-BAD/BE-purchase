@@ -5,7 +5,6 @@ import static com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.
 
 import com.blockpage.purchaseservice.adaptor.web.view.ApiWrapperResponse;
 
-import com.blockpage.purchaseservice.adaptor.web.requestbody.ProfileSkinRequest;
 import com.blockpage.purchaseservice.adaptor.web.requestbody.PurchaseRequest;
 import com.blockpage.purchaseservice.adaptor.web.view.PurchaseView;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
@@ -59,7 +58,8 @@ public class PurchaseController {
     }
 
     @PutMapping
-    public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(@RequestBody ProfileSkinRequest profileSkinRequest) {
+    public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(@RequestParam Long memberProfileSkinId) {
+        purchaseUseCase.changeProfileSkinPurchases(ChangePurchaseQuery.toQuery(TEST_MEMBER_ID, memberProfileSkinId));
         return ResponseEntity.status(HttpStatus.OK)
             .body(new ApiWrapperResponse("리소스가 정상적으로 변경되었습니다."));
     }

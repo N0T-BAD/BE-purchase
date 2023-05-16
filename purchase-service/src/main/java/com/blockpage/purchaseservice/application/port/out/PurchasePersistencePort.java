@@ -15,6 +15,7 @@ public interface PurchasePersistencePort {
 
     List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId, Boolean free);
 
-    List<Purchase> findProfileSkin(Long memberId);
+    List<Purchase> findProfileSkinByMemberId(Long memberId);
 
+    Purchase changeProfileSkin(Long memberId, Long memberProfileSkinId);
 }
