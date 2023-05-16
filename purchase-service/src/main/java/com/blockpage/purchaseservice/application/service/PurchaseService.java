@@ -1,10 +1,13 @@
 package com.blockpage.purchaseservice.application.service;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.block.request.BlockPayRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.external.block.requestbody.BlockPayRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestParams;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
 import com.blockpage.purchaseservice.application.port.out.BlockServicePort;
+import com.blockpage.purchaseservice.application.port.out.MemberServicePort;
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.domain.Purchase;
 import com.blockpage.purchaseservice.domain.Purchase.NftWrapper;
@@ -25,22 +28,33 @@ public class PurchaseService implements PurchaseUseCase {
 
     private final PurchasePersistencePort purchasePersistencePort;
     private final BlockServicePort blockServicePort;
+    private final MemberServicePort memberServicePort;
 
     @Override
     @Transactional
     public void purchaseProduct(PurchaseQuery query) {
 
-        BlockPayRequestParams blockPayRequestParams = BlockPayRequestParams.addEssentialParams(query.getBlockQuantity());
-        blockServicePort.blockPay(blockPayRequestParams);
+        BlockPayRequestParams params = BlockPayRequestParams.addEssentialParams(query.getBlockQuantity());
+        blockServicePort.blockPay(params);
 
         Purchase purchase = Purchase.initPurchaseForSave(query);
 
         switch (purchase.getProductType()) {
             case NFT -> purchasePersistencePort.saveNft(purchase);
-            case EPISODE_BM -> purchasePersistencePort.saveEpisodeBM(purchase);
+            case EPISODE_BM_PAID, EPISODE_BM_FREE -> purchasePersistencePort.saveEpisodeBM(purchase);
             case PROFILE_SKIN -> purchasePersistencePort.saveProfileSkin(purchase);
             default -> throw new IllegalStateException("Unexpected value: " + purchase.getProductType());
         }
+    }
+
+    @Override
+    public void changeProfileSkinPurchases(ChangePurchaseQuery query) {
+        Purchase purchase = purchasePersistencePort.changeProfileSkin(query.getMemberId(), query.getMemberProfileSkinId());
+
+        ChangeProfileSkinRequestBody body = ChangeProfileSkinRequestBody.addEssentialBody(query, purchase);
+        ChangeProfileSkinRequestParams params = ChangeProfileSkinRequestParams.addEssentialParams("profileSkin");
+        memberServicePort.changeProfileSkin(params, body);
+
     }
 
     @Override
@@ -48,9 +62,11 @@ public class PurchaseService implements PurchaseUseCase {
         List<Purchase> purchaseList;
         switch (ProductType.findByValue(findPurchaseQuery.getProductType())) {
             case NFT -> purchaseList = purchasePersistencePort.findNft(findPurchaseQuery.getMemberId());
-            case EPISODE_BM -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
-                findPurchaseQuery.getWebtoonId());
-            case PROFILE_SKIN -> purchaseList = purchasePersistencePort.findProfileSkin(findPurchaseQuery.getMemberId());
+            case EPISODE_BM_PAID -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+                findPurchaseQuery.getWebtoonId(), Boolean.FALSE);
+            case EPISODE_BM_FREE -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+                findPurchaseQuery.getWebtoonId(), Boolean.TRUE);
+            case PROFILE_SKIN -> purchaseList = purchasePersistencePort.findProfileSkinByMemberId(findPurchaseQuery.getMemberId());
             default -> throw new IllegalStateException("Unexpected value: " + ProductType.findByValue(findPurchaseQuery.getProductType()));
         }
         return purchaseList.stream()
@@ -64,6 +80,7 @@ public class PurchaseService implements PurchaseUseCase {
 
         private Long memberId;
         private LocalDateTime expiredDate;
+        private Integer blockQuantity;
 
         private Long memberHasEpisodeBMId;
         private Long episodeId;
@@ -80,13 +97,15 @@ public class PurchaseService implements PurchaseUseCase {
             return PurchaseDto.builder()
                 .memberId(purchase.getMemberId())
                 .expiredDate(purchase.getExpiredDate())
+                .blockQuantity(purchase.getBlockQuantity())
                 .memberHasEpisodeBMId(purchase.getMemberHasEpisodeBMId())
                 .episodeId(purchase.getEpisodeId())
                 .webtoonId(purchase.getWebtoonId())
                 .memberHasNftId(purchase.getMemberHasNftId())
                 .nftDto(purchase.getNftWrapper() != null ? NftDto.initForGet(purchase.getNftWrapper()) : null)
                 .memberHasProfileSkinId(purchase.getMemberHasProfileSkinId())
-                .profileSkinDto(purchase.getProfileSkinWrapper() != null ? ProfileSkinDto.initForGet(purchase.getProfileSkinWrapper()):null)
+                .profileSkinDto(
+                    purchase.getProfileSkinWrapper() != null ? ProfileSkinDto.initForGet(purchase.getProfileSkinWrapper()) : null)
                 .profileSkinDefault(purchase.getProfileSkinDefault())
                 .build();
         }

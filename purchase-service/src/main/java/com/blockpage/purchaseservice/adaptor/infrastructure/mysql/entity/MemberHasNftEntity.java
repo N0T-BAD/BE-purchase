@@ -39,6 +39,9 @@ public class MemberHasNftEntity extends BaseEntity {
     @Column(name = "member_id")
     private Long memberId;
 
+    @Column(name = "block_quantity")
+    private Integer blockQuantity;
+
     @Enumerated(EnumType.STRING)
     private PersistType persistType;
 
@@ -50,6 +53,7 @@ public class MemberHasNftEntity extends BaseEntity {
             .id(purchase.getMemberHasNftId())
             .memberId(purchase.getMemberId())
             .nftEntity(nftEntity)
+            .blockQuantity(purchase.getBlockQuantity())
             .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
             .expiredDate(purchase.getExpiredDate())
             .build();

@@ -7,10 +7,24 @@ import lombok.Builder;
 import lombok.Getter;
 
 public interface PurchaseUseCase {
-
     void purchaseProduct(PurchaseQuery purchaseQuery);
-
+    void changeProfileSkinPurchases(ChangePurchaseQuery toQuery);
     List<PurchaseDto> purchaseQuery(FindPurchaseQuery findPurchaseQuery);
+
+    @Getter
+    @Builder
+    class ChangePurchaseQuery {
+
+        private Long memberId;
+        private Long memberProfileSkinId;
+
+        public static ChangePurchaseQuery toQuery(Long testMemberId, Long memberProfileSkinId) {
+            return ChangePurchaseQuery.builder()
+                .memberId(testMemberId)
+                .memberProfileSkinId(memberProfileSkinId)
+                .build();
+        }
+    }
 
 
     @Getter

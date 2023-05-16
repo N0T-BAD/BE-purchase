@@ -13,6 +13,7 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.Pro
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.domain.Purchase;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -54,18 +55,35 @@ public class purchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
-    public List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId) {
-        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonId(memberId, webtoonId);
+    public List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId, Boolean free) {
+        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAndFree(memberId,
+            webtoonId, free);
         return memberEpisodeBMEntityList.stream()
             .map(Purchase::toDomainFromMemberEpisodeBMEntity)
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<Purchase> findProfileSkin(Long memberId) {
+    public List<Purchase> findProfileSkinByMemberId(Long memberId) {
         List<MemberHasProfileSkinEntity> memberProfileSkinEntityList = memberHasProfileSkinRepository.findByMemberId(memberId);
         return memberProfileSkinEntityList.stream()
             .map(Purchase::toDomainFromMemberProfileSkinEntity)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public Purchase changeProfileSkin(Long memberId, Long memberProfileSkinId) {
+        List<MemberHasProfileSkinEntity> entityList = memberHasProfileSkinRepository.findByMemberId(memberId);
+        MemberHasProfileSkinEntity oldDefault = entityList.stream()
+            .filter(MemberHasProfileSkinEntity::getDefaultSkin)
+            .findFirst()
+            .get();
+        MemberHasProfileSkinEntity newDefault = entityList.stream()
+            .filter(e -> e.getId().equals(memberProfileSkinId))
+            .findFirst()
+            .get();
+        oldDefault.changeDefaultSkin();
+        newDefault.changeDefaultSkin();
+        return Purchase.toDomainFromMemberProfileSkinEntity(newDefault);
     }
 }
