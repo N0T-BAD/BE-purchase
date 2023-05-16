@@ -1,8 +1,10 @@
 package com.blockpage.purchaseservice.adaptor.web.controller;
 
 import com.blockpage.purchaseservice.adaptor.web.view.ApiWrapperResponse;
-import com.blockpage.purchaseservice.adaptor.web.view.ProductsView;
-import java.util.ArrayList;
+import com.blockpage.purchaseservice.adaptor.web.view.ProductView;
+import com.blockpage.purchaseservice.application.port.in.ProductUseCase;
+import com.blockpage.purchaseservice.application.port.in.ProductUseCase.ProductQuery;
+import com.blockpage.purchaseservice.application.service.ProductService.ProductDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,19 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/products")
 public class ProductController {
 
+    private final ProductUseCase productUseCase;
 
-    /**
-     * 모든 NFT 상품 조회 API              | /v1/products?type=nft
-     * 모든 프로필 스킨 상품 조회 API        | /v1/products?type=profile-skin
-     */
     @GetMapping
-    public ResponseEntity<ApiWrapperResponse<ProductsView>> getAllProducts(@RequestParam String type) {
+    public ResponseEntity<ApiWrapperResponse<List<ProductView>>> getAllProducts(@RequestParam String type) {
 
-        List<ProductsView> productsView = new ArrayList<>();
-
-
+        List<ProductDto> productDtoList = productUseCase.productQuery(ProductQuery.toQuery(type));
+        List<ProductView> productViews = productDtoList.stream()
+            .map(ProductView::new)
+            .toList();
 
         return ResponseEntity.status(HttpStatus.OK)
-            .body(new ApiWrapperResponse(productsView));
+            .body(new ApiWrapperResponse(productViews));
     }
 }
