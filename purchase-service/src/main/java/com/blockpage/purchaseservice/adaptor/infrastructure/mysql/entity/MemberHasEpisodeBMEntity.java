@@ -3,6 +3,7 @@ package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.PersistType;
 
 import com.blockpage.purchaseservice.domain.Purchase;
+import com.blockpage.purchaseservice.domain.Purchase.ProductType;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,8 +39,15 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
     @Column
     private Long webtoonId;
 
+    @Column(name = "block_quantity")
+    private Integer blockQuantity;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private PersistType persistType;
+
+    @Column
+    private Boolean free;
 
     @Column
     private LocalDateTime expiredDate;
@@ -49,7 +57,9 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
             .id(purchase.getMemberHasEpisodeBMId())
             .memberId(purchase.getMemberId())
             .episodeId(purchase.getEpisodeId())
+            .blockQuantity(purchase.getBlockQuantity())
             .webtoonId(purchase.getWebtoonId())
+            .free(ProductType.findByValue(purchase.getProductType().getValue()) == ProductType.EPISODE_BM_FREE)
             .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
             .expiredDate(purchase.getExpiredDate())
             .build();
