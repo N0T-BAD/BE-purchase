@@ -39,6 +39,9 @@ public class MemberHasProfileSkinEntity extends BaseEntity {
     @Column(name = "member_id")
     private Long memberId;
 
+    @Column(name = "block_quantity")
+    private Integer blockQuantity;
+
     @Column(name = "default_skin")
     private Boolean defaultSkin;
 
@@ -53,6 +56,7 @@ public class MemberHasProfileSkinEntity extends BaseEntity {
             .id(purchase.getMemberHasProfileSkinId())
             .profileSkinEntity(profileSkinEntity) //상품 Entity 넣어줘야함..!
             .memberId(purchase.getMemberId())
+            .blockQuantity(purchase.getBlockQuantity())
             .defaultSkin(purchase.getProfileSkinDefault())
             .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
             .expiredDate(purchase.getExpiredDate())
