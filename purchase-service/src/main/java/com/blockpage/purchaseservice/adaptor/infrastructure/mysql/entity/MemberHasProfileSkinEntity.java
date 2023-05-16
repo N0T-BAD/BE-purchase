@@ -62,4 +62,12 @@ public class MemberHasProfileSkinEntity extends BaseEntity {
             .expiredDate(purchase.getExpiredDate())
             .build();
     }
+
+    public void changeDefaultSkin() {
+        if (this.defaultSkin == Boolean.FALSE) {
+            this.defaultSkin = Boolean.TRUE;
+        } else {
+            this.defaultSkin = Boolean.FALSE;
+        }
+    }
 }
