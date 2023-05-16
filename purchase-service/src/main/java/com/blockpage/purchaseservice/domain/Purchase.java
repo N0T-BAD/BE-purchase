@@ -31,6 +31,7 @@ public class Purchase {
     private Long memberId;
     private PersistType persistType;
     private LocalDateTime expiredDate;
+    private Integer blockQuantity;
 
     private Long memberHasEpisodeBMId;
     private Long episodeId;
@@ -67,12 +68,13 @@ public class Purchase {
         ProductType productType = ProductType.findByValue(query.getProductType());
         PersistType persistType = PersistType.findByValue(query.getPersistType());
         switch (productType) {
-            case EPISODE_BM -> {
+            case EPISODE_BM_PAID, EPISODE_BM_FREE -> {
                 return Purchase.builder()
                     .memberId(query.getMemberId())
                     .productType(productType)
                     .persistType(persistType)
                     .expiredDate(makeExpiredDate(persistType))
+                    .blockQuantity(query.getBlockQuantity())
                     .episodeId(query.getEpisodeId())
                     .webtoonId(query.getWebtoonId())
                     .memberHasEpisodeBMId(null)
@@ -84,6 +86,7 @@ public class Purchase {
                     .productType(productType)
                     .persistType(persistType)
                     .expiredDate(makeExpiredDate(persistType))
+                    .blockQuantity(query.getBlockQuantity())
                     .nftWrapper(NftWrapper.initForSave(query.getNftId()))
                     .memberHasNftId(null)
                     .build();
@@ -94,6 +97,7 @@ public class Purchase {
                     .productType(productType)
                     .persistType(persistType)
                     .expiredDate(makeExpiredDate(persistType))
+                    .blockQuantity(query.getBlockQuantity())
                     .memberHasProfileSkinId(null)
                     .profileSkinWrapper(ProfileSkinWrapper.initForSave(query.getProfileSkinId()))
                     .profileSkinDefault(FALSE)
@@ -109,6 +113,7 @@ public class Purchase {
             .memberId(entity.getMemberId())
             .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
             .expiredDate(entity.getExpiredDate())
+            .blockQuantity(entity.getBlockQuantity())
             .memberHasNftId(entity.getId())
             .nftWrapper(NftWrapper.initForGet(entity.getNftEntity()))
             .build();
@@ -120,6 +125,7 @@ public class Purchase {
             .memberId(entity.getMemberId())
             .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
             .expiredDate(entity.getExpiredDate())
+            .blockQuantity(entity.getBlockQuantity())
             .memberHasProfileSkinId(entity.getId())
             .profileSkinWrapper(ProfileSkinWrapper.initForGet(entity.getProfileSkinEntity()))
             .profileSkinDefault(entity.getDefaultSkin())
@@ -129,8 +135,9 @@ public class Purchase {
 
     public static Purchase toDomainFromMemberEpisodeBMEntity(MemberHasEpisodeBMEntity entity) {
         return Purchase.builder()
-            .productType(ProductType.EPISODE_BM)
+            .productType(ProductType.EPISODE_BM_PAID)
             .memberId(entity.getMemberId())
+            .blockQuantity(entity.getBlockQuantity())
             .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
             .expiredDate(entity.getExpiredDate())
             .memberHasEpisodeBMId(entity.getId())
@@ -227,9 +234,10 @@ public class Purchase {
     }
 
     public enum ProductType {
-        EPISODE_BM(0, "episode-bm"),
-        PROFILE_SKIN(1, "profile-skin"),
-        NFT(2, "nft"),
+        EPISODE_BM_PAID(0, "episode-bm-paid"),
+        EPISODE_BM_FREE(1, "episode-bm-free"),
+        PROFILE_SKIN(2, "profile-skin"),
+        NFT(3, "nft"),
         ;
         private int key;
         private String value;

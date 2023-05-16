@@ -54,8 +54,8 @@ public class purchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
-    public List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId) {
-        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonId(memberId, webtoonId);
+    public List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId, Boolean free) {
+        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAndFree(memberId, webtoonId, free);
         return memberEpisodeBMEntityList.stream()
             .map(Purchase::toDomainFromMemberEpisodeBMEntity)
             .collect(Collectors.toList());

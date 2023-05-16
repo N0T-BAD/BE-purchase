@@ -37,7 +37,7 @@ public class PurchaseService implements PurchaseUseCase {
 
         switch (purchase.getProductType()) {
             case NFT -> purchasePersistencePort.saveNft(purchase);
-            case EPISODE_BM -> purchasePersistencePort.saveEpisodeBM(purchase);
+            case EPISODE_BM_PAID, EPISODE_BM_FREE -> purchasePersistencePort.saveEpisodeBM(purchase);
             case PROFILE_SKIN -> purchasePersistencePort.saveProfileSkin(purchase);
             default -> throw new IllegalStateException("Unexpected value: " + purchase.getProductType());
         }
@@ -48,8 +48,10 @@ public class PurchaseService implements PurchaseUseCase {
         List<Purchase> purchaseList;
         switch (ProductType.findByValue(findPurchaseQuery.getProductType())) {
             case NFT -> purchaseList = purchasePersistencePort.findNft(findPurchaseQuery.getMemberId());
-            case EPISODE_BM -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
-                findPurchaseQuery.getWebtoonId());
+            case EPISODE_BM_PAID -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+                findPurchaseQuery.getWebtoonId(), Boolean.FALSE);
+            case EPISODE_BM_FREE -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+                findPurchaseQuery.getWebtoonId(), Boolean.TRUE);
             case PROFILE_SKIN -> purchaseList = purchasePersistencePort.findProfileSkin(findPurchaseQuery.getMemberId());
             default -> throw new IllegalStateException("Unexpected value: " + ProductType.findByValue(findPurchaseQuery.getProductType()));
         }
@@ -64,6 +66,7 @@ public class PurchaseService implements PurchaseUseCase {
 
         private Long memberId;
         private LocalDateTime expiredDate;
+        private Integer blockQuantity;
 
         private Long memberHasEpisodeBMId;
         private Long episodeId;
@@ -80,13 +83,15 @@ public class PurchaseService implements PurchaseUseCase {
             return PurchaseDto.builder()
                 .memberId(purchase.getMemberId())
                 .expiredDate(purchase.getExpiredDate())
+                .blockQuantity(purchase.getBlockQuantity())
                 .memberHasEpisodeBMId(purchase.getMemberHasEpisodeBMId())
                 .episodeId(purchase.getEpisodeId())
                 .webtoonId(purchase.getWebtoonId())
                 .memberHasNftId(purchase.getMemberHasNftId())
                 .nftDto(purchase.getNftWrapper() != null ? NftDto.initForGet(purchase.getNftWrapper()) : null)
                 .memberHasProfileSkinId(purchase.getMemberHasProfileSkinId())
-                .profileSkinDto(purchase.getProfileSkinWrapper() != null ? ProfileSkinDto.initForGet(purchase.getProfileSkinWrapper()):null)
+                .profileSkinDto(
+                    purchase.getProfileSkinWrapper() != null ? ProfileSkinDto.initForGet(purchase.getProfileSkinWrapper()) : null)
                 .profileSkinDefault(purchase.getProfileSkinDefault())
                 .build();
         }

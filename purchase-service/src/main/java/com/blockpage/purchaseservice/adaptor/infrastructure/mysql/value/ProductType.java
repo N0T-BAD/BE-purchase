@@ -7,9 +7,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ProductType {
-    EPISODE_BM(0, "episode-bm"),
-    PROFILE_SKIN(1, "profile-skin"),
-    NFT(2, "nft"),
+    EPISODE_BM_PAID(0, "episode-bm-paid"),
+    EPISODE_BM_FREE(1, "episode-bm-free"),
+    PROFILE_SKIN(2, "profile-skin"),
+    NFT(3, "nft"),
     ;
     private int key;
     private String value;
