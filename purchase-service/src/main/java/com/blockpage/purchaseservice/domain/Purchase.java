@@ -56,14 +56,6 @@ public class Purchase {
         }
     }
 
-    public void changeProfileSkinDefault(Purchase purchase) {
-        if (purchase.profileSkinDefault == TRUE) {
-            purchase.profileSkinDefault = FALSE;
-        } else {
-            purchase.profileSkinDefault = TRUE;
-        }
-    }
-
     public static Purchase initPurchaseForSave(PurchaseQuery query) {
         ProductType productType = ProductType.findByValue(query.getProductType());
         PersistType persistType = PersistType.findByValue(query.getPersistType());
