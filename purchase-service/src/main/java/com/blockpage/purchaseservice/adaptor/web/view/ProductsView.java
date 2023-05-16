@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductsDetailView {
+public class ProductsView {
 
     private Long nftId;
     private Long creatorId;
@@ -31,7 +31,7 @@ public class ProductsDetailView {
     private Integer webtoonBMBlockPrice;
     private EpisodeBMStatus episodeBMStatus;
 
-    public ProductsDetailView(Long nftId, Long creatorId, String nftName, String nftDescription, Integer nftBlockPrice, String nftImage,
+    public ProductsView(Long nftId, Long creatorId, String nftName, String nftDescription, Integer nftBlockPrice, String nftImage,
         NftType nftType) {
         this.nftId = nftId;
         this.creatorId = creatorId;
@@ -42,7 +42,7 @@ public class ProductsDetailView {
         this.nftType = nftType;
     }
 
-    public ProductsDetailView(Long profileSkinId, String profileSkinName, String profileSkinDescription, Integer profileSkinBlockPrice,
+    public ProductsView(Long profileSkinId, String profileSkinName, String profileSkinDescription, Integer profileSkinBlockPrice,
         String profileSkinImage) {
         this.profileSkinId = profileSkinId;
         this.profileSkinName = profileSkinName;
@@ -51,7 +51,7 @@ public class ProductsDetailView {
         this.profileSkinImage = profileSkinImage;
     }
 
-    public ProductsDetailView(Long webtoonBMId, Long webtoonId, Long episodeId, Integer webtoonBMBlockPrice,
+    public ProductsView(Long webtoonBMId, Long webtoonId, Long episodeId, Integer webtoonBMBlockPrice,
         EpisodeBMStatus episodeBMStatus) {
         WebtoonBMId = webtoonBMId;
         this.webtoonId = webtoonId;
