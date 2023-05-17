@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MemberServiceController implements MemberServicePort {
 
-    private final MemberServiceOpenFeign memberServiceOpenFeign;
+    private final MemberServiceFeign memberServiceFeign;
 
     @Override
     public ResponseEntity changeProfileSkin(ChangeProfileSkinRequestParams params, ChangeProfileSkinRequestBody body) {
-        return memberServiceOpenFeign.changeProfileSkin(params, body);
+        return memberServiceFeign.changeProfileSkin(params, body);
     }
 }

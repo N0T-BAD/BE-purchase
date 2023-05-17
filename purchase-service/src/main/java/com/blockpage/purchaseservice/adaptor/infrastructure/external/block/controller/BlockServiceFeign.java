@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "block-service", url = "${block.service.api.url}",
+@FeignClient(
+    name = "block-service", url = "${block.service.api.url}",
     configuration = BlockServiceFeignConfig.class,
-    fallback = BlockServiceFeign.FallBack.class)
+    fallback = BlockServiceFeign.FallBack.class
+)
 public interface BlockServiceFeign {
 
     @PutMapping(value = "/v1/blocks")
