@@ -1,5 +1,6 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.configuration;
 
+import com.blockpage.purchaseservice.exception.GlobalFeinErrorDecoder;
 import feign.Logger.Level;
 import feign.RequestInterceptor;
 import feign.Retryer;
@@ -21,7 +22,7 @@ public class BlockServiceFeignConfig {
 
     @Bean
     public ErrorDecoder errorDecoder() {
-        return new GlobalErrorDecoder();
+        return new GlobalFeinErrorDecoder();
     }
 
     @Bean

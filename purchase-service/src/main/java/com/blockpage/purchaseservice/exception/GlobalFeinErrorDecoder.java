@@ -1,12 +1,11 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.configuration;
+package com.blockpage.purchaseservice.exception;
 
 import static com.blockpage.purchaseservice.exception.ErrorCode.*;
 
-import com.blockpage.purchaseservice.exception.BusinessException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
-public class GlobalErrorDecoder implements ErrorDecoder {
+public class GlobalFeinErrorDecoder implements ErrorDecoder {
 
     @Override
     public Exception decode(String methodKey, Response response) {
