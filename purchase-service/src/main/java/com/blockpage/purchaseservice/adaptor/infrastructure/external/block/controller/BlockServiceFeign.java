@@ -23,7 +23,7 @@ public interface BlockServiceFeign {
 
         @Override
         public ResponseEntity blockPay(BlockPayRequestParams blockPayRequestParams) {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
     }
 }
