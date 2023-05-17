@@ -13,14 +13,13 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.Pro
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.domain.Purchase;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class purchasePersistenceAdaptor implements PurchasePersistencePort {
+public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
 
     private final MemberHasProfileSkinRepository memberHasProfileSkinRepository;
     private final MemberHasNftRepository memberHasNftRepository;
@@ -43,6 +42,7 @@ public class purchasePersistenceAdaptor implements PurchasePersistencePort {
     @Override
     public void saveNft(Purchase purchase) {
         NftEntity nftEntity = nftRepository.findById(purchase.getNftWrapper().getId()).get();
+        nftEntity.setMemberId(purchase.getMemberId());
         memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchase, nftEntity));
     }
 
