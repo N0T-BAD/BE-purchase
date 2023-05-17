@@ -3,13 +3,13 @@ package com.blockpage.purchaseservice.adaptor.infrastructure.external.member.con
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 
-public class MemberServiceOpenFeignInterceptor implements RequestInterceptor {
+public class MemberServiceFeignInterceptor implements RequestInterceptor {
 
     private final String CONTENT_TYPE = "Content-Type";
 
     private String memberServiceContentType;
 
-    public MemberServiceOpenFeignInterceptor(String memberServiceContentType) {
+    public MemberServiceFeignInterceptor(String memberServiceContentType) {
         this.memberServiceContentType = memberServiceContentType;
     }
 

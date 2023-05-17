@@ -1,5 +1,7 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.mysql.persistence;
 
+import static com.blockpage.purchaseservice.exception.ErrorCode.*;
+
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasEpisodeBMEntity;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasNftEntity;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.MemberHasProfileSkinEntity;
@@ -12,6 +14,7 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.Nft
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.ProfileSkinRepository;
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.domain.Purchase;
+import com.blockpage.purchaseservice.exception.BusinessException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +32,9 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
 
     @Override
     public void saveProfileSkin(Purchase purchase) {
-        ProfileSkinEntity profileSkinEntity = profileSkinRepository.findById(purchase.getProfileSkinWrapper().getId()).get();
+        ProfileSkinEntity profileSkinEntity = profileSkinRepository.findById(purchase.getProfileSkinWrapper().getId())
+            .orElseThrow(
+                () -> new BusinessException(NO_FOUND_PROFILE_SKIN_PRODUCT.getMessage(), NO_FOUND_PROFILE_SKIN_PRODUCT.getHttpStatus()));
         memberHasProfileSkinRepository.save(MemberHasProfileSkinEntity.toEntity(purchase, profileSkinEntity));
     }
 
@@ -41,7 +46,9 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
 
     @Override
     public void saveNft(Purchase purchase) {
-        NftEntity nftEntity = nftRepository.findById(purchase.getNftWrapper().getId()).get();
+        NftEntity nftEntity = nftRepository.findById(purchase.getNftWrapper().getId())
+            .orElseThrow(
+                () -> new BusinessException(NO_FOUND_PROFILE_SKIN_PRODUCT.getMessage(), NO_FOUND_PROFILE_SKIN_PRODUCT.getHttpStatus()));
         nftEntity.setMemberId(purchase.getMemberId());
         memberHasNftRepository.save(MemberHasNftEntity.toEntity(purchase, nftEntity));
     }
@@ -77,11 +84,15 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
         MemberHasProfileSkinEntity oldDefault = entityList.stream()
             .filter(MemberHasProfileSkinEntity::getDefaultSkin)
             .findFirst()
-            .get();
+            .orElseThrow(
+                () -> new BusinessException(PROFILE_SKIN_INTERNAL_ERROR.getMessage(), PROFILE_SKIN_INTERNAL_ERROR.getHttpStatus())
+            );
         MemberHasProfileSkinEntity newDefault = entityList.stream()
             .filter(e -> e.getId().equals(memberProfileSkinId))
             .findFirst()
-            .get();
+            .orElseThrow(
+                () -> new BusinessException(PROFILE_SKIN_INTERNAL_ERROR.getMessage(), PROFILE_SKIN_INTERNAL_ERROR.getHttpStatus())
+            );
         oldDefault.changeDefaultSkin();
         newDefault.changeDefaultSkin();
         return Purchase.toDomainFromMemberProfileSkinEntity(newDefault);

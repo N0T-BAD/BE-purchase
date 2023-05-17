@@ -3,13 +3,13 @@ package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.conf
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 
-public class BlockServiceOpenFeignInterceptor implements RequestInterceptor {
+public class BlockServiceFeignInterceptor implements RequestInterceptor {
 
     private final String CONTENT_TYPE = "Content-Type";
 
     private String blockServiceContentType;
 
-    public BlockServiceOpenFeignInterceptor(String blockServiceContentType) {
+    public BlockServiceFeignInterceptor(String blockServiceContentType) {
         this.blockServiceContentType = blockServiceContentType;
     }
 
