@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.external.member.controller;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.configuration.MemberServiceOpenFeignConfig;
+import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.configuration.MemberServiceFeignConfig;
 import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestBody;
 import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestParams;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "member-service", url = "${member.service.api.url}", configuration = MemberServiceOpenFeignConfig.class)
+@FeignClient(name = "member-service", url = "${member.service.api.url}", configuration = MemberServiceFeignConfig.class)
 public interface MemberServiceOpenFeign {
 
     @PutMapping(value = "/v1/members")

@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BlockServiceController implements BlockServicePort {
 
-    private final BlockServiceOpenFeign blockServiceOpenFeign;
+    private final BlockServiceFeign blockServiceFeign;
 
     @Override
     public ResponseEntity blockPay(BlockPayRequestParams blockPayRequestParams) {
-        return blockServiceOpenFeign.blockPay(blockPayRequestParams);
+        return blockServiceFeign.blockPay(blockPayRequestParams);
     }
 }
