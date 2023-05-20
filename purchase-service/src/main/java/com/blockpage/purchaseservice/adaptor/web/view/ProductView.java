@@ -12,6 +12,8 @@ import lombok.ToString;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductView {
 
+    private String message;
+
     private Long nftId;
     private Long nftMemberId;
     private Long nftCreatorId;
@@ -45,5 +47,9 @@ public class ProductView {
             this.profileSkinBlockPrice = dto.getProfileSkinDto().getProfileSkinBlockPrice();
             this.profileSkinImage = dto.getProfileSkinDto().getProfileSkinImage();
         }
+    }
+
+    public ProductView(String message) {
+        this.message = message;
     }
 }

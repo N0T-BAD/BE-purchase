@@ -46,7 +46,7 @@ public class PurchaseController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiWrapperResponse> postPurchases(
+    public ResponseEntity<ApiWrapperResponse<PurchaseView>> postPurchases(
         @RequestParam String type,
         @RequestParam(required = false) Long webtoonId,
         @RequestBody PurchaseRequest purchaseRequest) {
@@ -54,13 +54,13 @@ public class PurchaseController {
         purchaseUseCase.purchaseProduct(PurchaseQuery.toQuery(TEST_MEMBER_ID, type, webtoonId, purchaseRequest));
 
         return ResponseEntity.status(HttpStatus.OK)
-            .body(new ApiWrapperResponse("리소스가 정상적으로 생성되었습니다."));
+            .body(new ApiWrapperResponse(new PurchaseView("구매내역이 정상적으로 생성되었습니다.")));
     }
 
     @PutMapping
     public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(@RequestParam Long memberProfileSkinId) {
         purchaseUseCase.changeProfileSkinPurchases(ChangePurchaseQuery.toQuery(TEST_MEMBER_ID, memberProfileSkinId));
         return ResponseEntity.status(HttpStatus.OK)
-            .body(new ApiWrapperResponse("리소스가 정상적으로 변경되었습니다."));
+            .body(new ApiWrapperResponse(new PurchaseView("구매내역이 정상적으로 변경되었습니다.")));
     }
 }
