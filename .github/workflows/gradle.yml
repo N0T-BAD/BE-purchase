@@ -42,3 +42,11 @@ jobs:
       uses: ./purchase-service/gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
+    
+    # Docker build
+    - name: Docker build
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        docker build -t purchase-service .
+        docker tag purchase-service geunskoo/test:${GITHUB_SHA::7}
+        docker push geunskoo/test:${GITHUB_SHA::7}
