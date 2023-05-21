@@ -27,7 +27,7 @@ jobs:
     - name: Set Yaml
       uses: microsoft/variable-substitution@v1
       with:
-        files: ./purchase-service/src/main/resources/application-prod.yml 
+        files: ./src/main/resources/application-prod.yml 
       env:
         spring.datasource.url: ${{ secrets.DB_URL }} 
         spring.datasource.username: ${{ secrets.DB_USERNAME }}
@@ -36,10 +36,10 @@ jobs:
     
     # Gradlew 실행 허용
     - name: Run chmod to make gradlew executable
-      run: chmod +x ./purchase-service/gradlew
+      run: chmod +x ./gradlew
     # Gradle build (Test 제외)
     - name: Build with Gradle
-      run: purchase-service/gradlew build
+      run: ./gradlew build
     
     # Docker build
     - name: Docker build
