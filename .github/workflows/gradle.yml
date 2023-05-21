@@ -39,4 +39,6 @@ jobs:
 
     # Gradle build (Test 제외)
     - name: Build with Gradle
-      run : ./purchase-service/src/gradlew clean build --exclude-task test
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: build
