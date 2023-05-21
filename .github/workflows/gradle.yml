@@ -39,9 +39,7 @@ jobs:
       run: chmod +x ./purchase-service/gradlew
     # Gradle build (Test 제외)
     - name: Build with Gradle
-      uses: /purchase-service/gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-      with:
-        arguments: build
+      run: purchase-service/gradlew build
     
     # Docker build
     - name: Docker build
