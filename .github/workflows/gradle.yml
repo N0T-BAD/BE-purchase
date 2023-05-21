@@ -27,18 +27,16 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    # 환경 변수 설정
-    - name: Set environment values
-      run: |
-        cd ./src/main/resources
-        touch ./env.properties
-        echo "${{ secrets.ENV }}" > ./env.properties
-        echo "${{ secrets.ENV }}" > ./env.properties
-        echo "${{ secrets.ENV }}" > ./env.properties
-        echo "${{ secrets.ENV }}" > ./env.properties
-        echo "${{ secrets.ENV }}" > ./env.properties
-        echo "${{ secrets.ENV }}" > ./env.properties
-      shell: bash
+        
+    - name: Set Yaml
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: ./src/main/resources/application-prod.yml 
+      env:
+        spring.datasource.url: ${{ secrets.DB_URL }} 
+        spring.datasource.username: ${{ secrets.DB_USERNAME }}
+        spring.datasource.password: ${{ secrets.DB_PASSWORD }}
+
     # Gradle build (Test 제외)
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
