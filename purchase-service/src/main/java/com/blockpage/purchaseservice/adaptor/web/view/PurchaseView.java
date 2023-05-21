@@ -16,6 +16,8 @@ import lombok.ToString;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PurchaseView {
 
+    private String message;
+
     private Long memberId;
     private LocalDateTime expiredDate;
 
@@ -83,5 +85,9 @@ public class PurchaseView {
             this.profileSkinBlockPrice = dto.getProfileSkinBlockPrice();
             this.profileSkinImage = dto.getProfileSkinImage();
         }
+    }
+
+    public PurchaseView(String message) {
+        this.message = message;
     }
 }

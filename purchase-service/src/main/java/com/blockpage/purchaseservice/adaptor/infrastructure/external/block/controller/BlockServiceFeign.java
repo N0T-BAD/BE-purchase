@@ -22,7 +22,6 @@ public interface BlockServiceFeign {
 
     @Component
     class FallBack implements BlockServiceFeign {
-
         @Override
         public ResponseEntity blockPay(BlockPayRequestParams blockPayRequestParams) {
             return ResponseEntity.status(HttpStatus.OK).build();
