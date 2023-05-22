@@ -59,4 +59,4 @@ jobs:
           sudo docker pull geunskoo/purchase-service:${GITHUB_SHA::7}
           sudo docker tag geunskoo/purchase-service:${GITHUB_SHA::7} purchase-service
           sudo su
-          sudo docker-compose -f docker-compose.purchase.yml up -d
+          docker-compose -f docker-compose.purchase.yml up -d
