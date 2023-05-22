@@ -54,9 +54,4 @@ jobs:
         host: ${{ secrets.VM_INSTANCE_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        envs: GITHUB_SHA
-        script: |
-          sudo docker pull geunskoo/purchase-service:purchase-service${GITHUB_SHA::7}
-          sudo docker tag geunskoo/purchase-service:purchase-service${GITHUB_SHA::7}
-          sudo docker-compose up -d
+        script: echo success
