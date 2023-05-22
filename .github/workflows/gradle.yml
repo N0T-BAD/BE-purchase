@@ -49,9 +49,9 @@ jobs:
         
     # Deploy
     - name: Deploy
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v0.1.4
       with:
-        host: 35.216.90.80
+        host: ${{ secrets.VM_INSTANCE_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
