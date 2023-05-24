@@ -35,10 +35,8 @@ block:
   service:
     api:
       content-type: application/json
-      url: lb://BlOCK-SERVICE
 
 member:
   service:
     api:
       content-type: application/json
-      url: lb://MEMBER-SERVICE
