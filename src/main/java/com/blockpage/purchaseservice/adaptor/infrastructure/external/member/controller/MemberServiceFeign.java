@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(
     name = "member-service",
-    url = "${member.service.api.url}",
     configuration = MemberServiceFeignConfig.class,
     fallback = MemberServiceFeign.FallBack.class
 )
 public interface MemberServiceFeign {
 
-    @PutMapping(value = "/v1/members")
+    @PutMapping(value = "/member-service/v1/members")
     ResponseEntity changeProfileSkin(@SpringQueryMap
     ChangeProfileSkinRequestParams changeProfileSkinRequestParams, @RequestBody ChangeProfileSkinRequestBody changeProfileSkinRequestBody);
 

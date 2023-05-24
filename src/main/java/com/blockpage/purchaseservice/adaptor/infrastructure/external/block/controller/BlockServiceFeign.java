@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(
-    name = "block-service", url = "${block.service.api.url}",
+    name = "block-service",
     configuration = BlockServiceFeignConfig.class,
     fallback = BlockServiceFeign.FallBack.class
 )
 public interface BlockServiceFeign {
 
-    @PutMapping(value = "/v1/blocks")
+    @PutMapping(value = "/block-service/v1/blocks")
     ResponseEntity blockPay(@RequestBody BlockPayRequestParams blockPayRequestParams);
 
     @Component
     class FallBack implements BlockServiceFeign {
+
         @Override
         public ResponseEntity blockPay(BlockPayRequestParams blockPayRequestParams) {
             return ResponseEntity.status(HttpStatus.OK).build();
