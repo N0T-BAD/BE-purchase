@@ -1,6 +1,13 @@
 server:
   port: 8081
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${ eureka.client.service-url.defaultZone }
+
 spring:
   application:
     name: purchase-service
@@ -28,10 +35,10 @@ block:
   service:
     api:
       content-type: application/json
-      url: http://localhost:8080
+      url: lb://BlOCK-SERVICE
 
 member:
   service:
     api:
       content-type: application/json
-      url: http://localhost:8082
+      url: lb://MEMBER-SERVICE
