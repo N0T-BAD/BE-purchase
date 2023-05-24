@@ -37,7 +37,7 @@ public class MemberHasProfileSkinEntity extends BaseEntity {
     private ProfileSkinEntity profileSkinEntity;
 
     @Column(name = "member_id")
-    private Long memberId;
+    private String memberId;
 
     @Column(name = "block_quantity")
     private Integer blockQuantity;

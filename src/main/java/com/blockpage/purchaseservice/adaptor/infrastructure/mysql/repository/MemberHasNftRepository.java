@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberHasNftRepository extends JpaRepository<MemberHasNftEntity,Long> {
 
-    List<MemberHasNftEntity> findByMemberId(Long memberId);
+    List<MemberHasNftEntity> findByMemberId(String memberId);
 }

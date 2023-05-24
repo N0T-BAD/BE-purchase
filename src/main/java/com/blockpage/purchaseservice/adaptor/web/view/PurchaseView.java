@@ -18,7 +18,7 @@ public class PurchaseView {
 
     private String message;
 
-    private Long memberId;
+    private String memberId;
     private LocalDateTime expiredDate;
 
     private Long memberHasEpisodeBMId;
@@ -49,8 +49,8 @@ public class PurchaseView {
     public class NftDetail {
 
         private Long id;
-        private Long memberId;
-        private Long creatorId;
+        private String memberId;
+        private String creatorId;
         private String nftName;
         private String nftDescription;
         private Integer nftBlockPrice;

@@ -54,7 +54,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
-    public List<Purchase> findNft(Long memberId) {
+    public List<Purchase> findNft(String memberId) {
         List<MemberHasNftEntity> memberNftEntityList = memberHasNftRepository.findByMemberId(memberId);
         return memberNftEntityList.stream()
             .map(Purchase::toDomainFromMemberNftEntity)
@@ -62,7 +62,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
-    public List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId, Boolean free) {
+    public List<Purchase> findEpisodeBMByWebtoonId(String memberId, Long webtoonId, Boolean free) {
         List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAndFree(memberId,
             webtoonId, free);
         return memberEpisodeBMEntityList.stream()
@@ -71,7 +71,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
-    public List<Purchase> findProfileSkinByMemberId(Long memberId) {
+    public List<Purchase> findProfileSkinByMemberId(String memberId) {
         List<MemberHasProfileSkinEntity> memberProfileSkinEntityList = memberHasProfileSkinRepository.findByMemberId(memberId);
         return memberProfileSkinEntityList.stream()
             .map(Purchase::toDomainFromMemberProfileSkinEntity)
@@ -79,7 +79,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
-    public Purchase changeProfileSkin(Long memberId, Long memberProfileSkinId) {
+    public Purchase changeProfileSkin(String memberId, Long memberProfileSkinId) {
         List<MemberHasProfileSkinEntity> entityList = memberHasProfileSkinRepository.findByMemberId(memberId);
         MemberHasProfileSkinEntity oldDefault = entityList.stream()
             .filter(MemberHasProfileSkinEntity::getDefaultSkin)

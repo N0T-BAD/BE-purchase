@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberHasProfileSkinRepository extends JpaRepository<MemberHasProfileSkinEntity, Long> {
 
-    List<MemberHasProfileSkinEntity> findByMemberId(Long memberId);
+    List<MemberHasProfileSkinEntity> findByMemberId(String memberId);
 }

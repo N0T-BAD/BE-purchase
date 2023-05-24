@@ -11,11 +11,11 @@ public interface PurchasePersistencePort {
 
     void saveNft(Purchase purchase);
 
-    List<Purchase> findNft(Long memberId);
+    List<Purchase> findNft(String memberId);
 
-    List<Purchase> findEpisodeBMByWebtoonId(Long memberId, Long webtoonId, Boolean free);
+    List<Purchase> findEpisodeBMByWebtoonId(String memberId, Long webtoonId, Boolean free);
 
-    List<Purchase> findProfileSkinByMemberId(Long memberId);
+    List<Purchase> findProfileSkinByMemberId(String memberId);
 
-    Purchase changeProfileSkin(Long memberId, Long memberProfileSkinId);
+    Purchase changeProfileSkin(String memberId, Long memberProfileSkinId);
 }

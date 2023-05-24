@@ -11,7 +11,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ChangeProfileSkinRequestBody {
 
-    private Long memberId;
+    private String memberId;
     private String profileSkinImage;
 
     public static ChangeProfileSkinRequestBody addEssentialBody(ChangePurchaseQuery query, Purchase purchase) {

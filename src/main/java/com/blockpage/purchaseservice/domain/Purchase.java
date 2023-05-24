@@ -28,7 +28,7 @@ public class Purchase {
 
     private ProductType productType;                //도메인만 가지고 있음
 
-    private Long memberId;
+    private String memberId;
     private PersistType persistType;
     private LocalDateTime expiredDate;
     private Integer blockQuantity;
@@ -143,8 +143,8 @@ public class Purchase {
     public static class NftWrapper {
 
         private Long id;
-        private Long memberId;
-        private Long creatorId;
+        private String memberId;
+        private String creatorId;
         private String nftName;
         private String nftDescription;
         private Integer nftBlockPrice;

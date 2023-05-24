@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PurchaseController {
 
     private final PurchaseUseCase purchaseUseCase;
-    private Long TEST_MEMBER_ID = 1l;
+    private String TEST_MEMBER_ID = "oryukdo3@naver.com";
 
     @GetMapping
     public ResponseEntity<ApiWrapperResponse<List<PurchaseView>>> getPurchases(
