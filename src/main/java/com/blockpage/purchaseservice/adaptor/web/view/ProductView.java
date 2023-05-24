@@ -15,8 +15,8 @@ public class ProductView {
     private String message;
 
     private Long nftId;
-    private Long nftMemberId;
-    private Long nftCreatorId;
+    private String nftMemberId;
+    private String nftCreatorId;
     private String nftName;
     private String nftDescription;
     private Integer nftBlockPrice;

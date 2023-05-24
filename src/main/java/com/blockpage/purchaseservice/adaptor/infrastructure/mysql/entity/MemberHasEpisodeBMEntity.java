@@ -31,7 +31,7 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
     private Long id;
 
     @Column
-    private Long memberId;
+    private String memberId;
 
     @Column
     private Long episodeId;

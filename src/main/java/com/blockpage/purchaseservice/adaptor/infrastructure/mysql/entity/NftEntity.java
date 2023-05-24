@@ -23,10 +23,10 @@ public class NftEntity extends BaseEntity {
     private Long id;
 
     @Column
-    private Long memberId;
+    private String memberId;
 
     @Column
-    private Long creatorId;
+    private String creatorId;
 
     @Column
     private String nftName;

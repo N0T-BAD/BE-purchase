@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberHasEpisodeBMRepository extends JpaRepository<MemberHasEpisodeBMEntity, Long> {
 
-    List<MemberHasEpisodeBMEntity> findByMemberIdAndWebtoonIdAndFree(Long memberId, Long webtoonId, Boolean free);
+    List<MemberHasEpisodeBMEntity> findByMemberIdAndWebtoonIdAndFree(String memberId, Long webtoonId, Boolean free);
 }

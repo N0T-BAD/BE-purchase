@@ -91,7 +91,7 @@ public class PurchaseService implements PurchaseUseCase {
     @Builder
     public static class PurchaseDto {
 
-        private Long memberId;
+        private String memberId;
         private LocalDateTime expiredDate;
         private Integer blockQuantity;
 
@@ -129,8 +129,8 @@ public class PurchaseService implements PurchaseUseCase {
     public static class NftDto {
 
         private Long id;
-        private Long memberId;
-        private Long creatorId;
+        private String memberId;
+        private String creatorId;
         private String nftName;
         private String nftDescription;
         private Integer nftBlockPrice;

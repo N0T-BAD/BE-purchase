@@ -15,10 +15,10 @@ public interface PurchaseUseCase {
     @Builder
     class ChangePurchaseQuery {
 
-        private Long memberId;
+        private String memberId;
         private Long memberProfileSkinId;
 
-        public static ChangePurchaseQuery toQuery(Long testMemberId, Long memberProfileSkinId) {
+        public static ChangePurchaseQuery toQuery(String testMemberId, Long memberProfileSkinId) {
             return ChangePurchaseQuery.builder()
                 .memberId(testMemberId)
                 .memberProfileSkinId(memberProfileSkinId)
@@ -31,11 +31,11 @@ public interface PurchaseUseCase {
     @Builder
     class FindPurchaseQuery {
 
-        private Long memberId;
+        private String memberId;
         private String productType;
         private Long webtoonId;
 
-        public static FindPurchaseQuery toQuery(Long testMemberId, String type, Long webtoonId) {
+        public static FindPurchaseQuery toQuery(String testMemberId, String type, Long webtoonId) {
             return FindPurchaseQuery.builder()
                 .memberId(testMemberId)
                 .productType(type)
@@ -51,7 +51,7 @@ public interface PurchaseUseCase {
         private String productType;
         private String persistType;
         private Integer blockQuantity;
-        private Long memberId;
+        private String memberId;
 
         //NFT purchase spec
         private Long nftId;
@@ -63,7 +63,7 @@ public interface PurchaseUseCase {
         private Long episodeId;
         private Long webtoonId;
 
-        public static PurchaseQuery toQuery(Long testMemberId, String productType, Long webtoonId, PurchaseRequest purchaseRequest) {
+        public static PurchaseQuery toQuery(String testMemberId, String productType, Long webtoonId, PurchaseRequest purchaseRequest) {
             return PurchaseQuery.builder()
                 .memberId(testMemberId)
                 .productType(productType)
