@@ -19,7 +19,7 @@ spring:
     password: ${spring.datasource.password}
 
   redis:
-    host: localhost
+    host: host.docker.internal
     port: 6379
 
   jpa:
