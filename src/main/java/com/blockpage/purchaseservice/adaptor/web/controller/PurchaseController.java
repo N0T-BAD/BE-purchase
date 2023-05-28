@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,14 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class PurchaseController {
 
     private final PurchaseUseCase purchaseUseCase;
-    private String TEST_MEMBER_ID = "oryukdo3@naver.com";
 
     @GetMapping
     public ResponseEntity<ApiWrapperResponse<List<PurchaseView>>> getPurchases(
         @RequestParam String type,
+        @RequestHeader String memberId,
         @RequestParam(required = false) Long webtoonId) {
 
-        List<PurchaseDto> purchaseDtoList = purchaseUseCase.purchaseQuery(FindPurchaseQuery.toQuery(TEST_MEMBER_ID, type, webtoonId));
+        List<PurchaseDto> purchaseDtoList = purchaseUseCase.purchaseQuery(FindPurchaseQuery.toQuery(memberId, type, webtoonId));
         List<PurchaseView> purchaseViews = purchaseDtoList.stream()
             .map(PurchaseView::new)
             .collect(Collectors.toList());
@@ -47,19 +48,23 @@ public class PurchaseController {
 
     @PostMapping
     public ResponseEntity<ApiWrapperResponse<PurchaseView>> postPurchases(
+        @RequestHeader String memberId,
         @RequestParam String type,
         @RequestParam(required = false) Long webtoonId,
         @RequestBody PurchaseRequest purchaseRequest) {
 
-        purchaseUseCase.purchaseProduct(PurchaseQuery.toQuery(TEST_MEMBER_ID, type, webtoonId, purchaseRequest));
+        purchaseUseCase.purchaseProduct(PurchaseQuery.toQuery(memberId, type, webtoonId, purchaseRequest));
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(new ApiWrapperResponse(new PurchaseView("구매내역이 정상적으로 생성되었습니다.")));
     }
 
     @PutMapping
-    public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(@RequestParam Long memberProfileSkinId) {
-        purchaseUseCase.changeProfileSkinPurchases(ChangePurchaseQuery.toQuery(TEST_MEMBER_ID, memberProfileSkinId));
+    public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(
+        @RequestHeader String memberId,
+        @RequestParam Long memberProfileSkinId
+    ) {
+        purchaseUseCase.changeProfileSkinPurchases(ChangePurchaseQuery.toQuery(memberId, memberProfileSkinId));
         return ResponseEntity.status(HttpStatus.OK)
             .body(new ApiWrapperResponse(new PurchaseView("구매내역이 정상적으로 변경되었습니다.")));
     }
