@@ -20,15 +20,16 @@ public class ViewCountMessageSender {
 
     private final KafkaTemplate kafkaTemplate;
 
-    public void sendViewCount() {
-        Message<String> message = MessageBuilder.withPayload("hi")
+    public void sendViewCount(ViewCountMessage viewCountMessage) {
+        Message<ViewCountMessage> message = MessageBuilder.withPayload(viewCountMessage)
             .setHeader(KafkaHeaders.TOPIC, topicName)
             .build();
 
-        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(message);
-        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+        ListenableFuture<SendResult<String, ViewCountMessage>> future = kafkaTemplate.send(message);
+
+        future.addCallback(new ListenableFutureCallback<SendResult<String, ViewCountMessage>>() {
             @Override
-            public void onSuccess(SendResult<String, String> result) {
+            public void onSuccess(SendResult<String, ViewCountMessage> result) {
                 System.out.println(
                     "Send message=[" + result.getProducerRecord().value().toString() + "] with offset=[" + result.getRecordMetadata()
                         .offset() + "]");
@@ -40,5 +41,4 @@ public class ViewCountMessageSender {
             }
         });
     }
-
 }
