@@ -13,7 +13,7 @@ public class BlockServiceController implements BlockServicePort {
     private final BlockServiceFeign blockServiceFeign;
 
     @Override
-    public ResponseEntity blockPay(BlockPayRequestParams blockPayRequestParams) {
-        return blockServiceFeign.blockPay(blockPayRequestParams);
+    public ResponseEntity blockPay(String memberId, BlockPayRequestParams blockPayRequestParams) {
+        return blockServiceFeign.blockPay(memberId, blockPayRequestParams);
     }
 }
