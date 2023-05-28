@@ -35,17 +35,18 @@ public class PurchaseService implements PurchaseUseCase {
     public void purchaseProduct(PurchaseQuery query) {
 
         Purchase purchase = Purchase.initPurchaseForSave(query);
+        String memberId = purchase.getMemberId();
 
         switch (purchase.getProductType()) {
             case NFT -> {
                 purchasePersistencePort.saveNft(purchase);
                 BlockPayRequestParams params = BlockPayRequestParams.addEssentialParams(query);
-                blockServicePort.blockPay(params);
+                blockServicePort.blockPay(memberId, params);
             }
             case EPISODE_BM_PAID -> {
                 purchasePersistencePort.saveEpisodeBM(purchase);
                 BlockPayRequestParams params = BlockPayRequestParams.addEssentialParams(query);
-                blockServicePort.blockPay(params);
+                blockServicePort.blockPay(memberId, params);
             }
             case EPISODE_BM_FREE -> {
                 purchasePersistencePort.saveEpisodeBM(purchase);
@@ -53,7 +54,7 @@ public class PurchaseService implements PurchaseUseCase {
             case PROFILE_SKIN -> {
                 purchasePersistencePort.saveProfileSkin(purchase);
                 BlockPayRequestParams params = BlockPayRequestParams.addEssentialParams(query);
-                blockServicePort.blockPay(params);
+                blockServicePort.blockPay(memberId, params);
             }
             default -> throw new IllegalStateException("Unexpected value: " + purchase.getProductType());
         }

@@ -5,5 +5,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface BlockServicePort {
 
-    ResponseEntity blockPay(BlockPayRequestParams blockPayRequestParams);
+    ResponseEntity blockPay(String memberId, BlockPayRequestParams blockPayRequestParams);
 }
