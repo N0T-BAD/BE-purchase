@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.configuration;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.member.configuration;
 
 import com.blockpage.purchaseservice.exception.GlobalFeinErrorDecoder;
 import feign.Logger.Level;
@@ -7,13 +7,11 @@ import feign.Retryer;
 import feign.codec.ErrorDecoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class BlockServiceFeignConfig {
+public class MemberServiceFeignConfig {
 
     @Value("${block.service.api.content-type}")
-    private String blockServiceContentType;
+    private String memberServiceContentType;
 
     @Bean
     public feign.Logger.Level feignLoggerLevel() {
@@ -32,6 +30,6 @@ public class BlockServiceFeignConfig {
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return new BlockServiceFeignInterceptor(blockServiceContentType);
+        return new MemberServiceFeignInterceptor(memberServiceContentType);
     }
 }

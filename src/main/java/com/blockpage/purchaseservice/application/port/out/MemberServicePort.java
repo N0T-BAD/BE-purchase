@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.application.port.out;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestBody;
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.member.requestbody.ChangeProfileSkinRequestParams;
 import org.springframework.http.ResponseEntity;
 
 public interface MemberServicePort {

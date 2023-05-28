@@ -1,6 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.external.block.controller;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.block.controller;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.block.requestbody.BlockPayRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.block.requestbody.BlockPayRequestParams;
 import com.blockpage.purchaseservice.application.port.out.BlockServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

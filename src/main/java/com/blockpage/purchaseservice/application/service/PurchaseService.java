@@ -1,8 +1,8 @@
 package com.blockpage.purchaseservice.application.service;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.block.requestbody.BlockPayRequestParams;
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestBody;
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.block.requestbody.BlockPayRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.member.requestbody.ChangeProfileSkinRequestParams;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
