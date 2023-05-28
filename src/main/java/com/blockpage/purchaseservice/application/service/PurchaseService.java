@@ -76,9 +76,9 @@ public class PurchaseService implements PurchaseUseCase {
         List<Purchase> purchaseList;
         switch (ProductType.findByValue(findPurchaseQuery.getProductType())) {
             case NFT -> purchaseList = purchasePersistencePort.findNft(findPurchaseQuery.getMemberId());
-            case EPISODE_BM_PAID -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+            case EPISODE_BM_PAID -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonIdAndFree(findPurchaseQuery.getMemberId(),
                 findPurchaseQuery.getWebtoonId(), Boolean.FALSE);
-            case EPISODE_BM_FREE -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+            case EPISODE_BM_FREE -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonIdAndFree(findPurchaseQuery.getMemberId(),
                 findPurchaseQuery.getWebtoonId(), Boolean.TRUE);
             case PROFILE_SKIN -> purchaseList = purchasePersistencePort.findProfileSkinByMemberId(findPurchaseQuery.getMemberId());
             default -> throw new IllegalStateException("Unexpected value: " + ProductType.findByValue(findPurchaseQuery.getProductType()));

@@ -62,7 +62,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
-    public List<Purchase> findEpisodeBMByWebtoonId(String memberId, Long webtoonId, Boolean free) {
+    public List<Purchase> findEpisodeBMByWebtoonIdAndFree(String memberId, Long webtoonId, Boolean free) {
         List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAndFree(memberId,
             webtoonId, free);
         return memberEpisodeBMEntityList.stream()

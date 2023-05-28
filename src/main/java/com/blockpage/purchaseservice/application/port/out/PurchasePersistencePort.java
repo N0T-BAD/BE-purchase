@@ -13,7 +13,7 @@ public interface PurchasePersistencePort {
 
     List<Purchase> findNft(String memberId);
 
-    List<Purchase> findEpisodeBMByWebtoonId(String memberId, Long webtoonId, Boolean free);
+    List<Purchase> findEpisodeBMByWebtoonIdAndFree(String memberId, Long webtoonId, Boolean free);
 
     List<Purchase> findProfileSkinByMemberId(String memberId);
 
