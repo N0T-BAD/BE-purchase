@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.member.configuration;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.configuration;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

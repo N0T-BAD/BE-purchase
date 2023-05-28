@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.block.configuration;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.block.configuration;
 
 import com.blockpage.purchaseservice.exception.GlobalFeinErrorDecoder;
 import feign.Logger.Level;

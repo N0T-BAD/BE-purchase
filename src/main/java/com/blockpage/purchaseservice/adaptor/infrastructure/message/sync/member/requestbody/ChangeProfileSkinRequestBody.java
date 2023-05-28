@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.member.requestbody;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody;
 
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.ChangePurchaseQuery;
 import com.blockpage.purchaseservice.domain.Purchase;

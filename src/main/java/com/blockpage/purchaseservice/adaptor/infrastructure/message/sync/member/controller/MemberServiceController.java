@@ -1,7 +1,7 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.member.controller;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.controller;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.message.member.requestbody.ChangeProfileSkinRequestBody;
-import com.blockpage.purchaseservice.adaptor.infrastructure.message.member.requestbody.ChangeProfileSkinRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestParams;
 import com.blockpage.purchaseservice.application.port.out.MemberServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
