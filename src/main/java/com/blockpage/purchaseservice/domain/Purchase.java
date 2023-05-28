@@ -127,7 +127,7 @@ public class Purchase {
 
     public static Purchase toDomainFromMemberEpisodeBMEntity(MemberHasEpisodeBMEntity entity) {
         return Purchase.builder()
-            .productType(ProductType.EPISODE_BM_PAID)
+            .productType(entity.getFree() ? ProductType.EPISODE_BM_FREE : ProductType.EPISODE_BM_PAID)
             .memberId(entity.getMemberId())
             .blockQuantity(entity.getBlockQuantity())
             .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
