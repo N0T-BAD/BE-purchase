@@ -22,4 +22,6 @@ public class PurchaseRequest {
 
     //episodeBM purchase spec
     private Long episodeId;
+    private String webtoonTitle;
+    private Integer episodeNumber;
 }

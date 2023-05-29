@@ -36,6 +36,8 @@ public class Purchase {
     private Long memberHasEpisodeBMId;
     private Long episodeId;
     private Long webtoonId;
+    private String webtoonTitle;
+    private Integer episodeNumber;
 
     private Long memberHasNftId;
     private NftWrapper nftWrapper;
@@ -69,6 +71,8 @@ public class Purchase {
                     .blockQuantity(query.getBlockQuantity())
                     .episodeId(query.getEpisodeId())
                     .webtoonId(query.getWebtoonId())
+                    .episodeNumber(query.getEpisodeNumber())
+                    .webtoonTitle(query.getWebtoonTitle())
                     .memberHasEpisodeBMId(null)
                     .build();
             }
@@ -135,6 +139,8 @@ public class Purchase {
             .memberHasEpisodeBMId(entity.getId())
             .episodeId(entity.getEpisodeId())
             .webtoonId(entity.getWebtoonId())
+            .episodeNumber(entity.getEpisodeNumber())
+            .webtoonTitle(entity.getWebtoonTitle())
             .build();
     }
 
