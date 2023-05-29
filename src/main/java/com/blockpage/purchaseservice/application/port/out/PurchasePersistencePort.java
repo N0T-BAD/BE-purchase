@@ -1,6 +1,7 @@
 package com.blockpage.purchaseservice.application.port.out;
 
 import com.blockpage.purchaseservice.domain.Purchase;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PurchasePersistencePort {
@@ -18,4 +19,6 @@ public interface PurchasePersistencePort {
     List<Purchase> findProfileSkinByMemberId(String memberId);
 
     Purchase changeProfileSkin(String memberId, Long memberProfileSkinId);
+
+    List<Purchase> findEpisodeBMByCreateDate(LocalDateTime start, LocalDateTime end);
 }

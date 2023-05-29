@@ -15,6 +15,7 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.repository.Pro
 import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePort;
 import com.blockpage.purchaseservice.domain.Purchase;
 import com.blockpage.purchaseservice.exception.BusinessException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -96,5 +97,13 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
         oldDefault.changeDefaultSkin();
         newDefault.changeDefaultSkin();
         return Purchase.toDomainFromMemberProfileSkinEntity(newDefault);
+    }
+
+    @Override
+    public List<Purchase> findEpisodeBMByCreateDate(LocalDateTime start, LocalDateTime end) {
+        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findAllByRegisterTimeBetween(start, end);
+        return memberEpisodeBMEntityList.stream()
+            .map(Purchase::toDomainFromMemberEpisodeBMEntity)
+            .collect(Collectors.toList());
     }
 }
