@@ -1,5 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.configuration;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.message.ViewCountMessage;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;

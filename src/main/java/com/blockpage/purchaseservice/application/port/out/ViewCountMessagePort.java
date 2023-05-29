@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.application.port.out;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.ViewCountMessage;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.message.ViewCountMessage;
 
 public interface ViewCountMessagePort {
 

@@ -1,5 +1,6 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.controller;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.message.ViewCountMessage;
 import com.blockpage.purchaseservice.application.port.out.ViewCountMessagePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

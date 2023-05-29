@@ -1,6 +1,8 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.controller;
 
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.message.ViewCountMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ViewCountMessageSender {
@@ -30,14 +33,13 @@ public class ViewCountMessageSender {
         future.addCallback(new ListenableFutureCallback<SendResult<String, ViewCountMessage>>() {
             @Override
             public void onSuccess(SendResult<String, ViewCountMessage> result) {
-                System.out.println(
-                    "Send message=[" + result.getProducerRecord().value().toString() + "] with offset=[" + result.getRecordMetadata()
-                        .offset() + "]");
+                log.info("send message = " + result.getProducerRecord().value().toString() + " with offset = " + result.getRecordMetadata()
+                    .offset());
             }
 
             @Override
             public void onFailure(Throwable ex) {
-                System.out.println("Unable to send message due to = " + ex.getMessage());
+                log.error(ex.getMessage());
             }
         });
     }

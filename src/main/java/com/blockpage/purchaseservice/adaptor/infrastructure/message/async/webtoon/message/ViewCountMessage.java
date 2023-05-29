@@ -1,4 +1,4 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.async.webtoon.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
