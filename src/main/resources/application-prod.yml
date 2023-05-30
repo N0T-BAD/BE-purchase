@@ -28,7 +28,7 @@ spring:
     show-sql: true
 
   kafka:
-    bootstrapAddress: http://35.216.90.80:9092
+    bootstrapAddress: ${spring.kafka.bootstrapAddress}
     topicName: viewCount
 
 block:
