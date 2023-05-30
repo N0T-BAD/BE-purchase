@@ -28,7 +28,7 @@ spring:
     show-sql: true
 
   kafka:
-    bootstrapAddress: host.docker.internal
+    bootstrapAddress: localhost:9092
     topicName: viewCount
 
 block:
