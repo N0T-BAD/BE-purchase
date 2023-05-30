@@ -21,8 +21,8 @@ public class ViewCountService {
     private final ViewCountMessagePort viewCountMessagePort;
     private final PurchasePersistencePort purchasePersistencePort;
 
-    private final long FIXED_RATE_SECONDS = 30l;
-    private final long FIXED_RATE_MILLISECONDS = 30 * 1000l; //20초
+    private final long FIXED_RATE_SECONDS = 5 * 60l;
+    private final long FIXED_RATE_MILLISECONDS = 5 * 60 * 1000l; //5분
     private final long INITIAL_DELAY_MILLISECONDS = 3 * 1000l;
 
 
