@@ -28,7 +28,7 @@ spring:
     show-sql: true
 
   kafka:
-    bootstrapAddress: localhost:9092
+    bootstrapAddress: 35.216.90.80:9092
     topicName: viewCount
 
 block:
