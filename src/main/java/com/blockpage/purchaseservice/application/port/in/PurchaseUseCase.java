@@ -7,8 +7,11 @@ import lombok.Builder;
 import lombok.Getter;
 
 public interface PurchaseUseCase {
+
     void purchaseProduct(PurchaseQuery purchaseQuery);
+
     void changeProfileSkinPurchases(ChangePurchaseQuery toQuery);
+
     List<PurchaseDto> purchaseQuery(FindPurchaseQuery findPurchaseQuery);
 
     @Getter
@@ -62,6 +65,8 @@ public interface PurchaseUseCase {
         //episodeBM purchase spec
         private Long episodeId;
         private Long webtoonId;
+        private Integer episodeNumber;
+        private String webtoonTitle;
 
         public static PurchaseQuery toQuery(String testMemberId, String productType, Long webtoonId, PurchaseRequest purchaseRequest) {
             return PurchaseQuery.builder()
@@ -73,6 +78,8 @@ public interface PurchaseUseCase {
                 .profileSkinId(purchaseRequest.getProfileSkinId())
                 .episodeId(purchaseRequest.getEpisodeId())
                 .persistType(purchaseRequest.getPersistType())
+                .episodeNumber(purchaseRequest.getEpisodeNumber())
+                .webtoonTitle(purchaseRequest.getWebtoonTitle())
                 .build();
         }
     }

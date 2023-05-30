@@ -12,11 +12,15 @@ public class BlockPayRequestParams {
 
     private Integer blockQuantity;
     private String type;
+    private String webtoonTitle;
+    private Integer episodeNumber;
 
     public static BlockPayRequestParams addEssentialParams(PurchaseQuery query) {
         return BlockPayRequestParams.builder()
             .blockQuantity(query.getBlockQuantity())
             .type(query.getProductType())
+            .webtoonTitle(query.getWebtoonTitle())
+            .episodeNumber(query.getEpisodeNumber())
             .build();
     }
 }
