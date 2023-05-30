@@ -1,8 +1,8 @@
-package com.blockpage.purchaseservice.adaptor.infrastructure.external.member.controller;
+package com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.controller;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.configuration.MemberServiceFeignConfig;
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestBody;
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.configuration.MemberServiceFeignConfig;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestParams;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.ResponseEntity;

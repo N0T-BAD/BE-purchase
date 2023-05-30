@@ -39,6 +39,12 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
     @Column
     private Long webtoonId;
 
+    @Column
+    private String webtoonTitle;
+
+    @Column
+    private Integer episodeNumber;
+
     @Column(name = "block_quantity")
     private Integer blockQuantity;
 
@@ -57,8 +63,10 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
             .id(purchase.getMemberHasEpisodeBMId())
             .memberId(purchase.getMemberId())
             .episodeId(purchase.getEpisodeId())
+            .episodeNumber(purchase.getEpisodeNumber())
             .blockQuantity(purchase.getBlockQuantity())
             .webtoonId(purchase.getWebtoonId())
+            .webtoonTitle(purchase.getWebtoonTitle())
             .free(ProductType.findByValue(purchase.getProductType().getValue()) == ProductType.EPISODE_BM_FREE)
             .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
             .expiredDate(purchase.getExpiredDate())

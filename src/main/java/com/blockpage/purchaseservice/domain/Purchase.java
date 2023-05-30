@@ -36,6 +36,8 @@ public class Purchase {
     private Long memberHasEpisodeBMId;
     private Long episodeId;
     private Long webtoonId;
+    private String webtoonTitle;
+    private Integer episodeNumber;
 
     private Long memberHasNftId;
     private NftWrapper nftWrapper;
@@ -69,6 +71,8 @@ public class Purchase {
                     .blockQuantity(query.getBlockQuantity())
                     .episodeId(query.getEpisodeId())
                     .webtoonId(query.getWebtoonId())
+                    .episodeNumber(query.getEpisodeNumber())
+                    .webtoonTitle(query.getWebtoonTitle())
                     .memberHasEpisodeBMId(null)
                     .build();
             }
@@ -127,7 +131,7 @@ public class Purchase {
 
     public static Purchase toDomainFromMemberEpisodeBMEntity(MemberHasEpisodeBMEntity entity) {
         return Purchase.builder()
-            .productType(ProductType.EPISODE_BM_PAID)
+            .productType(entity.getFree() ? ProductType.EPISODE_BM_FREE : ProductType.EPISODE_BM_PAID)
             .memberId(entity.getMemberId())
             .blockQuantity(entity.getBlockQuantity())
             .persistType(PersistType.findByValue(entity.getPersistType().getValue()))
@@ -135,6 +139,8 @@ public class Purchase {
             .memberHasEpisodeBMId(entity.getId())
             .episodeId(entity.getEpisodeId())
             .webtoonId(entity.getWebtoonId())
+            .episodeNumber(entity.getEpisodeNumber())
+            .webtoonTitle(entity.getWebtoonTitle())
             .build();
     }
 

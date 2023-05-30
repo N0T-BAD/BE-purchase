@@ -1,8 +1,8 @@
 package com.blockpage.purchaseservice.application.service;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.block.requestbody.BlockPayRequestParams;
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestBody;
-import com.blockpage.purchaseservice.adaptor.infrastructure.external.member.requestbody.ChangeProfileSkinRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.block.requestbody.BlockPayRequestParams;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestParams;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase;
@@ -76,9 +76,9 @@ public class PurchaseService implements PurchaseUseCase {
         List<Purchase> purchaseList;
         switch (ProductType.findByValue(findPurchaseQuery.getProductType())) {
             case NFT -> purchaseList = purchasePersistencePort.findNft(findPurchaseQuery.getMemberId());
-            case EPISODE_BM_PAID -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+            case EPISODE_BM_PAID -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonIdAndFree(findPurchaseQuery.getMemberId(),
                 findPurchaseQuery.getWebtoonId(), Boolean.FALSE);
-            case EPISODE_BM_FREE -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonId(findPurchaseQuery.getMemberId(),
+            case EPISODE_BM_FREE -> purchaseList = purchasePersistencePort.findEpisodeBMByWebtoonIdAndFree(findPurchaseQuery.getMemberId(),
                 findPurchaseQuery.getWebtoonId(), Boolean.TRUE);
             case PROFILE_SKIN -> purchaseList = purchasePersistencePort.findProfileSkinByMemberId(findPurchaseQuery.getMemberId());
             default -> throw new IllegalStateException("Unexpected value: " + ProductType.findByValue(findPurchaseQuery.getProductType()));
