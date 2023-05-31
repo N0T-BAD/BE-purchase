@@ -14,9 +14,8 @@ public class ChangeProfileSkinRequestBody {
     private String memberId;
     private String profileSkinImage;
 
-    public static ChangeProfileSkinRequestBody addEssentialBody(ChangePurchaseQuery query, Purchase purchase) {
+    public static ChangeProfileSkinRequestBody addEssentialBody(Purchase purchase) {
         return ChangeProfileSkinRequestBody.builder()
-            .memberId(query.getMemberId())
             .profileSkinImage(purchase.getProfileSkinWrapper().getProfileSkinImage())
             .build();
     }
