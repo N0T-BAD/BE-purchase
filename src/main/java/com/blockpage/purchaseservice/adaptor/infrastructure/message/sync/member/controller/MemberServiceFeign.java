@@ -22,7 +22,7 @@ public interface MemberServiceFeign {
     @PutMapping(value = "/member-service/v1/members")
     ResponseEntity changeProfileSkin(@RequestHeader String memberId,
         @SpringQueryMap ChangeProfileSkinRequestParams changeProfileSkinRequestParams,
-        @ModelAttribute ChangeProfileSkinRequestBody changeProfileSkinRequestBody);
+        @RequestBody ChangeProfileSkinRequestBody changeProfileSkinRequestBody);
 
     @Component
     class FallBack implements MemberServiceFeign {
