@@ -12,11 +12,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ChangeProfileSkinRequestBody {
 
-    private String profileSkinImage;
+    private String profileSkin;
 
     public static ChangeProfileSkinRequestBody addEssentialBody(Purchase purchase) {
         return ChangeProfileSkinRequestBody.builder()
-            .profileSkinImage(purchase.getProfileSkinWrapper().getProfileSkinImage())
+            .profileSkin(purchase.getProfileSkinWrapper().getProfileSkinImage())
             .build();
     }
 }
