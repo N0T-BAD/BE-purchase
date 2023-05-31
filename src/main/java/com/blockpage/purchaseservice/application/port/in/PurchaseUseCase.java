@@ -21,10 +21,10 @@ public interface PurchaseUseCase {
         private String memberId;
         private Long memberProfileSkinId;
 
-        public static ChangePurchaseQuery toQuery(String testMemberId, Long memberProfileSkinId) {
+        public static ChangePurchaseQuery toQuery(String testMemberId, PurchaseRequest purchaseRequest) {
             return ChangePurchaseQuery.builder()
                 .memberId(testMemberId)
-                .memberProfileSkinId(memberProfileSkinId)
+                .memberProfileSkinId(purchaseRequest.getMemberProfileSkinId())
                 .build();
         }
     }

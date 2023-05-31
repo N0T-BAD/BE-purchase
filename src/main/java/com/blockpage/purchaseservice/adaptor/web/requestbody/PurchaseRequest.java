@@ -19,6 +19,7 @@ public class PurchaseRequest {
 
     //profile-skin purchase spec
     private Long profileSkinId;
+    private Long memberProfileSkinId;
 
     //episodeBM purchase spec
     private Long episodeId;
