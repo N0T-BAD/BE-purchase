@@ -62,7 +62,7 @@ public class PurchaseController {
     @PutMapping
     public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(
         @RequestHeader String memberId,
-        @RequestParam Long memberProfileSkinId
+        @RequestBody Long memberProfileSkinId
     ) {
         purchaseUseCase.changeProfileSkinPurchases(ChangePurchaseQuery.toQuery(memberId, memberProfileSkinId));
         return ResponseEntity.status(HttpStatus.OK)

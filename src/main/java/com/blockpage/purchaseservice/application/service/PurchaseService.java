@@ -67,7 +67,7 @@ public class PurchaseService implements PurchaseUseCase {
 
         ChangeProfileSkinRequestBody body = ChangeProfileSkinRequestBody.addEssentialBody(query, purchase);
         ChangeProfileSkinRequestParams params = ChangeProfileSkinRequestParams.addEssentialParams("profileSkin");
-        memberServicePort.changeProfileSkin(params, body);
+        memberServicePort.changeProfileSkin(query, params, body);
 
     }
 
