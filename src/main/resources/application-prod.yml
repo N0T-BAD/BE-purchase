@@ -39,4 +39,4 @@ block:
 member:
   service:
     api:
-      content-type: application/json
+      content-type: multipart/form-data
