@@ -62,9 +62,9 @@ public class PurchaseController {
     @PutMapping
     public ResponseEntity<ApiWrapperResponse> patchPurchasesProfileSkinDefault(
         @RequestHeader String memberId,
-        @RequestBody Long memberProfileSkinId
+        @RequestBody PurchaseRequest purchaseRequest
     ) {
-        purchaseUseCase.changeProfileSkinPurchases(ChangePurchaseQuery.toQuery(memberId, memberProfileSkinId));
+        purchaseUseCase.changeProfileSkinPurchases(ChangePurchaseQuery.toQuery(memberId, purchaseRequest));
         return ResponseEntity.status(HttpStatus.OK)
             .body(new ApiWrapperResponse(new PurchaseView("구매내역이 정상적으로 변경되었습니다.")));
     }
