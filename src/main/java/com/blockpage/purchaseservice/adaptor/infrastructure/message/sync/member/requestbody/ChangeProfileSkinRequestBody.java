@@ -1,17 +1,17 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody;
 
-import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.ChangePurchaseQuery;
 import com.blockpage.purchaseservice.domain.Purchase;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 public class ChangeProfileSkinRequestBody {
 
-    private String memberId;
     private String profileSkinImage;
 
     public static ChangeProfileSkinRequestBody addEssentialBody(Purchase purchase) {
