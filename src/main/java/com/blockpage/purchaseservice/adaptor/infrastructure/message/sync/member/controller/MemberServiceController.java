@@ -1,6 +1,6 @@
 package com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.controller;
 
-import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestParam;
 import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestParams;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.ChangePurchaseQuery;
 import com.blockpage.purchaseservice.application.port.out.MemberServicePort;
@@ -16,7 +16,7 @@ public class MemberServiceController implements MemberServicePort {
 
     @Override
     public ResponseEntity changeProfileSkin(ChangePurchaseQuery query, ChangeProfileSkinRequestParams params,
-        ChangeProfileSkinRequestBody body) {
-        return memberServiceFeign.changeProfileSkin(query.getMemberId(), params, body);
+        ChangeProfileSkinRequestParam requestParam) {
+        return memberServiceFeign.changeProfileSkin(query.getMemberId(), params, requestParam.getProfileSkin());
     }
 }
