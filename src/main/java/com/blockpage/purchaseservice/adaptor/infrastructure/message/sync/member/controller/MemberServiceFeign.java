@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 )
 public interface MemberServiceFeign {
 
-    @PutMapping(value = "/member-service/v1/members?type=profileSkin")
+    @PutMapping(value = "/member-service/v1/members")
     ResponseEntity changeProfileSkin(@RequestHeader String memberId,
-//        @SpringQueryMap ChangeProfileSkinRequestParams changeProfileSkinRequestParams,
+        @SpringQueryMap ChangeProfileSkinRequestParams changeProfileSkinRequestParams,
         @RequestParam String profileSkin);
 
     @Component
     class FallBack implements MemberServiceFeign {
 
         @Override
-        public ResponseEntity changeProfileSkin(String memberId,
+        public ResponseEntity changeProfileSkin(String memberId, ChangeProfileSkinRequestParams changeProfileSkinRequestParams,
             String profileSkin) {
             return null;
         }

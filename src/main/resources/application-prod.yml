@@ -40,3 +40,8 @@ member:
   service:
     api:
       content-type: multipart/form-data
+
+logging:
+  level:
+    root: info
+    com.blockpage.purchaseservice.adaptor.infrastructure.message: debug
