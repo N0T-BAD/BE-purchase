@@ -39,7 +39,7 @@ block:
 member:
   service:
     api:
-      content-type: multipart/form-data
+      content-type: application/json
 
 logging:
   level:
