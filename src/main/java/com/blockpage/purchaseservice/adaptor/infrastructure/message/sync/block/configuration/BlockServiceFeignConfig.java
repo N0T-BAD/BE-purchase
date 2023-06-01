@@ -20,10 +20,10 @@ public class BlockServiceFeignConfig {
         return Level.FULL;
     }
 
-    @Bean
-    public ErrorDecoder errorDecoder() {
-        return new GlobalFeinErrorDecoder();
-    }
+//    @Bean
+//    public ErrorDecoder errorDecoder() {
+//        return new GlobalFeinErrorDecoder();
+//    }
 
     @Bean
     public Retryer retryer() {
