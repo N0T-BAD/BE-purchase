@@ -10,12 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ChangeProfileSkinRequestBody {
+public class ChangeProfileSkinRequestParam {
 
     private String profileSkin;
 
-    public static ChangeProfileSkinRequestBody addEssentialBody(Purchase purchase) {
-        return ChangeProfileSkinRequestBody.builder()
+    public static ChangeProfileSkinRequestParam addEssentialBody(Purchase purchase) {
+        return ChangeProfileSkinRequestParam.builder()
             .profileSkin(purchase.getProfileSkinWrapper().getProfileSkinImage())
             .build();
     }

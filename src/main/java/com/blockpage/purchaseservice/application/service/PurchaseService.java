@@ -1,7 +1,7 @@
 package com.blockpage.purchaseservice.application.service;
 
 import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.block.requestbody.BlockPayRequestParams;
-import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestBody;
+import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestParam;
 import com.blockpage.purchaseservice.adaptor.infrastructure.message.sync.member.requestbody.ChangeProfileSkinRequestParams;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.ProductType;
@@ -65,9 +65,9 @@ public class PurchaseService implements PurchaseUseCase {
     public void changeProfileSkinPurchases(ChangePurchaseQuery query) {
         Purchase purchase = purchasePersistencePort.changeProfileSkin(query.getMemberId(), query.getMemberProfileSkinId());
 
-        ChangeProfileSkinRequestBody body = ChangeProfileSkinRequestBody.addEssentialBody(purchase);
+        ChangeProfileSkinRequestParam requestParam = ChangeProfileSkinRequestParam.addEssentialBody(purchase);
         ChangeProfileSkinRequestParams params = ChangeProfileSkinRequestParams.addEssentialParams("profileSkin");
-        memberServicePort.changeProfileSkin(query, params, body);
+        memberServicePort.changeProfileSkin(query, params, requestParam);
 
     }
 
