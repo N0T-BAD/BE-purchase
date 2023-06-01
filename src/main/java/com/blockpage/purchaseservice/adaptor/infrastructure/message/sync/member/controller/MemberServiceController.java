@@ -17,6 +17,6 @@ public class MemberServiceController implements MemberServicePort {
     @Override
     public ResponseEntity changeProfileSkin(ChangePurchaseQuery query, ChangeProfileSkinRequestParams params,
         ChangeProfileSkinRequestParam requestParam) {
-        return memberServiceFeign.changeProfileSkin(query.getMemberId(), params, requestParam.getProfileSkin());
+        return memberServiceFeign.changeProfileSkin(query.getMemberId(), requestParam.getProfileSkin());
     }
 }
