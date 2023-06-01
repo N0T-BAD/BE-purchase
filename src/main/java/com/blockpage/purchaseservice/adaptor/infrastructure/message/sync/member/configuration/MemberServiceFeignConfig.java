@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 public class MemberServiceFeignConfig {
 
-    @Value("${block.service.api.content-type}")
+    @Value("${member.service.api.content-type}")
     private String memberServiceContentType;
 
     @Bean
