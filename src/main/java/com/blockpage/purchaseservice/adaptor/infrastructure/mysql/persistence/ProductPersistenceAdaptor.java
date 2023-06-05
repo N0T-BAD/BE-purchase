@@ -9,6 +9,7 @@ import com.blockpage.purchaseservice.application.service.ProductService.ProductE
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class ProductPersistenceAdaptor implements ProductPersistencePort {
     private final NftRepository nftRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductEntityDto> findAllNft() {
         List<NftEntity> nftEntities = nftRepository.findAll();
         return nftEntities.stream()
@@ -26,6 +28,7 @@ public class ProductPersistenceAdaptor implements ProductPersistencePort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductEntityDto> findAllProfileSkin() {
         List<ProfileSkinEntity> profileSkinEntities = profileSkinRepository.findAll();
         return profileSkinEntities.stream()
