@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class PurchaseService implements PurchaseUseCase {
 
     private final PurchasePersistencePort purchasePersistencePort;
@@ -31,7 +30,6 @@ public class PurchaseService implements PurchaseUseCase {
     private final MemberServicePort memberServicePort;
 
     @Override
-    @Transactional
     public void purchaseProduct(PurchaseQuery query) {
 
         Purchase purchase = Purchase.initPurchaseForSave(query);
@@ -61,7 +59,6 @@ public class PurchaseService implements PurchaseUseCase {
     }
 
     @Override
-    @Transactional
     public void changeProfileSkinPurchases(ChangePurchaseQuery query) {
         Purchase purchase = purchasePersistencePort.changeProfileSkin(query.getMemberId(), query.getMemberProfileSkinId());
 

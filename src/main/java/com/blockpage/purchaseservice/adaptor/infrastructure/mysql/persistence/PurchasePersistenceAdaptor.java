@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -32,6 +33,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     private final NftRepository nftRepository;
 
     @Override
+    @Transactional
     public void saveProfileSkin(Purchase purchase) {
         ProfileSkinEntity profileSkinEntity = profileSkinRepository.findById(purchase.getProfileSkinWrapper().getId())
             .orElseThrow(
@@ -40,12 +42,14 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
+    @Transactional
     public void saveEpisodeBM(Purchase purchase) {
         memberHasEpisodeBMRepository.save(MemberHasEpisodeBMEntity.toEntity(purchase));
 
     }
 
     @Override
+    @Transactional
     public void saveNft(Purchase purchase) {
         NftEntity nftEntity = nftRepository.findById(purchase.getNftWrapper().getId())
             .orElseThrow(
@@ -55,6 +59,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Purchase> findNft(String memberId) {
         List<MemberHasNftEntity> memberNftEntityList = memberHasNftRepository.findByMemberId(memberId);
         return memberNftEntityList.stream()
@@ -63,6 +68,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Purchase> findEpisodeBMByWebtoonIdAndFree(String memberId, Long webtoonId, Boolean free) {
         List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAndFree(memberId,
             webtoonId, free);
@@ -72,6 +78,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Purchase> findProfileSkinByMemberId(String memberId) {
         List<MemberHasProfileSkinEntity> memberProfileSkinEntityList = memberHasProfileSkinRepository.findByMemberId(memberId);
         return memberProfileSkinEntityList.stream()
@@ -80,6 +87,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
+    @Transactional
     public Purchase changeProfileSkin(String memberId, Long memberProfileSkinId) {
         List<MemberHasProfileSkinEntity> entityList = memberHasProfileSkinRepository.findByMemberId(memberId);
         MemberHasProfileSkinEntity oldDefault = entityList.stream()
@@ -100,6 +108,7 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Purchase> findEpisodeBMByCreateDate(LocalDateTime start, LocalDateTime end) {
         List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findAllByRegisterTimeBetween(start, end);
         return memberEpisodeBMEntityList.stream()
