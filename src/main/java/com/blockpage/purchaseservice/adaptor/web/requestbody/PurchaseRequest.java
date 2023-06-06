@@ -25,4 +25,9 @@ public class PurchaseRequest {
     private Long episodeId;
     private String webtoonTitle;
     private Integer episodeNumber;
+
+    private String webtoonThumbnail;
+    private String creator;
+    private String illustrator;
+    private String genre;
 }

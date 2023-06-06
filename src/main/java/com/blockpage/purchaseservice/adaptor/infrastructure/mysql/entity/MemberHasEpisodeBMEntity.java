@@ -58,6 +58,18 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
     @Column
     private LocalDateTime expiredDate;
 
+    @Column
+    private String webtoonThumbnail;
+
+    @Column
+    private String creator;
+
+    @Column
+    private String illustrator;
+
+    @Column
+    private String genre;
+
     public static MemberHasEpisodeBMEntity toEntity(Purchase purchase) {
         return MemberHasEpisodeBMEntity.builder()
             .id(purchase.getMemberHasEpisodeBMId())
@@ -70,6 +82,10 @@ public class MemberHasEpisodeBMEntity extends BaseEntity {
             .free(ProductType.findByValue(purchase.getProductType().getValue()) == ProductType.EPISODE_BM_FREE)
             .persistType(PersistType.findByValue(purchase.getPersistType().getValue()))
             .expiredDate(purchase.getExpiredDate())
+            .webtoonThumbnail(purchase.getWebtoonThumbnail())
+            .creator(purchase.getCreator())
+            .illustrator(purchase.getIllustrator())
+            .genre(purchase.getGenre())
             .build();
     }
 }
