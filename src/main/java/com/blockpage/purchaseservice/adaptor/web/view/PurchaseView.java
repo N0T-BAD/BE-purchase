@@ -23,6 +23,7 @@ public class PurchaseView {
 
     private Long memberHasEpisodeBMId;
     private Long episodeId;
+    private String webtoonTitle;
     private Long webtoonId;
     private String webtoonThumbnail;
     private String creator;
@@ -42,6 +43,7 @@ public class PurchaseView {
         this.memberHasEpisodeBMId = purchaseDto.getMemberHasEpisodeBMId();
         this.episodeId = purchaseDto.getEpisodeId();
         this.webtoonId = purchaseDto.getWebtoonId();
+        this.webtoonTitle = purchaseDto.getWebtoonTitle();
         this.webtoonThumbnail = purchaseDto.getWebtoonThumbnail();
         this.creator = purchaseDto.getCreator();
         this.illustrator = purchaseDto.getIllustrator();

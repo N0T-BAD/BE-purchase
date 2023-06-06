@@ -96,6 +96,7 @@ public class PurchaseService implements PurchaseUseCase {
         private Long memberHasEpisodeBMId;
         private Long episodeId;
         private Long webtoonId;
+        private String webtoonTitle;
         private String webtoonThumbnail;
         private String creator;
         private String illustrator;
@@ -122,6 +123,7 @@ public class PurchaseService implements PurchaseUseCase {
                 .profileSkinDto(
                     purchase.getProfileSkinWrapper() != null ? ProfileSkinDto.initForGet(purchase.getProfileSkinWrapper()) : null)
                 .profileSkinDefault(purchase.getProfileSkinDefault())
+                .webtoonTitle(purchase.getWebtoonTitle())
                 .webtoonThumbnail(purchase.getWebtoonThumbnail())
                 .creator(purchase.getCreator())
                 .illustrator(purchase.getIllustrator())
