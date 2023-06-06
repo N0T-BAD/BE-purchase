@@ -36,7 +36,6 @@ jobs:
           spring.kafka.bootstrapAddress: ${{ secrets.KAFKA_BOOTSTRAP_ADDRESS }}
           eureka.client.service-url.defaultZone: ${{ secrets.EUREKA_DEFAULT_ZONE }}
 
-
       # Gradlew 실행 허용
       - name: Run chmod to make gradlew executable
         run: chmod +x ./gradlew
