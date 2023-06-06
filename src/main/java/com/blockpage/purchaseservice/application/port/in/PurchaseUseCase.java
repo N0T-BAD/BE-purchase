@@ -68,6 +68,11 @@ public interface PurchaseUseCase {
         private Integer episodeNumber;
         private String webtoonTitle;
 
+        private String webtoonThumbnail;
+        private String creator;
+        private String illustrator;
+        private String genre;
+
         public static PurchaseQuery toQuery(String testMemberId, String productType, Long webtoonId, PurchaseRequest purchaseRequest) {
             return PurchaseQuery.builder()
                 .memberId(testMemberId)
@@ -80,6 +85,10 @@ public interface PurchaseUseCase {
                 .persistType(purchaseRequest.getPersistType())
                 .episodeNumber(purchaseRequest.getEpisodeNumber())
                 .webtoonTitle(purchaseRequest.getWebtoonTitle())
+                .webtoonThumbnail(purchaseRequest.getWebtoonThumbnail())
+                .creator(purchaseRequest.getCreator())
+                .illustrator(purchaseRequest.getIllustrator())
+                .genre(purchaseRequest.getGenre())
                 .build();
         }
     }

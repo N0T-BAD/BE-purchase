@@ -24,6 +24,10 @@ public class PurchaseView {
     private Long memberHasEpisodeBMId;
     private Long episodeId;
     private Long webtoonId;
+    private String webtoonThumbnail;
+    private String creator;
+    private String illustrator;
+    private String genre;
 
     private Long memberHasNftId;
     private NftDetail nftDetail;
@@ -38,6 +42,10 @@ public class PurchaseView {
         this.memberHasEpisodeBMId = purchaseDto.getMemberHasEpisodeBMId();
         this.episodeId = purchaseDto.getEpisodeId();
         this.webtoonId = purchaseDto.getWebtoonId();
+        this.webtoonThumbnail = purchaseDto.getWebtoonThumbnail();
+        this.creator = purchaseDto.getCreator();
+        this.illustrator = purchaseDto.getIllustrator();
+        this.genre = purchaseDto.getGenre();
         this.memberHasNftId = purchaseDto.getMemberHasNftId();
         this.nftDetail = purchaseDto.getNftDto() != null ? new NftDetail(purchaseDto.getNftDto()) : null;
         this.memberHasProfileSkinId = purchaseDto.getMemberHasProfileSkinId();

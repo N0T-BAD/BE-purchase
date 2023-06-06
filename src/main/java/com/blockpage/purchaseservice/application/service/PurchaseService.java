@@ -96,6 +96,10 @@ public class PurchaseService implements PurchaseUseCase {
         private Long memberHasEpisodeBMId;
         private Long episodeId;
         private Long webtoonId;
+        private String webtoonThumbnail;
+        private String creator;
+        private String illustrator;
+        private String genre;
 
         private Long memberHasNftId;
         private NftDto nftDto;
@@ -118,6 +122,10 @@ public class PurchaseService implements PurchaseUseCase {
                 .profileSkinDto(
                     purchase.getProfileSkinWrapper() != null ? ProfileSkinDto.initForGet(purchase.getProfileSkinWrapper()) : null)
                 .profileSkinDefault(purchase.getProfileSkinDefault())
+                .webtoonThumbnail(purchase.getWebtoonThumbnail())
+                .creator(purchase.getCreator())
+                .illustrator(purchase.getIllustrator())
+                .genre(purchase.getGenre())
                 .build();
         }
     }

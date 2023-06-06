@@ -38,6 +38,10 @@ public class Purchase {
     private Long webtoonId;
     private String webtoonTitle;
     private Integer episodeNumber;
+    private String webtoonThumbnail;
+    private String creator;
+    private String illustrator;
+    private String genre;
 
     private Long memberHasNftId;
     private NftWrapper nftWrapper;
@@ -74,6 +78,10 @@ public class Purchase {
                     .episodeNumber(query.getEpisodeNumber())
                     .webtoonTitle(query.getWebtoonTitle())
                     .memberHasEpisodeBMId(null)
+                    .webtoonThumbnail(query.getWebtoonThumbnail())
+                    .creator(query.getCreator())
+                    .illustrator(query.getIllustrator())
+                    .genre(query.getGenre())
                     .build();
             }
             case NFT -> {
@@ -141,6 +149,10 @@ public class Purchase {
             .webtoonId(entity.getWebtoonId())
             .episodeNumber(entity.getEpisodeNumber())
             .webtoonTitle(entity.getWebtoonTitle())
+            .webtoonThumbnail(entity.getWebtoonThumbnail())
+            .creator(entity.getCreator())
+            .illustrator(entity.getIllustrator())
+            .genre(entity.getGenre())
             .build();
     }
 
