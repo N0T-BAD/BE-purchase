@@ -102,7 +102,7 @@ public class PurchaseService implements PurchaseUseCase {
         private String illustrator;
         private String genre;
         private String leftTimer;
-
+        private Integer episodeNumber;
         private Long memberHasNftId;
         private NftDto nftDto;
 
@@ -117,6 +117,7 @@ public class PurchaseService implements PurchaseUseCase {
                 .blockQuantity(purchase.getBlockQuantity())
                 .memberHasEpisodeBMId(purchase.getMemberHasEpisodeBMId())
                 .episodeId(purchase.getEpisodeId())
+                .episodeNumber(purchase.getEpisodeNumber())
                 .webtoonId(purchase.getWebtoonId())
                 .memberHasNftId(purchase.getMemberHasNftId())
                 .nftDto(purchase.getNftWrapper() != null ? NftDto.initForGet(purchase.getNftWrapper()) : null)

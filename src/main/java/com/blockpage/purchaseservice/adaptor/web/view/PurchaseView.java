@@ -23,6 +23,7 @@ public class PurchaseView {
 
     private Long memberHasEpisodeBMId;
     private Long episodeId;
+    private Integer episodeNumber;
     private String webtoonTitle;
     private Long webtoonId;
     private String webtoonThumbnail;
@@ -53,6 +54,7 @@ public class PurchaseView {
         this.profileSkinDefault = purchaseDto.getProfileSkinDefault();
         this.profileSkinDetail = purchaseDto.getProfileSkinDto() != null ? new ProfileSkinDetail(purchaseDto.getProfileSkinDto()) : null;
         this.leftTimer = purchaseDto.getLeftTimer();
+        this.episodeNumber = purchaseDto.getEpisodeNumber();
     }
 
     @Getter
