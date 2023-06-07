@@ -11,4 +11,6 @@ public interface MemberHasEpisodeBMRepository extends JpaRepository<MemberHasEpi
     List<MemberHasEpisodeBMEntity> findByMemberIdAndWebtoonIdAndFree(String memberId, Long webtoonId, Boolean free);
 
     List<MemberHasEpisodeBMEntity> findAllByRegisterTimeBetween(LocalDateTime start, LocalDateTime end);
+
+    List<MemberHasEpisodeBMEntity> findByMemberIdAndFree(String memberId, Boolean free);
 }
