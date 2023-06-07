@@ -16,7 +16,10 @@ import com.blockpage.purchaseservice.application.port.out.PurchasePersistencePor
 import com.blockpage.purchaseservice.domain.Purchase;
 import com.blockpage.purchaseservice.exception.BusinessException;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -70,11 +73,24 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     @Override
     @Transactional(readOnly = true)
     public List<Purchase> findEpisodeBMByWebtoonIdAndFree(String memberId, Long webtoonId, Boolean free) {
-        List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAndFree(memberId,
-            webtoonId, free);
-        return memberEpisodeBMEntityList.stream()
-            .map(Purchase::toDomainFromMemberEpisodeBMEntity)
-            .collect(Collectors.toList());
+        if (webtoonId == null) {
+            List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndFree(memberId, free);
+            Map<Long, Optional<MemberHasEpisodeBMEntity>> recentPurchaseList = memberEpisodeBMEntityList.stream()
+                .collect(Collectors.groupingBy(MemberHasEpisodeBMEntity::getWebtoonId,
+                    Collectors.maxBy(Comparator.comparing(MemberHasEpisodeBMEntity::getRegisterTime))));
+
+            return recentPurchaseList.values().stream()
+                .map(Optional::get)
+                .map(Purchase::toDomainFromMemberEpisodeBMEntity)
+                .collect(Collectors.toList());
+
+        } else {
+            List<MemberHasEpisodeBMEntity> memberEpisodeBMEntityList = memberHasEpisodeBMRepository.findByMemberIdAndWebtoonIdAndFree(
+                memberId, webtoonId, free);
+            return memberEpisodeBMEntityList.stream()
+                .map(Purchase::toDomainFromMemberEpisodeBMEntity)
+                .collect(Collectors.toList());
+        }
     }
 
     @Override
