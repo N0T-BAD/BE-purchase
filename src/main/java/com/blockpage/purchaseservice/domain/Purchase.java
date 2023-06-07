@@ -10,8 +10,10 @@ import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.entity.Profile
 import com.blockpage.purchaseservice.adaptor.infrastructure.mysql.value.NftType;
 import com.blockpage.purchaseservice.application.port.in.PurchaseUseCase.PurchaseQuery;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,6 +44,7 @@ public class Purchase {
     private String creator;
     private String illustrator;
     private String genre;
+    private String leftTimer;
 
     private Long memberHasNftId;
     private NftWrapper nftWrapper;
@@ -60,6 +63,13 @@ public class Purchase {
             }
             default -> throw new IllegalStateException("Unexpected value: " + persistType);
         }
+    }
+
+    public static String makeLeftTimer(MemberHasEpisodeBMEntity entity) {
+        Duration duration = Duration.between(LocalDateTime.now(), entity.getExpiredDate());
+        long hours = duration.toHours();
+        int minutes = duration.toMinutesPart();
+        return hours + "시간 " + minutes + "분";
     }
 
     public static Purchase initPurchaseForSave(PurchaseQuery query) {
@@ -153,6 +163,7 @@ public class Purchase {
             .creator(entity.getCreator())
             .illustrator(entity.getIllustrator())
             .genre(entity.getGenre())
+            .leftTimer(makeLeftTimer(entity))
             .build();
     }
 

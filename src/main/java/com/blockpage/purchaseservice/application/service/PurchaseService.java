@@ -101,6 +101,7 @@ public class PurchaseService implements PurchaseUseCase {
         private String creator;
         private String illustrator;
         private String genre;
+        private String leftTimer;
 
         private Long memberHasNftId;
         private NftDto nftDto;
@@ -128,6 +129,7 @@ public class PurchaseService implements PurchaseUseCase {
                 .creator(purchase.getCreator())
                 .illustrator(purchase.getIllustrator())
                 .genre(purchase.getGenre())
+                .leftTimer(purchase.getLeftTimer())
                 .build();
         }
     }

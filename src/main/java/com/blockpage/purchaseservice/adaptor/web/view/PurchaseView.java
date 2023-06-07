@@ -19,7 +19,7 @@ public class PurchaseView {
     private String message;
 
     private String memberId;
-    private LocalDateTime expiredDate;
+    private String leftTimer;
 
     private Long memberHasEpisodeBMId;
     private Long episodeId;
@@ -39,7 +39,6 @@ public class PurchaseView {
 
     public PurchaseView(PurchaseDto purchaseDto) {
         this.memberId = purchaseDto.getMemberId();
-        this.expiredDate = purchaseDto.getExpiredDate();
         this.memberHasEpisodeBMId = purchaseDto.getMemberHasEpisodeBMId();
         this.episodeId = purchaseDto.getEpisodeId();
         this.webtoonId = purchaseDto.getWebtoonId();
@@ -53,6 +52,7 @@ public class PurchaseView {
         this.memberHasProfileSkinId = purchaseDto.getMemberHasProfileSkinId();
         this.profileSkinDefault = purchaseDto.getProfileSkinDefault();
         this.profileSkinDetail = purchaseDto.getProfileSkinDto() != null ? new ProfileSkinDetail(purchaseDto.getProfileSkinDto()) : null;
+        this.leftTimer = purchaseDto.getLeftTimer();
     }
 
     @Getter
