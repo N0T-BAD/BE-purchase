@@ -206,7 +206,7 @@ public class Purchase {
         private Long id;
         private String profileSkinName;
         private String profileSkinDescription;
-        private String profileSkinBlockPrice;
+        private Integer profileSkinBlockPrice;
         private String profileSkinImage;
 
         public static ProfileSkinWrapper initForGet(ProfileSkinEntity entity) {

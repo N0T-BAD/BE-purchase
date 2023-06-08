@@ -88,7 +88,7 @@ public class ProductService implements ProductUseCase {
         private Long profileSkinId;
         private String profileSkinName;
         private String profileSkinDescription;
-        private String profileSkinBlockPrice;
+        private Integer profileSkinBlockPrice;
         private String profileSkinImage;
 
         public static ProfileSkinDto toDto(ProfileSkinEntity profileSkin) {

@@ -24,7 +24,7 @@ public class ProfileSkinEntity extends BaseEntity {
     private String profileSkinDescription;
 
     @Column
-    private String profileSkinBlockPrice;
+    private Integer profileSkinBlockPrice;
 
     @Column
     private String profileSkinImage;

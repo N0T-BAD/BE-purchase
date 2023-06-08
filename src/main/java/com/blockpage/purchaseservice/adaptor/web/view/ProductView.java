@@ -26,7 +26,7 @@ public class ProductView {
     private Long profileSkinId;
     private String profileSkinName;
     private String profileSkinDescription;
-    private String profileSkinBlockPrice;
+    private Integer profileSkinBlockPrice;
     private String profileSkinImage;
 
 
