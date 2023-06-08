@@ -40,9 +40,15 @@ public class PurchasePersistenceAdaptor implements PurchasePersistencePort {
     public void saveProfileSkin(Purchase purchase) {
         ProfileSkinEntity profileSkinEntity = profileSkinRepository.findById(purchase.getProfileSkinWrapper().getId())
             .orElseThrow(
-                () -> new BusinessException(NO_FOUND_PROFILE_SKIN_PRODUCT.getMessage(), NO_FOUND_PROFILE_SKIN_PRODUCT.getHttpStatus()));
+                () -> new BusinessException(NO_FOUND_PROFILE_SKIN_PRODUCT.getMessage(), NO_FOUND_PROFILE_SKIN_PRODUCT.getHttpStatus())
+            );
+        memberHasProfileSkinRepository.findByMemberIdAndProfileSkinEntity(purchase.getMemberId(), profileSkinEntity)
+            .ifPresent(e -> {
+                throw new BusinessException(ALREADY_EXISTENCE_PROFILESKIN.getMessage(), ALREADY_EXISTENCE_PROFILESKIN.getHttpStatus());
+            });
         memberHasProfileSkinRepository.save(MemberHasProfileSkinEntity.toEntity(purchase, profileSkinEntity));
     }
+
 
     @Override
     @Transactional
