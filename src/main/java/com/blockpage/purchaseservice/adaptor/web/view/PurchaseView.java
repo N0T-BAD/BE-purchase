@@ -8,6 +8,7 @@ import com.blockpage.purchaseservice.application.service.PurchaseService.Purchas
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 
+import java.time.format.DateTimeFormatter;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -20,6 +21,7 @@ public class PurchaseView {
 
     private String memberId;
     private String leftTimer;
+    private String expiredDate;
 
     private Long memberHasEpisodeBMId;
     private Long episodeId;
@@ -55,6 +57,7 @@ public class PurchaseView {
         this.profileSkinDetail = purchaseDto.getProfileSkinDto() != null ? new ProfileSkinDetail(purchaseDto.getProfileSkinDto()) : null;
         this.leftTimer = purchaseDto.getLeftTimer();
         this.episodeNumber = purchaseDto.getEpisodeNumber();
+        this.expiredDate = purchaseDto.getExpiredDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));;
     }
 
     @Getter
