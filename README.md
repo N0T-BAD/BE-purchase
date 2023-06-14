@@ -34,10 +34,6 @@
     <td><b>Kafka bootstrap 주소를 입력해주세요</b></td>
   </tr>
   <tr>
-    <td><b>{REDIS_HOST}</b></td>
-    <td><b>REDIS HOST를 입력해주세요</b></td>
-  </tr>
-  <tr>
     <td><b>{DOCKERHUB_USERNAME}</b></td>
     <td><b>DOCKERHUB 명을 입력해주세요</b></td>
   </tr>
